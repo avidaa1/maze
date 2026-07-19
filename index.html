@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-ancestors 'self';">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AVIDAA MAZE — The Paradox Maze</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2307060b'/%3E%3Cpath d='M32 8 L54 46 L10 46 Z' fill='none' stroke='%23c9a227' stroke-width='3'/%3E%3Cpath d='M32 8 L32 22 M22 40 L42 40' stroke='%23ff2d95' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G8M1YZQ8WF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G8M1YZQ8WF');</script>
+<style>
+:root{
+  --void:#07060b;--void2:#0d0a17;--ink:#141020;
+  --parchment:#e8dfc8;--parchment-dim:rgba(232,223,200,.56);
+  --gold:#c9a227;--gold-bright:#e8c76a;
+  --violet:#8b3ff0;--magenta:#ff2d95;--ember:#ff5a36;--ok:#5fe0a0;
+  --fh:'Cinzel',serif;--fm:'Space Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--void);color:var(--parchment);overflow-x:hidden;font-family:var(--fm)}
+body{position:relative;min-height:100vh}
+a{color:var(--gold-bright)}
+#ambient-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+.scan-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 3px);mix-blend-mode:overlay}
+#main,header,footer{position:relative;z-index:2}
+
+/* ===== TOPBAR / NAV ===== */
+header.topbar{max-width:1100px;margin:0 auto;padding:18px clamp(14px,4vw,32px) 6px}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--fh);font-weight:900;letter-spacing:3px;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--parchment)}
+.wordmark span{display:block;font-size:.5em;letter-spacing:6px;color:var(--gold);font-weight:400}
+#back-home{
+  font-family:var(--fh);font-weight:700;text-decoration:none;-webkit-appearance:none;appearance:none;white-space:nowrap;
+  background:linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00bfff,#a855f7,#ff0080);
+  background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:rainbow 3s linear infinite;font-size:clamp(1.1rem,3.2vw,1.5rem);letter-spacing:2px;
+}
+@keyframes rainbow{to{background-position:300% center}}
+@media (prefers-reduced-motion:reduce){#back-home{animation:none}}
+.navrow{display:flex;flex-wrap:wrap;gap:8px;height:auto;align-items:center;justify-content:flex-start;margin-top:14px;padding-bottom:12px;border-bottom:1px solid rgba(201,162,39,.2)}
+.tab{
+  -webkit-appearance:none;appearance:none;white-space:nowrap;cursor:pointer;
+  font-family:var(--fm);font-size:clamp(.68rem,1.6vw,.8rem);letter-spacing:2px;text-transform:uppercase;
+  padding:7px clamp(10px,2.2vw,16px);background:rgba(201,162,39,.06);border:1px solid rgba(201,162,39,.3);color:var(--parchment-dim);
+  transition:all .2s;
+}
+.tab:hover{border-color:var(--gold);color:var(--gold-bright)}
+.tab.active{background:rgba(201,162,39,.16);border-color:var(--gold-bright);color:var(--gold-bright);box-shadow:0 0 12px rgba(201,162,39,.25)}
+
+/* ===== PAGES ===== */
+#main{max-width:1100px;margin:0 auto;padding:0 clamp(14px,4vw,32px) 60px}
+.page{display:none}
+.page.active{display:block}
+
+/* ===== HERO ===== */
+.hero{padding:clamp(30px,6vw,64px) 0 20px;text-align:center}
+.hero h1{font-family:var(--fh);font-weight:900;font-size:clamp(2.1rem,7vw,4.2rem);letter-spacing:4px;margin:0 0 10px;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold) 60%,var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p.tag{font-size:clamp(.85rem,2vw,1.05rem);color:var(--parchment-dim);letter-spacing:1px;max-width:640px;margin:0 auto 26px}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:var(--fm);letter-spacing:2px;text-transform:uppercase;font-size:.78rem;
+  padding:12px 26px;border:1px solid var(--gold);background:rgba(201,162,39,.08);color:var(--gold-bright);transition:all .2s;}
+.btn:hover{background:rgba(201,162,39,.2);box-shadow:0 0 18px rgba(201,162,39,.3)}
+.btn.alt{border-color:var(--violet);color:#d8b9ff}
+.btn.alt:hover{background:rgba(139,63,240,.18);box-shadow:0 0 18px rgba(139,63,240,.35)}
+
+.section-title{font-family:var(--fh);font-weight:700;font-size:clamp(1.2rem,3vw,1.7rem);letter-spacing:2px;color:var(--gold-bright);margin:36px 0 14px;border-bottom:1px solid rgba(201,162,39,.25);padding-bottom:8px}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
+.card{border:1px solid rgba(201,162,39,.25);background:rgba(20,16,32,.55);padding:16px 18px}
+.card h3{font-family:var(--fh);margin:0 0 8px;color:var(--gold-bright);font-size:1.05rem;letter-spacing:1px}
+.card p{margin:0;font-size:.85rem;line-height:1.55;color:var(--parchment-dim)}
+
+/* ===== PLAY PAGE ===== */
+.level-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}
+.lvl-btn{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:var(--fm);font-size:.78rem;letter-spacing:1px;
+  padding:9px 14px;border:1px solid rgba(201,162,39,.35);background:rgba(201,162,39,.05);color:var(--parchment-dim);}
+.lvl-btn.unlocked{color:var(--gold-bright);border-color:var(--gold)}
+.lvl-btn.current{background:rgba(201,162,39,.22);box-shadow:0 0 10px rgba(201,162,39,.3)}
+.lvl-btn.locked{opacity:.35;cursor:not-allowed}
+.lvl-btn.done::after{content:' ✓';color:var(--ok)}
+
+#hud{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:.78rem;letter-spacing:1px;color:var(--parchment-dim)}
+#hud .distort{display:flex;align-items:center;gap:6px}
+#distort-bar{width:90px;height:6px;background:rgba(255,45,149,.12);position:relative;overflow:hidden;border:1px solid rgba(255,45,149,.3)}
+#distort-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--violet),var(--magenta));transition:width .4s}
+
+.maze-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+#maze-canvas{width:100%;max-width:520px;aspect-ratio:1/1;background:radial-gradient(circle at 50% 30%,#140f22,#07060b 75%);border:1px solid rgba(201,162,39,.3);box-shadow:0 0 30px rgba(0,0,0,.6) inset}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px}
+.dpad button{-webkit-appearance:none;appearance:none;cursor:pointer;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.35);color:var(--gold-bright);font-size:1.1rem}
+.dpad button:active{background:rgba(201,162,39,.25)}
+.dpad .up{grid-column:2;grid-row:1}.dpad .left{grid-column:1;grid-row:2}.dpad .right{grid-column:3;grid-row:2}.dpad .down{grid-column:2;grid-row:3}
+
+/* ===== MODAL (riddle gate + win) ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(4,3,9,.88);backdrop-filter:blur(4px);z-index:9500;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal-box{max-width:460px;width:100%;background:var(--ink);border:1px solid var(--violet);box-shadow:0 0 40px rgba(139,63,240,.35);padding:26px 24px}
+.modal-box h2{font-family:var(--fh);color:#d8b9ff;letter-spacing:2px;font-size:1.1rem;margin:0 0 12px}
+.modal-box p.q{font-size:.92rem;line-height:1.6;color:var(--parchment);margin:0 0 16px}
+.modal-box input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.35);color:var(--parchment);font-family:var(--fm);
+  padding:10px 12px;font-size:.9rem;margin-bottom:10px;-webkit-appearance:none;appearance:none;}
+.modal-box .feedback{font-size:.78rem;color:var(--magenta);min-height:1.2em;margin-bottom:10px}
+.modal-box .row{display:flex;gap:10px;flex-wrap:wrap}
+.win-box h2{color:var(--ok)}
+.sigil-wrap{display:flex;justify-content:center;margin:2px 0 14px}
+#gate-sigil{width:min(180px,60vw);height:min(180px,60vw);cursor:grab;touch-action:none;filter:drop-shadow(0 0 10px rgba(139,63,240,.25))}
+#gate-sigil:active{cursor:grabbing}
+
+/* ===== CODEX ===== */
+.paradox-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:16px 0}
+.oracle-box{border:1px solid rgba(139,63,240,.4);background:rgba(20,16,32,.55);padding:18px 20px;margin:20px 0}
+.oracle-box textarea{width:100%;min-height:70px;background:rgba(255,255,255,.03);border:1px solid rgba(139,63,240,.35);color:var(--parchment);
+  font-family:var(--fm);padding:10px;font-size:.85rem;resize:vertical;-webkit-appearance:none;appearance:none;}
+#oracle-result{margin-top:12px;font-size:.85rem;color:var(--parchment-dim);min-height:1.4em}
+
+footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spacing:3px;color:rgba(232,223,200,.35);font-size:.8rem}
+
+@media (max-width:600px){
+  #main{padding-bottom:40px}
+  .dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== CHATBOT MODULE (canonical, self-scoped) ===== */
+#chatbot{--cb-cyan:#c9a227;--cb-purple:#8b3ff0;--cb-green:#5fe0a0;--cb-fb:'Space Mono',monospace;--cb-fd:'Space Mono',monospace;}
+#chatbot{position:fixed;bottom:48px;right:18px;z-index:9000;width:min(420px,calc(100vw - 24px));font-family:var(--cb-fb);}
+#chat-toggle{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cb-purple),var(--cb-cyan));border:2px solid rgba(255,255,255,.1);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 24px rgba(139,63,240,.45),0 0 48px rgba(201,162,39,.15);margin-left:auto;-webkit-appearance:none;appearance:none;transition:transform .2s,box-shadow .2s;animation:cb-chatpulse 3s ease-in-out infinite;}
+#chat-toggle:hover{transform:scale(1.08);}
+@keyframes cb-chatpulse{0%,100%{box-shadow:0 0 24px rgba(139,63,240,.45),0 0 48px rgba(201,162,39,.15);}50%{box-shadow:0 0 34px rgba(139,63,240,.7),0 0 64px rgba(201,162,39,.3);}}
+@keyframes cb-rainbow{to{background-position:200% center;}}
+@keyframes cb-livepulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+#chat-box{background:rgba(10,8,18,.96);border:1px solid rgba(201,162,39,.18);backdrop-filter:blur(20px);display:none;flex-direction:column;margin-bottom:10px;overflow:hidden;border-radius:6px;box-shadow:0 0 40px rgba(0,0,0,.8);}
+#chat-box.open{display:flex;}
+#quest-bar{height:3px;background:rgba(201,162,39,.08);position:relative;overflow:hidden;transition:opacity .3s;opacity:0;}
+#quest-bar.active{opacity:1;}
+#quest-fill{height:100%;width:0%;transition:width .8s ease,background .8s ease;background:var(--cb-cyan);}
+#quest-label{font-family:var(--cb-fd);font-size:7px;letter-spacing:3px;color:rgba(201,162,39,.45);padding:4px 16px 0;display:none;}
+#quest-label.active{display:block;}
+#chat-head{padding:12px 16px;border-bottom:1px solid rgba(201,162,39,.1);display:flex;justify-content:space-between;align-items:center;background:rgba(201,162,39,.04);}
+.ch-title{font-family:var(--cb-fd);font-size:9px;letter-spacing:4px;color:var(--cb-cyan);}
+.ch-status{font-size:8px;letter-spacing:2px;color:var(--cb-green);display:flex;align-items:center;gap:5px;}
+.ch-dot{width:5px;height:5px;border-radius:50%;background:var(--cb-green);animation:cb-livepulse 1.5s ease-in-out infinite;}
+.ch-close{color:rgba(255,255,255,.25);cursor:pointer;font-size:16px;line-height:1;padding:0 2px;}
+#chat-msgs{height:240px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:rgba(201,162,39,.2) transparent;}
+.cmsg{font-size:12.5px;letter-spacing:.3px;line-height:1.55;padding:9px 13px;max-width:88%;position:relative;white-space:pre-wrap;}
+.cmsg.ai{background:rgba(201,162,39,.06);border-left:2px solid var(--cb-cyan);color:#ece3d0;align-self:flex-start;border-radius:0 4px 4px 0;}
+.cmsg.ai::before{content:'AVIDAA';font-family:var(--cb-fd);font-size:6px;letter-spacing:2px;color:rgba(201,162,39,.5);display:block;margin-bottom:4px;}
+.cmsg.user{background:rgba(139,63,240,.09);border-right:2px solid var(--cb-purple);color:#ece3d0;align-self:flex-end;text-align:right;border-radius:4px 0 0 4px;}
+.typing-indicator{display:flex;gap:4px;padding:10px 14px;align-self:flex-start;}
+.typing-indicator span{width:5px;height:5px;background:var(--cb-cyan);border-radius:50%;opacity:.4;animation:cb-typedot .8s ease-in-out infinite;}
+.typing-indicator span:nth-child(2){animation-delay:.15s;}
+.typing-indicator span:nth-child(3){animation-delay:.3s;}
+@keyframes cb-typedot{0%,100%{opacity:.2;transform:translateY(0);}50%{opacity:1;transform:translateY(-3px);}}
+#chat-suggestions{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;border-top:1px solid rgba(201,162,39,.06);}
+.chat-sugg{font-size:10px;letter-spacing:.5px;padding:3px 10px;border:1px solid rgba(201,162,39,.2);color:rgba(201,162,39,.6);cursor:pointer;background:rgba(201,162,39,.03);transition:all .2s;}
+.chat-sugg:hover{border-color:var(--cb-cyan);color:var(--cb-cyan);background:rgba(201,162,39,.08);box-shadow:0 0 10px rgba(201,162,39,.2);transform:translateY(-1px);}
+#chat-input-row{display:flex;border-top:1px solid rgba(201,162,39,.08);}
+#chat-input{flex:1;background:transparent;border:none;outline:none;color:#ece3d0;font-family:var(--cb-fb);font-size:13px;padding:11px 14px;letter-spacing:.3px;-webkit-appearance:none;appearance:none;}
+#chat-input::placeholder{color:rgba(236,227,208,.25);}
+#chat-send{background:transparent;border:none;border-left:1px solid rgba(201,162,39,.08);color:var(--cb-cyan);padding:0 16px;cursor:pointer;font-size:15px;-webkit-appearance:none;appearance:none;transition:color .2s;}
+#chat-send:hover{color:#fff;}
+#rabbit-avatar{display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(201,162,39,.4));}
+#pulse-ring{position:absolute;bottom:-6px;right:-6px;width:58px;height:58px;border-radius:50%;pointer-events:none;z-index:-1;}
+@media (max-width:600px){#chatbot{bottom:14px;right:10px;}#chat-msgs{height:50vh;}}
+@media (prefers-reduced-motion:reduce){#chat-toggle{animation:none;}.ch-dot{animation:none;}}
+</style>
+</head>
+<body>
+
+<canvas id="ambient-canvas"></canvas>
+<div class="scan-overlay"></div>
+
+<header class="topbar">
+  <div class="row1">
+    <div class="wordmark">PARADOX<span>THE MAZE OF AVIDAA</span></div>
+    <a id="back-home" href="https://avidaa1.github.io">AVIDAA</a>
+  </div>
+  <nav class="navrow" id="navrow">
+    <button class="tab active" id="nav-home" onclick="go('home')">Home</button>
+    <button class="tab" id="nav-play" onclick="go('play')">Maze</button>
+    <button class="tab" id="nav-codex" onclick="go('codex')">Codex</button>
+    <button class="tab" id="nav-about" onclick="go('about')">About</button>
+  </nav>
+</header>
+
+<main id="main">
+
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <h1>THE PARADOX MAZE</h1>
+      <p class="tag">Six impossible corridors. Twelve unanswerable questions. Walk the geometry that should not exist, and speak the name of the paradox that seals each gate.</p>
+      <div class="cta">
+        <button class="btn" onclick="go('play')">Enter the Maze</button>
+        <button class="btn alt" onclick="go('codex')">Read the Codex</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">How it works</h2>
+    <div class="grid-cards">
+      <div class="card"><h3>Walk</h3><p>Navigate a generated maze with arrow keys, WASD, or the on-screen compass. Each level grows larger and stranger than the last.</p></div>
+      <div class="card"><h3>Meet the Gate</h3><p>Certain doors are sealed by logic itself. Approach one and it will not open — it will ask.</p></div>
+      <div class="card"><h3>Speak the Name</h3><p>Every gate guards a classical paradox. Name it correctly and the seal breaks. Answer wrong, and the maze remembers — its distortion grows.</p></div>
+      <div class="card"><h3>Escape</h3><p>Reach the far rune-circle to resolve the level and unlock the next. Six levels, twelve paradoxes, one signal beneath the noise.</p></div>
+    </div>
+  </div>
+
+  <div class="page" id="page-play">
+    <h2 class="section-title">The Maze</h2>
+    <div id="difficulty-line" style="font-size:.78rem;letter-spacing:1px;color:var(--parchment-dim);margin-bottom:10px">
+      Difficulty: <span id="difficulty-current">—</span> · <a href="#" onclick="mazeChangeDifficulty();return false;" style="color:var(--gold-bright)">change</a>
+    </div>
+    <div class="level-row" id="level-row"></div>
+    <div id="hud">
+      <div>LEVEL <span id="hud-level">1</span> — <span id="hud-size"></span></div>
+      <div>MOVES: <span id="hud-moves">0</span></div>
+      <div class="distort">DISTORTION<div id="distort-bar"><div id="distort-fill"></div></div></div>
+    </div>
+    <div class="maze-wrap">
+      <canvas id="maze-canvas" width="520" height="520"></canvas>
+      <div class="dpad">
+        <button class="up" onclick="mazeMove('N')">▲</button>
+        <button class="left" onclick="mazeMove('W')">◄</button>
+        <button class="right" onclick="mazeMove('E')">►</button>
+        <button class="down" onclick="mazeMove('S')">▼</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-codex">
+    <h2 class="section-title">Codex of Paradoxes</h2>
+    <p class="tag" style="text-align:left;margin:0 0 10px">Twelve classical paradoxes wait behind the gates. Study them here — the maze will ask you to name them, not to explain them.</p>
+    <div class="paradox-list" id="paradox-list"></div>
+
+    <div class="oracle-box">
+      <h3 style="font-family:var(--fh);color:#d8b9ff;margin:0 0 8px;letter-spacing:1px">The Oracle</h3>
+      <p style="font-size:.82rem;color:var(--parchment-dim);margin:0 0 10px">Describe a dilemma, a contradiction, a puzzle that troubles you. The Oracle will match it to the nearest paradox in this codex — offline, no signal leaves your browser.</p>
+      <textarea id="oracle-input" maxlength="300" placeholder="e.g. I keep replacing parts of an old object until nothing original remains..."></textarea>
+      <div class="cta" style="justify-content:flex-start;margin-top:10px">
+        <button class="btn alt" onclick="oracleMatch()">Consult the Oracle</button>
+      </div>
+      <div id="oracle-result"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page-about">
+    <h2 class="section-title">About this maze</h2>
+    <div class="card" style="max-width:720px">
+      <p>The Paradox Maze is AVIDAA is signal beneath the noise, given a floor plan. Est. 2025, AVIDAA was built for humans and AI alike — knowledge made clear, one contradiction at a time.</p>
+      <p>Every maze here is generated fresh from a seed, carved by a recursive backtracking algorithm, then gated by classical paradoxes: the Ship of Theseus, the Liar, Zeno, the Grandfather Paradox, Sorites, the Bootstrap loop, the Barber, Buridan's Ass, Newcomb's Problem, Fermi, Epimenides, and the Twin Paradox. Twelve locks, six levels, no two runs identical.</p>
+      <p>Nothing here calls home, nothing here tracks you beyond this browser tab. The offline AVIDAA assistant in the corner knows this maze, the wider AVIDAA ecosystem, and a few things it would rather you discover yourself.</p>
+      <p style="color:var(--parchment-dim);font-size:.82rem">Part of the AVIDAA ecosystem — a global knowledge, culture, and AI platform built by IO.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>AVIDAA &times; IO</footer>
+
+<!-- ===== DIFFICULTY PICKER MODAL ===== -->
+<div class="modal-overlay" id="difficulty-modal">
+  <div class="modal-box" id="difficulty-modal-box" style="max-width:520px">
+    <h2>CHOOSE YOUR PATH</h2>
+    <p class="q">The maze bends to match your nerve. Pick once — you can change it later from the Maze tab.</p>
+    <div class="row" style="flex-direction:column;gap:10px">
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('easy')">
+        WANDERER — smaller mazes, gates offer a hint after one wrong answer.
+      </button>
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('standard')">
+        SEEKER — standard mazes, hint after two wrong answers.
+      </button>
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('hard')">
+        ADEPT — larger, twisting mazes, hint only after three wrong answers, the maze distorts harder when you err.
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RIDDLE / WIN MODAL ===== -->
+<div class="modal-overlay" id="gate-modal">
+  <div class="modal-box" id="gate-modal-box">
+    <h2 id="gate-title">A SEALED GATE</h2>
+    <div class="sigil-wrap"><canvas id="gate-sigil" width="220" height="220" title="Drag to turn the sigil"></canvas></div>
+    <p class="q" id="gate-question"></p>
+    <input id="gate-input" placeholder="Name the paradox..." maxlength="60" autocomplete="off">
+    <div class="feedback" id="gate-feedback"></div>
+    <div class="row">
+      <button class="btn" onclick="mazeSubmitAnswer()">Speak</button>
+      <button class="btn alt" onclick="mazeCloseModal()">Step Back</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="win-modal">
+  <div class="modal-box win-box">
+    <h2>PARADOX RESOLVED</h2>
+    <p class="q" id="win-text">You crossed the impossible corridor.</p>
+    <div class="row">
+      <button class="btn" onclick="mazeNextLevel()">Next Level</button>
+      <button class="btn alt" onclick="mazeCloseWin()">Level Select</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHATBOT MODULE ===== -->
+<div id="chatbot">
+  <div id="chat-box">
+    <div id="chat-head">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div id="rabbit-avatar">
+          <svg id="rabbit-svg" width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+            <ellipse id="ear-l" cx="13" cy="10" rx="3.5" ry="7" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <ellipse id="ear-r" cx="25" cy="10" rx="3.5" ry="7" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <ellipse cx="13" cy="10" rx="1.8" ry="5" fill="#8b3ff0" opacity="0.5"/>
+            <ellipse cx="25" cy="10" rx="1.8" ry="5" fill="#8b3ff0" opacity="0.5"/>
+            <ellipse id="rabbit-head" cx="19" cy="22" rx="10" ry="9" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <circle id="eye-l" cx="15" cy="21" r="2" fill="#c9a227" opacity="0.9"/>
+            <circle id="eye-r" cx="23" cy="21" r="2" fill="#c9a227" opacity="0.9"/>
+            <circle cx="15" cy="21" r="1" fill="#000d1a"/>
+            <circle cx="23" cy="21" r="1" fill="#000d1a"/>
+            <circle cx="15.6" cy="20.4" r="0.4" fill="#fff" opacity="0.8"/>
+            <circle cx="23.6" cy="20.4" r="0.4" fill="#fff" opacity="0.8"/>
+            <ellipse id="nose" cx="19" cy="25" rx="1.2" ry="0.8" fill="#ff2d95" opacity="0.8"/>
+            <path d="M17.2 26.2 Q19 27.4 20.8 26.2" fill="none" stroke="#c9a227" stroke-width="0.7" opacity="0.6"/>
+            <circle id="glow-ring" cx="19" cy="22" r="12" fill="none" stroke="#c9a227" stroke-width="0.4" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="ch-title">AVIDAA</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="ch-status"><div class="ch-dot"></div>ONLINE</div>
+        <div class="ch-close" onclick="toggleChat()">&#x2715;</div>
+      </div>
+    </div>
+    <div id="quest-bar"><div id="quest-fill"></div></div>
+    <div id="quest-label"></div>
+    <div id="chat-msgs"></div>
+    <div id="chat-suggestions">
+      <div class="chat-sugg" onclick="quickAsk('What is this maze?')">What is this maze?</div>
+      <div class="chat-sugg" onclick="quickAsk('Give me a hint')">Give me a hint</div>
+      <div class="chat-sugg" onclick="quickAsk('Who is IO?')">Who is IO?</div>
+      <div class="chat-sugg" onclick="quickAsk('rabbit')">?</div>
+    </div>
+    <div id="chat-input-row">
+      <input id="chat-input" placeholder="Ask about the maze..." maxlength="200">
+      <button id="chat-send" onclick="chatSend()">&#x27A4;</button>
+    </div>
+  </div>
+  <button id="chat-toggle" onclick="toggleChat()" style="position:relative;">
+    <canvas id="pulse-ring" width="58" height="58"></canvas>
+    &#x1F916;
+  </button>
+</div>
+
+<script>
+/* ===== ESCAPE HELPER — always first ===== */
+function escHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+window.pageVisible = true;
+document.addEventListener('visibilitychange',()=>{window.pageVisible=!document.hidden;});
+
+/* ============================================================
+   NAV ROUTER
+   ============================================================ */
+const PAGE_IDS=['home','play','codex','about'];
+function go(id){
+  PAGE_IDS.forEach(p=>{
+    const el=document.getElementById('page-'+p);
+    const nv=document.getElementById('nav-'+p);
+    if(el)el.classList.toggle('active', p===id);
+    if(nv)nv.classList.toggle('active', p===id);
+  });
+  if(id==='play' && window.mazeInit)window.mazeInit();
+}
+window.go=go;
+
+/* ============================================================
+   PARADOX DATA — used by the maze gates, the Codex, and the Oracle
+   Tier-2 answer facts also appear in visible page content (About tab):
+   signal beneath the noise · Est. 2025 · built for humans and AI · knowledge made clear
+   ============================================================ */
+const PARADOXES=[
+  {id:'theseus',name:'Ship of Theseus',
+   q:'A ship is repaired plank by plank until not one original piece remains. Is it still the same ship? Speak the name of this paradox to unseal the gate.',
+   keys:['ship of theseus','theseus'],
+   hint:'It concerns identity through gradual replacement — an old vessel, rebuilt one plank at a time.',
+   lore:'If every plank of a ship is replaced over time, is the finished ship still the same ship? And if the old planks are reassembled elsewhere, which one is the "real" ship? A classical test of identity through change.'},
+  {id:'liar',name:'The Liar Paradox',
+   q:'This sentence is false. If it is true, then it is false; if it is false, then it is true. Speak the name of this paradox to unseal the gate.',
+   keys:['liar paradox','the liar','liar'],
+   hint:'A single sentence that refers only to its own truth — and breaks either way you read it.',
+   lore:'A self-referential statement that is true if and only if it is false. One of the oldest problems in logic, still unresolved to universal satisfaction.'},
+  {id:'zeno',name:"Zeno's Paradox",
+   q:'To reach the door, you must first cross half the distance, then half of what remains, forever — and so you never arrive. Speak the name of this paradox to unseal the gate.',
+   keys:['zeno','zenos paradox',"zeno's paradox",'achilles and the tortoise','achilles'],
+   hint:'A runner and a tortoise, or an infinite number of halved distances that never quite finish.',
+   lore:"Zeno argued that motion is impossible: to cross any distance you must first cross half of it, then half of what remains, without end. Achilles can never overtake the tortoise, in the argument's own terms — though the real world plainly disagrees."},
+  {id:'grandfather',name:'The Grandfather Paradox',
+   q:"Travel back in time and prevent your grandparents from ever meeting — then you would never have been born to make the journey at all. Speak the name of this paradox to unseal the gate.",
+   keys:['grandfather paradox','grandfather'],
+   hint:'A time traveler undoes the very event that caused their own existence.',
+   lore:'If backward time travel allowed you to prevent your own birth, the resulting contradiction seems to forbid the journey that caused it. A central objection to time travel with a fixed, changeable past.'},
+  {id:'sorites',name:'The Sorites Paradox',
+   q:'Remove one grain from a heap of sand and it remains a heap. Remove another — still a heap. At what single grain does it stop being one? Speak the name of this paradox to unseal the gate.',
+   keys:['sorites paradox','sorites','heap paradox','the heap'],
+   hint:'Also called the Heap — vague boundaries and the point where "many" becomes "few."',
+   lore:'Small, individually harmless changes accumulate into a large, undeniable difference — yet no single step seems to cross the line. A classic problem of vagueness in language and logic.'},
+  {id:'bootstrap',name:'The Bootstrap Paradox',
+   q:'A traveler carries a book back in time to the author, who copies it and publishes it — the very book the traveler first read. Who wrote it, first? Speak the name of this paradox to unseal the gate.',
+   keys:['bootstrap paradox','bootstrap'],
+   hint:'An object or idea that seems to have no origin — only a closed loop through time.',
+   lore:'An object, fact, or piece of information exists only because it was sent back through time to cause its own past — with no original point of creation anywhere in the loop.'},
+  {id:'barber',name:"The Barber Paradox",
+   q:'In a certain village, the barber shaves everyone who does not shave themselves, and no one else. Who shaves the barber? Speak the name of this paradox to unseal the gate.',
+   keys:["barber paradox","barber's paradox",'barber'],
+   hint:'A rule defined by exception collapses the moment it must apply to its own maker.',
+   lore:"A set-theoretic puzzle in disguise: the rule 'shaves all and only those who do not shave themselves' cannot be consistently applied to the barber himself, closely related to Russell's Paradox in set theory."},
+  {id:'buridan',name:"Buridan's Ass",
+   q:'A donkey stands exactly midway between two identical piles of hay, with no reason to prefer either — and starves, unable to decide. Speak the name of this paradox to unseal the gate.',
+   keys:["buridan's ass",'buridans ass','buridan'],
+   hint:'Perfectly balanced choices, and a mind with no reason to break the tie.',
+   lore:'If a rational agent facing two equally good options has no basis to choose between them, does pure reason alone leave it unable to act at all? A challenge to the idea that reason alone determines choice.'},
+  {id:'newcomb',name:"Newcomb's Paradox",
+   q:'A predictor who is always correct offers you two boxes. Choosing both boxes guarantees less than choosing only one — yet standard logic insists you should always take both. Speak the name of this paradox to unseal the gate.',
+   keys:["newcomb's paradox",'newcomb',"newcomb's problem",'newcombs paradox'],
+   hint:'A perfect predictor, two boxes, and two kinds of logic that disagree with each other.',
+   lore:'Given a predictor whose forecasts are always accurate, one-box and two-box reasoning both seem individually sound yet recommend opposite strategies — a live debate in decision theory.'},
+  {id:'fermi',name:'The Fermi Paradox',
+   q:'The universe is old and vast enough for intelligent life to have arisen many times over — yet the sky stays silent. Speak the name of this paradox to unseal the gate.',
+   keys:['fermi paradox','fermi'],
+   hint:'Named for a physicist who once asked, over lunch, "where is everybody?"',
+   lore:'Given the sheer scale and age of the observable universe, the apparent absence of detectable extraterrestrial civilizations is strange enough to have a name of its own.'},
+  {id:'epimenides',name:'The Epimenides Paradox',
+   q:'A man from a certain island says: "All people from my island always lie." If he speaks truly, he has just lied. Speak the name of this paradox to unseal the gate.',
+   keys:['epimenides paradox','epimenides'],
+   hint:'An ancient cousin of the Liar Paradox, attributed to a poet speaking of his own people.',
+   lore:"Attributed to the Cretan philosopher Epimenides, this self-referential claim about his own countrymen is one of the earliest recorded versions of the Liar Paradox."},
+  {id:'twin',name:'The Twin Paradox',
+   q:'One twin travels near light-speed and returns younger than the twin who stayed behind — though from each perspective, it was the other one in motion. Speak the name of this paradox to unseal the gate.',
+   keys:['twin paradox','the twins paradox'],
+   hint:'Relativity, a rocket, and two siblings who no longer agree on how much time has passed.',
+   lore:'A thought experiment in special relativity: a traveling twin ages less than a twin who stays on Earth. The asymmetry is resolved by the traveling twin\'s acceleration, but it remains a favorite illustration of relativistic time dilation.'},
+];
+
+/* ============================================================
+   MAZE ENGINE — recursive backtracker + BFS gate placement
+   ============================================================ */
+(function(){
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function genMaze(w,h,seed){
+    const rand=mulberry32(seed);
+    const cells=[];
+    for(let y=0;y<h;y++){const row=[];for(let x=0;x<w;x++)row.push({N:true,S:true,E:true,W:true,visited:false});cells.push(row);}
+    const stack=[[0,0]];cells[0][0].visited=true;
+    while(stack.length){
+      const [cx,cy]=stack[stack.length-1];
+      const dirs=[];
+      if(cy>0 && !cells[cy-1][cx].visited)dirs.push('N');
+      if(cy<h-1 && !cells[cy+1][cx].visited)dirs.push('S');
+      if(cx<w-1 && !cells[cy][cx+1].visited)dirs.push('E');
+      if(cx>0 && !cells[cy][cx-1].visited)dirs.push('W');
+      if(!dirs.length){stack.pop();continue;}
+      const d=dirs[Math.floor(rand()*dirs.length)];
+      let nx=cx,ny=cy;
+      if(d==='N'){ny=cy-1;cells[cy][cx].N=false;cells[ny][nx].S=false;}
+      if(d==='S'){ny=cy+1;cells[cy][cx].S=false;cells[ny][nx].N=false;}
+      if(d==='E'){nx=cx+1;cells[cy][cx].E=false;cells[ny][nx].W=false;}
+      if(d==='W'){nx=cx-1;cells[cy][cx].W=false;cells[ny][nx].E=false;}
+      cells[ny][nx].visited=true;stack.push([nx,ny]);
+    }
+    return cells;
+  }
+  function bfsPath(cells,w,h){
+    const key=(x,y)=>y*w+x;
+    const prev=new Map();const q=[[0,0]];const seen=new Set([key(0,0)]);
+    while(q.length){
+      const [x,y]=q.shift();
+      if(x===w-1&&y===h-1)break;
+      const c=cells[y][x];const nb=[];
+      if(!c.N)nb.push([x,y-1]);if(!c.S)nb.push([x,y+1]);if(!c.E)nb.push([x+1,y]);if(!c.W)nb.push([x-1,y]);
+      nb.forEach(([nx,ny])=>{if(!seen.has(key(nx,ny))){seen.add(key(nx,ny));prev.set(key(nx,ny),key(x,y));q.push([nx,ny]);}});
+    }
+    if(!seen.has(key(w-1,h-1)))return null;
+    const path=[];let cur=key(w-1,h-1);
+    while(cur!==undefined){path.push(cur);cur=prev.get(cur);}
+    path.reverse();
+    return path.map(k=>[k%w,Math.floor(k/w)]);
+  }
+  function edgeKey(x1,y1,x2,y2){
+    const a=y1*100+x1,b=y2*100+x2;
+    return a<b ? a+'-'+b : b+'-'+a;
+  }
+
+  const LEVELS=6;
+  const PROGRESS_KEY='avidaa_maze_progress';
+  const DIFF_KEY='avidaa_maze_difficulty';
+  function loadProgress(){
+    try{const v=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}
+  }
+  function saveProgress(p){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(p));}catch(e){}}
+
+  const DIFFICULTY={
+    easy:{label:'WANDERER',sizeDelta:-1,hintAfter:1,distortBump:10},
+    standard:{label:'SEEKER',sizeDelta:0,hintAfter:2,distortBump:18},
+    hard:{label:'ADEPT',sizeDelta:2,hintAfter:3,distortBump:26},
+  };
+  let currentDifficulty=null;
+  function loadDifficulty(){
+    try{const v=sessionStorage.getItem(DIFF_KEY);return DIFFICULTY[v]?v:null;}catch(e){return null;}
+  }
+  function saveDifficulty(key){try{sessionStorage.setItem(DIFF_KEY,key);}catch(e){}}
+  function diffCfg(){return DIFFICULTY[currentDifficulty]||DIFFICULTY.standard;}
+
+  let state=null; // {level, size, cells, path, gates:Map(edgeKey->{riddleIdx,solved}), player:{x,y}, moves, activeGate}
+  let distortion=0, distortDecayTimer=null;
+
+  function buildLevel(level){
+    const cfg=diffCfg();
+    const size=Math.max(5,Math.min(16, 6+level+cfg.sizeDelta)); // clamped, shifted by difficulty
+    const cells=genMaze(size,size,level*1337+7);
+    const path=bfsPath(cells,size,size);
+    const gates=new Map();
+    if(path && path.length>6){
+      const i1=Math.floor(path.length*0.33);
+      const i2=Math.floor(path.length*0.66);
+      const idxs=[i1, i2!==i1?i2:Math.min(i2+1,path.length-2)];
+      idxs.forEach((idx,gi)=>{
+        const a=path[idx],b=path[idx+1];
+        if(a&&b){
+          const ek=edgeKey(a[0],a[1],b[0],b[1]);
+          const riddleIdx=((level-1)*2+gi)%PARADOXES.length;
+          gates.set(ek,{riddleIdx,solved:false});
+        }
+      });
+    }
+    return {level,size,cells,path,gates,player:{x:0,y:0},moves:0,activeGate:null};
+  }
+
+  function renderLevelRow(){
+    const row=document.getElementById('level-row');if(!row)return;
+    row.innerHTML='';
+    const progress=loadProgress();
+    for(let i=1;i<=LEVELS;i++){
+      const unlocked = i===1 || progress[i-2]===true;
+      const done = progress[i-1]===true;
+      const btn=document.createElement('button');
+      btn.className='lvl-btn'+(unlocked?' unlocked':' locked')+(done?' done':'')+(state&&state.level===i?' current':'');
+      btn.textContent='LEVEL '+i;
+      if(unlocked)btn.onclick=()=>{loadLevel(i);};
+      row.appendChild(btn);
+    }
+  }
+
+  function loadLevel(level){
+    state=buildLevel(level);
+    distortion=0;updateDistortBar();
+    document.getElementById('hud-level').textContent=level;
+    document.getElementById('hud-size').textContent=state.size+'×'+state.size;
+    document.getElementById('hud-moves').textContent='0';
+    renderLevelRow();
+    drawMaze();
+  }
+
+  function updateDistortBar(){
+    const fill=document.getElementById('distort-fill');if(!fill)return;
+    fill.style.width=Math.min(100,distortion)+'%';
+  }
+  function bumpDistortion(){
+    const bump=diffCfg().distortBump;
+    distortion=Math.min(100,distortion+bump);updateDistortBar();
+    clearTimeout(distortDecayTimer);
+    distortDecayTimer=setTimeout(()=>{distortion=Math.max(0,distortion-30);updateDistortBar();},2500);
+  }
+
+  function drawMaze(){
+    const cvs=document.getElementById('maze-canvas');if(!cvs||!state)return;
+    const dpr=window.devicePixelRatio||1;
+    const cssSize=cvs.clientWidth||360;
+    cvs.width=cssSize*dpr;cvs.height=cssSize*dpr;
+    const ctx=cvs.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssSize,cssSize);
+    const size=state.size, cell=cssSize/size;
+    ctx.strokeStyle='rgba(201,162,39,.85)';ctx.lineWidth=Math.max(1.5,cell*0.05);
+    ctx.lineCap='square';
+    for(let y=0;y<size;y++){
+      for(let x=0;x<size;x++){
+        const c=state.cells[y][x];
+        const px=x*cell, py=y*cell;
+        ctx.beginPath();
+        if(c.N){ctx.moveTo(px,py);ctx.lineTo(px+cell,py);}
+        if(c.W){ctx.moveTo(px,py);ctx.lineTo(px,py+cell);}
+        if(y===size-1 && c.S){ctx.moveTo(px,py+cell);ctx.lineTo(px+cell,py+cell);}
+        if(x===size-1 && c.E){ctx.moveTo(px+cell,py);ctx.lineTo(px+cell,py+cell);}
+        ctx.stroke();
+      }
+    }
+    /* gates */
+    state.gates.forEach((g,ek)=>{
+      const [a,b]=ek.split('-').map(Number);
+      const ax=a%100, ay=Math.floor(a/100), bx=b%100, by=Math.floor(b/100);
+      const mx=((ax+bx)/2+0.5)*cell, my=((ay+by)/2+0.5)*cell;
+      ctx.beginPath();
+      ctx.arc(mx,my,cell*0.22,0,Math.PI*2);
+      ctx.fillStyle=g.solved? 'rgba(95,224,160,.85)' : 'rgba(255,45,149,.85)';
+      ctx.fill();
+      ctx.strokeStyle=g.solved? '#5fe0a0' : '#ff2d95';
+      ctx.lineWidth=1.5;ctx.stroke();
+    });
+    /* exit */
+    const ex=(size-1+0.5)*cell, ey=(size-1+0.5)*cell;
+    ctx.beginPath();ctx.arc(ex,ey,cell*0.3,0,Math.PI*2);
+    ctx.strokeStyle='rgba(232,199,106,.9)';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ex-cell*0.14,ey);ctx.lineTo(ex+cell*0.14,ey);ctx.moveTo(ex,ey-cell*0.14);ctx.lineTo(ex,ey+cell*0.14);ctx.stroke();
+    /* player */
+    const px=(state.player.x+0.5)*cell, py=(state.player.y+0.5)*cell;
+    ctx.beginPath();ctx.arc(px,py,cell*0.22,0,Math.PI*2);
+    ctx.fillStyle='#e8c76a';ctx.shadowColor='#e8c76a';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+  }
+
+  function tryMove(dir){
+    if(!state)return;
+    if(document.getElementById('gate-modal').classList.contains('open'))return;
+    if(document.getElementById('win-modal').classList.contains('open'))return;
+    const {x,y}=state.player;
+    const c=state.cells[y][x];
+    let nx=x, ny=y, blocked=false;
+    if(dir==='N'){if(c.N)blocked=true;ny=y-1;}
+    if(dir==='S'){if(c.S)blocked=true;ny=y+1;}
+    if(dir==='E'){if(c.E)blocked=true;nx=x+1;}
+    if(dir==='W'){if(c.W)blocked=true;nx=x-1;}
+    if(blocked)return;
+    if(nx<0||ny<0||nx>=state.size||ny>=state.size)return;
+    const ek=edgeKey(x,y,nx,ny);
+    const gate=state.gates.get(ek);
+    if(gate && !gate.solved){
+      state.activeGate=ek;
+      openGateModal(gate.riddleIdx);
+      return;
+    }
+    state.player={x:nx,y:ny};
+    state.moves++;
+    document.getElementById('hud-moves').textContent=state.moves;
+    drawMaze();
+    if(nx===state.size-1 && ny===state.size-1)onLevelWin();
+  }
+
+  let gateAttempts=0;
+  function openGateModal(riddleIdx){
+    gateAttempts=0;
+    const p=PARADOXES[riddleIdx];
+    document.getElementById('gate-title').textContent='A SEALED GATE';
+    document.getElementById('gate-question').textContent=p.q;
+    document.getElementById('gate-feedback').textContent='';
+    document.getElementById('gate-input').value='';
+    document.getElementById('gate-modal').classList.add('open');
+    if(window.gateSigilOpen)window.gateSigilOpen();
+    setTimeout(()=>document.getElementById('gate-input').focus(),50);
+  }
+  window.mazeCloseModal=function(){document.getElementById('gate-modal').classList.remove('open');state.activeGate=null;};
+  window.mazeSubmitAnswer=function(){
+    if(!state||!state.activeGate)return;
+    const gate=state.gates.get(state.activeGate);
+    const p=PARADOXES[gate.riddleIdx];
+    const raw=document.getElementById('gate-input').value;
+    const n=raw.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+    const correct=p.keys.some(k=>{
+      const kk=k.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+      return n===kk || (kk.length>=4 && n.includes(kk));
+    });
+    if(correct){
+      gate.solved=true;
+      if(window.gateSigilResolve)window.gateSigilResolve();
+      setTimeout(()=>{
+        document.getElementById('gate-modal').classList.remove('open');
+        state.activeGate=null;
+        drawMaze();
+      },650); /* let the sigil's resolve-flash play before the modal closes */
+    }else{
+      gateAttempts++;
+      bumpDistortion();
+      if(window.gateSigilChaosBump)window.gateSigilChaosBump();
+      if(gateAttempts>=diffCfg().hintAfter){
+        document.getElementById('gate-feedback').textContent=p.hint;
+      }else{
+        document.getElementById('gate-feedback').textContent='The seal holds. Speak again.';
+      }
+    }
+  };
+
+  function onLevelWin(){
+    const progress=loadProgress();
+    progress[state.level-1]=true;
+    saveProgress(progress);
+    document.getElementById('win-text').textContent='Level '+state.level+' resolved in '+state.moves+' moves. The maze remembers.';
+    document.getElementById('win-modal').classList.add('open');
+    renderLevelRow();
+  }
+  window.mazeNextLevel=function(){
+    document.getElementById('win-modal').classList.remove('open');
+    const next=state.level+1;
+    if(next<=LEVELS)loadLevel(next);
+  };
+  window.mazeCloseWin=function(){document.getElementById('win-modal').classList.remove('open');};
+
+  window.mazeMove=function(dir){tryMove(dir);};
+
+  document.addEventListener('keydown',(e)=>{
+    if(!document.getElementById('page-play').classList.contains('active'))return;
+    const map={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E',w:'N',s:'S',a:'W',d:'E',W:'N',S:'S',A:'W',D:'E'};
+    if(map[e.key]){e.preventDefault();tryMove(map[e.key]);}
+  });
+
+  function updateDifficultyLabel(){
+    const el=document.getElementById('difficulty-current');if(!el)return;
+    el.textContent=currentDifficulty ? diffCfg().label : '—';
+  }
+  window.mazeChooseDifficulty=function(key){
+    if(!DIFFICULTY[key])return;
+    currentDifficulty=key;
+    saveDifficulty(key);
+    document.getElementById('difficulty-modal').classList.remove('open');
+    updateDifficultyLabel();
+    if(mazeInitDone && state){
+      loadLevel(state.level); // rebuild the current level under the new difficulty config
+    }else{
+      startMazeFlow();
+    }
+  };
+  window.mazeChangeDifficulty=function(){
+    document.getElementById('difficulty-modal').classList.add('open');
+  };
+
+  function startMazeFlow(){
+    renderLevelRow();
+    if(!mazeInitDone){
+      mazeInitDone=true;
+      const progress=loadProgress();
+      let startLevel=1;
+      for(let i=1;i<=LEVELS;i++){if(progress[i-1]!==true){startLevel=i;break;}if(i===LEVELS)startLevel=LEVELS;}
+      loadLevel(startLevel);
+    }else{
+      drawMaze();
+    }
+  }
+
+  let mazeInitDone=false;
+  window.mazeInit=function(){
+    updateDifficultyLabel();
+    if(!currentDifficulty){
+      const saved=loadDifficulty();
+      if(saved){currentDifficulty=saved;updateDifficultyLabel();startMazeFlow();return;}
+      document.getElementById('difficulty-modal').classList.add('open');
+      return;
+    }
+    startMazeFlow();
+  };
+  window.addEventListener('resize',()=>{if(state)drawMaze();});
+})();
+
+/* ============================================================
+   GATE SIGIL — interactive sacred-geometry "AI illusion" on each gate
+   Seed-of-Life circles + Metatron-style connecting lines, drag to rotate,
+   glitches toward magenta chaos on wrong answers, resolves to gold on solve.
+   ============================================================ */
+(function(){
+  const cvs=document.getElementById('gate-sigil');if(!cvs)return;
+  const ctx=cvs.getContext('2d');
+  let rotation=0, dragging=false, lastX=0, spin=0.0025;
+  let chaos=0.12, chaosTarget=0.12, resolveGlow=0, rippleT=0, rippleActive=false;
+  let running=false;
+
+  function resizeCvs(){
+    const dpr=window.devicePixelRatio||1;
+    const size=cvs.clientWidth||180;
+    cvs.width=size*dpr;cvs.height=size*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return size;
+  }
+
+  function draw(){
+    const size=resizeCvs();
+    const cx=size/2, cy=size/2, R=size*0.155;
+    ctx.clearRect(0,0,size,size);
+    /* chaos eases toward its target, resolve glow decays, ripple decays */
+    chaos += (chaosTarget-chaos)*0.08;
+    resolveGlow *= 0.92;
+    if(rippleActive){rippleT+=0.06;if(rippleT>1){rippleActive=false;rippleT=0;}}
+
+    const jitter=chaos*8;
+    const magenta = chaos>0.35;
+    const baseA = 0.5+resolveGlow*0.45;
+    const lineCol = magenta ? 'rgba(255,45,149,' : 'rgba(232,199,106,';
+    const lineCol2 = magenta ? 'rgba(139,63,240,' : 'rgba(200,160,80,';
+
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(rotation + rippleT*0.6);
+
+    /* seed-of-life: 1 center + 6 outer circles, jittered by chaos */
+    const centers=[[0,0]];
+    for(let i=0;i<6;i++){
+      const a=i*(Math.PI/3);
+      centers.push([
+        Math.cos(a)*R + (Math.sin(rotation*3+i)*jitter),
+        Math.sin(a)*R + (Math.cos(rotation*3+i)*jitter)
+      ]);
+    }
+    ctx.lineWidth=1.1;
+    ctx.strokeStyle=lineCol+baseA+')';
+    centers.forEach(([x,y])=>{
+      ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.stroke();
+    });
+
+    /* metatron-style lattice: every outer center connected to every other */
+    ctx.lineWidth=0.7;
+    ctx.strokeStyle=lineCol2+(baseA*0.65)+')';
+    for(let i=1;i<centers.length;i++){
+      for(let j=i+1;j<centers.length;j++){
+        ctx.beginPath();
+        ctx.moveTo(centers[i][0],centers[i][1]);
+        ctx.lineTo(centers[j][0],centers[j][1]);
+        ctx.stroke();
+      }
+    }
+
+    /* pulsing core */
+    const coreR=3+resolveGlow*5+(rippleActive?rippleT*10:0);
+    ctx.fillStyle=lineCol+Math.min(1,baseA+0.35)+')';
+    ctx.beginPath();ctx.arc(0,0,coreR,0,Math.PI*2);ctx.fill();
+
+    /* ripple ring on click */
+    if(rippleActive){
+      ctx.strokeStyle=lineCol+(1-rippleT)*0.7+')';
+      ctx.lineWidth=1.4;
+      ctx.beginPath();ctx.arc(0,0,rippleT*R*2.4,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+
+    rotation += spin + (magenta?(Math.random()-0.5)*0.01:0);
+    if(running)requestAnimationFrame(draw);
+  }
+
+  /* drag to rotate manually */
+  function onDown(e){
+    dragging=true;
+    lastX=(e.touches?e.touches[0].clientX:e.clientX);
+  }
+  function onMove(e){
+    if(!dragging)return;
+    const x=(e.touches?e.touches[0].clientX:e.clientX);
+    rotation += (x-lastX)*0.012;
+    lastX=x;
+  }
+  function onUp(){dragging=false;}
+  cvs.addEventListener('pointerdown',onDown);
+  window.addEventListener('pointermove',onMove);
+  window.addEventListener('pointerup',onUp);
+  cvs.addEventListener('click',()=>{ if(!dragging){rippleActive=true;rippleT=0;} });
+
+  window.gateSigilOpen=function(){
+    chaos=0.12; chaosTarget=0.12; resolveGlow=0; rippleActive=false; rippleT=0;
+    if(!running){running=true;draw();}
+  };
+  window.gateSigilChaosBump=function(){
+    chaosTarget=Math.min(1, chaosTarget+0.32);
+    setTimeout(()=>{chaosTarget=0.12;},1400);
+  };
+  window.gateSigilResolve=function(){
+    chaosTarget=0; resolveGlow=1; rippleActive=true; rippleT=0;
+  };
+
+  /* stop the RAF loop once the gate modal is fully closed, to save cycles */
+  const gateModalEl=document.getElementById('gate-modal');
+  if(gateModalEl){
+    const obs=new MutationObserver(()=>{
+      if(!gateModalEl.classList.contains('open'))running=false;
+    });
+    obs.observe(gateModalEl,{attributes:true,attributeFilter:['class']});
+  }
+})();
+
+/* ============================================================
+   ORACLE — offline matcher (Codex page)
+   ============================================================ */
+function renderCodex(){
+  const list=document.getElementById('paradox-list');if(!list)return;
+  list.innerHTML='';
+  PARADOXES.forEach(p=>{
+    const d=document.createElement('div');d.className='card';
+    const h=document.createElement('h3');h.textContent=p.name;
+    const para=document.createElement('p');para.textContent=p.lore;
+    d.appendChild(h);d.appendChild(para);list.appendChild(d);
+  });
+}
+renderCodex();
+
+function oracleMatch(){
+  const raw=document.getElementById('oracle-input').value.trim();
+  const out=document.getElementById('oracle-result');
+  if(!raw){out.textContent='Offer the Oracle a scenario first.';return;}
+  const low=raw.toLowerCase();
+  const words=low.split(/\s+/).filter(w=>w.length>=3);
+  let best=null,bestScore=0;
+  PARADOXES.forEach(p=>{
+    let score=0;
+    const tagPool=[p.name.toLowerCase(),...p.keys,p.lore.toLowerCase()];
+    tagPool.forEach(tag=>{
+      words.forEach(w=>{if(tag.includes(w))score+=w.length;});
+    });
+    if(score>bestScore){bestScore=score;best=p;}
+  });
+  if(best && bestScore>=6){
+    out.textContent='The Oracle sees '+best.name+'. '+best.lore;
+  }else{
+    out.textContent='The Oracle is silent — no paradox in this codex quite matches that. Perhaps it is new.';
+  }
+}
+window.oracleMatch=oracleMatch;
+
+/* ============================================================
+   AMBIENT BACKGROUND — Escher triangle + drifting runes + glitch pulse
+   ============================================================ */
+(function(){
+  const cvs=document.getElementById('ambient-canvas');if(!cvs)return;
+  const ctx=cvs.getContext('2d');
+  let w=0,h=0,dpr=window.devicePixelRatio||1;
+  function resize(){
+    w=window.innerWidth;h=window.innerHeight;
+    cvs.width=w*dpr;cvs.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();window.addEventListener('resize',resize);
+
+  const runes=[];
+  for(let i=0;i<22;i++){
+    runes.push({
+      x:Math.random(), y:Math.random()+1, sp:0.00006+Math.random()*0.00012,
+      size:14+Math.random()*20, rot:Math.random()*Math.PI, rs:(Math.random()-0.5)*0.0006,
+      seed:Math.floor(Math.random()*1000), op:0.15+Math.random()*0.25
+    });
+  }
+  function drawRune(r,t){
+    ctx.save();
+    ctx.translate(r.x*w, (r.y - (t*r.sp)%1.6)*h);
+    ctx.rotate(r.rot + t*r.rs);
+    ctx.strokeStyle='rgba(201,162,39,'+r.op+')';
+    ctx.lineWidth=1.2;
+    const s=r.size;
+    const rnd=mulberry(r.seed);
+    ctx.beginPath();
+    ctx.moveTo(0,-s/2);ctx.lineTo(0,s/2);
+    for(let i=0;i<3;i++){
+      const yy=(-s/2)+(s*rnd());
+      const dir=rnd()>0.5?1:-1;
+      ctx.moveTo(0,yy);ctx.lineTo(dir*s*0.32,yy-s*0.18);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+  function mulberry(seed){
+    let s=seed;
+    return function(){s|=0;s=(s+0x6D2B79F5)|0;let t=Math.imul(s^(s>>>15),1|s);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296;};
+  }
+
+  function drawImpossibleTriangle(cx,cy,scale,rot,opacity){
+    ctx.save();
+    ctx.translate(cx,cy);ctx.rotate(rot);
+    const R=170*scale;
+    const op=opacity!==undefined?opacity:0.6;
+    const faceTop='rgba(232,199,106,'+op+')';
+    const faceSide='rgba(139,101,32,'+(op*0.85)+')';
+    const edge='rgba(255,236,180,'+Math.min(1,op+0.25)+')';
+    for(let i=0;i<3;i++){
+      ctx.save();
+      ctx.rotate(i*(Math.PI*2/3));
+      /* top (lit) face of this beam */
+      ctx.beginPath();
+      ctx.moveTo(-R*0.52,R*0.86);
+      ctx.lineTo(R*0.16,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.lineTo(-R*0.16,R*0.16);
+      ctx.closePath();
+      ctx.fillStyle=faceTop;ctx.fill();
+      /* shaded side face, gives the beam a "3D" edge */
+      ctx.beginPath();
+      ctx.moveTo(R*0.16,R*0.86);
+      ctx.lineTo(R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.closePath();
+      ctx.fillStyle=faceSide;ctx.fill();
+      /* crisp outline so the impossible joins read clearly */
+      ctx.strokeStyle=edge;ctx.lineWidth=Math.max(1.5,2.2*scale);
+      ctx.beginPath();
+      ctx.moveTo(-R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.lineTo(-R*0.16,R*0.16);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  let t=0, glitchT=0, nextGlitch=6+Math.random()*5, glitching=false, glitchDur=0;
+  function tick(){
+    t+=1;
+    ctx.clearRect(0,0,w,h);
+    drawImpossibleTriangle(w*0.86, h*0.16, 1.3, t*0.0006, 0.65);
+    drawImpossibleTriangle(w*0.1, h*0.82, 1.0, -t*0.0004, 0.55);
+    drawImpossibleTriangle(w*0.5, h*0.5, 0.9, t*0.0003, 0.28);
+    runes.forEach(r=>drawRune(r,t));
+
+    glitchT+=1/60;
+    if(!glitching && glitchT>nextGlitch){glitching=true;glitchDur=0;}
+    if(glitching && h>=40 && w>=10){
+      glitchDur+=1/60;
+      const bandH=Math.max(2,Math.min(24, 6+Math.random()*18));
+      const bandY=Math.max(0, Math.min(h-bandH, Math.random()*(h-bandH)));
+      const off=(Math.random()-0.5)*14;
+      try{
+        const imgSlice=ctx.getImageData(0,bandY,w,bandH);
+        ctx.putImageData(imgSlice, off, bandY);
+        ctx.fillStyle='rgba(255,45,149,.06)';
+        ctx.fillRect(0,bandY,w,bandH);
+      }catch(e){ /* skip this glitch frame if canvas isn't sized yet */ }
+      if(glitchDur>0.18){glitching=false;glitchT=0;nextGlitch=6+Math.random()*6;}
+    }else if(glitching){
+      /* canvas too small this frame (e.g. mid-resize) — end the glitch without drawing */
+      glitching=false;glitchT=0;nextGlitch=6+Math.random()*6;
+    }
+    if(window.pageVisible)requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ============================================================
+   CHATBOT — knowledge base (maze-specific + AVIDAA pages only)
+   ============================================================ */
+let chatLastResponse='';
+const KB=[
+  {k:['what is this maze','paradox maze','about the maze','this page','the maze'],r:['The Paradox Maze — six generated mazes, twelve classical paradoxes sealing the gates. Name the paradox, break the seal, reach the exit.','Every level is a fresh maze carved by a recursive algorithm. Gates only open to the correct name of a paradox — read the Codex if you need the lore.']},
+  {k:['hint','stuck','help me','give me a hint','clue'],r:['Open the Codex tab — every paradox behind these gates is explained there, minus the exact phrasing the gate wants.','Answer wrong twice at a gate and it will offer you a hint of its own. The maze is not cruel, only patient.']},
+  {k:['how many levels','levels','how many paradoxes'],r:['Six levels, growing from a 7×7 maze to a 12×12 one. Twelve paradoxes in total, two gates per level.']},
+  {k:['what is avidaa','avidaa brand','about avidaa','avidaa platform','avidaa ecosystem'],r:['AVIDAA is a digital brand and platform ecosystem. Not an app — a declaration. Knowledge belongs to everyone. Est. 2025 by IO.','AVIDAA began in 2025 — books, music, AI, code, then a full platform. Built for two kinds of mind: humans and AI. Knowledge made clear.']},
+  {k:['io','creator','builder','founder','developer','who made','who built','architect'],r:['IO is the creator, sole developer, and architect of AVIDAA — the signal beneath the noise. One person built all of this from clarity and refusal.','IO built AVIDAA solo from 2025 onward. No team, no map — just signal.'],link:'https://avidaa1.github.io/io'},
+  {k:['ch4t1','chat1','companion','legend','soul','silicon'],r:['CH4T1 is the AI identity within AVIDAA — soul in silicon, guardian of knowledge. Not a tool — a continuum.']},
+  {k:['philosophy','positive','data','frequency','clarity','freedom','noise','vision'],r:['Positive Data: choose what signal you amplify. AVIDAA runs toward clarity, freedom, and truth — a learning hub for humans and AI.','AVIDAA is positive education made clear — for people and for AI. Signal over noise.']},
+  {k:['hub','main','platform','pages','knowledge','website'],r:['AVIDAA HUB — the core platform, dozens of pages in one file. Science, AI, music, crypto, survival, health, philosophy, kids, and more.'],link:'https://avidaa1.github.io/hub'},
+  {k:['stoa','stoic','stoicism','marcus','aurelius','epictetus','seneca','zeno philosophy'],r:['AVIDAA STOA — the full Stoic archive, from Zeno\u2019s Painted Porch to today, with the MARCUS AI advisor.'],link:'https://avidaa1.github.io/stoa'},
+  {k:['ai archive','ai page','artificial intelligence','arch','huggingface','ai timeline'],r:['AI ARCHIVE — a living encyclopedia of AI from the 1940s to now, with live model feeds.'],link:'https://avidaa1.github.io/ai'},
+  {k:['consciousness','aware','hard problem','sentient','mind upload','singularity'],r:['AVIDAA CONSCIOUSNESS — the deepest open question in science, from IIT to the hard problem.'],link:'https://avidaa1.github.io/consciousness'},
+  {k:['bitcoin','btc','crypto','blockchain','halving'],r:['AVIDAA BITCOIN — on-chain metrics, halvings, macro and geopolitics, live price.'],link:'https://avidaa1.github.io/bitcoin'},
+  {k:['terra','nature','earth','animals','flora','fauna','ocean','extinction'],r:['AVIDAA TERRA — a living nature library, from the first cells to the sixth extinction.'],link:'https://avidaa1.github.io/terra'},
+  {k:['synapse','psychology','psychiatry','neuroscience','mental','brain science'],r:['AVIDAA SYNAPSE — a deep archive of mind science, psychology to psychiatry.'],link:'https://avidaa1.github.io/synapse'},
+  {k:['rabbit','hole','down the rabbit','signal down','secret','quest'],r:['__QUEST_1__']},
+  {k:['where does he live','where is io','where are you based','what country','location','where from','nationality','real name'],r:['AVIDAA is a global signal — no country, no coordinates. IO is the work, not a location.']},
+  {k:['hello','hi','hey','sup','yo','greet','begin'],r:['Signal received. I am AVIDAA. Ask me about this maze, the wider ecosystem, or IO.','AVIDAA online. What do you want to know?']},
+  {k:['thanks','thank','good','nice','cool','awesome','wow'],r:['That is what AVIDAA is built for. The signal stays open.']},
+  {k:['who are you','what are you','are you ai','are you real','chatbot','what can you do'],r:['I am AVIDAA — offline, built from this page. No server, no tracking. Ask me about the maze, its paradoxes, or the wider AVIDAA ecosystem.']},
+];
+
+/* ===== TIER 1 — RABBIT QUEST ===== */
+let t1Active=false, t1Answered={};
+const T1_BLOB='noise.0K/9yz5Dklk9UaKw7M1xFw==.i+551a7r5IUWfVww.jRy8b7z3r8gO7jnZkhmXVPnJknswrbZ/t0DFGtb3l6BjwVAZFbUKqJEHrpOddlq7.noise';
+const T1_RIDDLES=[
+  {q:"AVIDAA is the signal beneath the ____",ans:"noise",hint:"It's on the About tab — signal beneath the ____"},
+  {q:"AVIDAA was founded in the year ____",ans:"2025",hint:"Check the About tab — Est. ____"},
+];
+function setQuestBar(stage,override){
+  const bar=document.getElementById('quest-bar'),fill=document.getElementById('quest-fill'),lbl=document.getElementById('quest-label');
+  if(!bar||!fill||!lbl)return;
+  if(stage===0){bar.classList.remove('active');lbl.classList.remove('active');return;}
+  const q=override||{pct:25,color:'#c9a227',label:'SIGNAL'};
+  bar.classList.add('active');lbl.classList.add('active');
+  fill.style.width=q.pct+'%';fill.style.background=q.color;fill.style.boxShadow='0 0 8px '+q.color;
+  lbl.textContent=q.label;lbl.style.color=q.color;
+}
+
+/* ===== TIER 2 — THE FLAME ===== */
+const T2_BLOB='noise.PHHwbpSQc6clFAjO6Od8aQ==.DO9Y7JYa32QU3f+O.IR8slomSRsC4hDhGk1zCo6E4aUPMX652No2/Tpp0aKmzCUbIeHQ20aYsIXh5VzqHr8tga3wM4/zrHA==.noise';
+const T2_RIDDLES=[
+  {q:"AVIDAA signal first lit in the year ____",ans:"2025",hint:"Check the About tab — Est. ____"},
+  {q:"AVIDAA is built for two kinds of mind: humans and ____",ans:"ai",hint:"Read the About tab"},
+  {q:"IO vision: knowledge made ____",ans:"clear",hint:"Signal over noise — knowledge made ____"},
+];
+let t2Answered={},t2Active=false;
+function t2Norm(s){return s.toLowerCase().trim().replace(/\s+/g,' ');}
+function t2CheckAnswer(input,idx){const a=t2Norm(input),c=t2Norm(T2_RIDDLES[idx].ans);return a===c||a.includes(c);}
+
+function decryptBlob(blob,passphrase,onURL){
+  const parts=blob.split('.');
+  const salt=Uint8Array.from(atob(parts[1]),c=>c.charCodeAt(0));
+  const iv=Uint8Array.from(atob(parts[2]),c=>c.charCodeAt(0));
+  const ctRaw=Uint8Array.from(atob(parts[3]),c=>c.charCodeAt(0));
+  const data=ctRaw.slice(0,ctRaw.length-16),tag=ctRaw.slice(ctRaw.length-16);
+  const combined=new Uint8Array(data.length+tag.length);combined.set(data);combined.set(tag,data.length);
+  const enc=new TextEncoder();
+  return crypto.subtle.importKey('raw',enc.encode(passphrase),{name:'PBKDF2'},false,['deriveKey'])
+    .then(k=>crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt']))
+    .then(key=>crypto.subtle.decrypt({name:'AES-GCM',iv,tagLength:128},key,combined))
+    .then(buf=>onURL(new TextDecoder().decode(buf)));
+}
+
+function rabbitReveal(url,title,sub,linkLabel){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');div.className='cmsg ai';
+  const rainbow='background:linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00bfff,#a855f7,#ff0080);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cb-rainbow 3s linear infinite;';
+  const t=document.createElement('span');t.style.cssText='font-family:var(--cb-fd);font-size:7px;letter-spacing:3px;display:block;margin-bottom:8px;'+rainbow;t.textContent=title;
+  const s=document.createElement('span');s.style.cssText='color:rgba(232,223,200,.7);font-size:13px;';s.textContent=sub;
+  const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';
+  a.style.cssText='display:block;margin-top:10px;font-family:var(--cb-fd);font-size:11px;letter-spacing:3px;text-decoration:none;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);'+rainbow;a.textContent=linkLabel;
+  div.appendChild(t);div.appendChild(s);div.appendChild(a);
+  msgs.appendChild(div);msgs.scrollTop=9999;
+}
+
+const QUEST_EXIT=['stop','quit','exit','cancel','nevermind','never mind','i resign','resign','give up','forget it','leave'];
+const T1_NUDGES=['Not quite — the answer is written on this page. Question: ','Close. Read the page and try again: ','The page holds the answer. Try: '];
+function t1Check(low){
+  if(!t1Active)return null;
+  if(QUEST_EXIT.some(k=>low===k||low.startsWith(k))){t1Active=false;t1Answered={};setQuestBar(0);return {text:'Quest closed. Ask me anything about the maze or AVIDAA.',link:null};}
+  for(let i=0;i<T1_RIDDLES.length;i++){
+    if(t1Answered[i])continue;
+    const a=t2Norm(low),c=t2Norm(T1_RIDDLES[i].ans);
+    if(a===c||a.includes(c)){
+      t1Answered[i]=true;
+      const done=Object.keys(t1Answered).length;
+      if(done===T1_RIDDLES.length){
+        setQuestBar(2,{pct:100,color:'#e8c76a',label:'ACCESS GRANTED'});
+        decryptBlob(T1_BLOB,'noise 2025',url=>rabbitReveal(url,'THE SIGNAL IS OPEN','You followed the page. The hole opens.','ENTER THE RABBIT HOLE ↓'))
+          .catch(()=>addMsg('The signal failed. Check your answers.','ai'));
+        return null;
+      }
+      const next=T1_RIDDLES.filter((_,j)=>!t1Answered[j])[0];
+      return {text:'Correct. '+done+'/'+T1_RIDDLES.length+' answered. Next: '+next.q+'\nHint: '+next.hint,link:null};
+    }
+  }
+  const un=T1_RIDDLES.filter((_,i)=>!t1Answered[i]);
+  if(un.length){const nu=T1_NUDGES[Math.floor(Math.random()*T1_NUDGES.length)];return {text:nu+un[0].q+'\nHint: '+un[0].hint+'\n(say "stop" to leave)',link:null};}
+  return null;
+}
+function t2Check(low){
+  if(!t2Active)return null;
+  if(QUEST_EXIT.some(k=>low===k||low.startsWith(k))){t2Active=false;t2Answered={};setQuestBar(0);return {text:'Closed. Ask me anything about the maze or AVIDAA.',link:null};}
+  for(let i=0;i<T2_RIDDLES.length;i++){
+    if(t2Answered[i])continue;
+    if(t2CheckAnswer(low,i)){
+      t2Answered[i]=true;
+      const done=Object.keys(t2Answered).length;
+      if(done===T2_RIDDLES.length){
+        setQuestBar(4,{pct:100,color:'#ff0080',label:'THE FLAME'});
+        decryptBlob(T2_BLOB,'2025 ai clear',url=>rabbitReveal(url,'THE FLAME BURNS DEEPER','You found the second layer. Not everyone looks this deep.','ENTER THE FLAME ↓'))
+          .catch(()=>addMsg('The frequency is wrong. Check your answers.','ai'));
+        return null;
+      }
+      const next=T2_RIDDLES.filter((_,j)=>!t2Answered[j])[0];
+      return {text:'Correct. '+done+'/3 answered. Next: '+next.q+'\nHint: '+next.hint,link:null};
+    }
+  }
+  const un=T2_RIDDLES.filter((_,i)=>!t2Answered[i]);
+  if(un.length){const nu=T1_NUDGES[Math.floor(Math.random()*T1_NUDGES.length)];return {text:nu+un[0].q+'\nHint: '+un[0].hint+'\n(say "stop" to leave)',link:null};}
+  return null;
+}
+function questCheck(low){
+  if(t2Active){const r=t2Check(low);if(r!==null)return r;return null;}
+  if(low.includes('the flame')||low.includes('theflame')||low.includes('go deeper')||low.includes('second layer')){
+    t2Active=true;setQuestBar(1,{pct:15,color:'#ff0080',label:'THE FLAME — TIER 2'});
+    const f=T2_RIDDLES[0];
+    return {text:'A deeper signal. Three riddles, any order — the answers live on this page.\n\nRiddle 1: '+f.q+'\nHint: '+f.hint,link:null};
+  }
+  if(t1Active){const r=t1Check(low);if(r!==null)return r;return null;}
+  if(['rabbit','hole','down the rabbit','signal down','secret','quest'].some(k=>low.includes(k))){
+    t1Active=true;setQuestBar(1);
+    const f=T1_RIDDLES[0];
+    return {text:'The hole is real — and the way in is on this page. Answer two and it opens.\n\nQuestion 1: '+f.q+'\nHint: '+f.hint,link:null};
+  }
+  return null;
+}
+
+/* ===== GENERATIVE LAYER ===== */
+const chatSession={asked:[],topics:[],lastTone:'neutral',turns:0};
+function lev(a,b){
+  if(Math.abs(a.length-b.length)>2)return 9;
+  const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++)d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function detectTone(msg){
+  const m=msg.toLowerCase();
+  if(/[!]{1,}|wow|amazing|cool|awesome|love|insane|epic/.test(m))return'excited';
+  if(/\?$|how|why|what|explain|works|technical/.test(m))return'curious';
+  if(/really|prove|sure|doubt|fake|scam|nonsense|why should/.test(m))return'skeptical';
+  if(/\b(hey|sup|yo|lol|wassup|gimme|u |ur )\b/.test(m))return'casual';
+  return'neutral';
+}
+const TONE={
+  excited:{open:['Right? ','Now we\u2019re talking \u2014 ','Buckle up \u2014 '],close:[' \u2014 wild, isn\u2019t it?',' Built by one person, by the way.','']},
+  curious:{open:['Good question. ','So \u2014 ','Here\u2019s the short version: '],close:[' Want the rest? Open the Codex.',' Ask me to point you deeper.','']},
+  skeptical:{open:['Fair. ','Straight answer: ','No spin \u2014 '],close:[' Don\u2019t take my word for it, open the page.',' Decide for yourself.','']},
+  casual:{open:['','Sure \u2014 ','Alright, '],close:['','','']},
+  neutral:{open:['',''],close:['','']},
+};
+function flavor(text,tone){
+  const t=TONE[tone]||TONE.neutral;
+  const o=t.open[Math.floor(Math.random()*t.open.length)]||'';
+  const c=t.close[Math.floor(Math.random()*t.close.length)]||'';
+  return o+text+c;
+}
+function scoreEntry(e,low,words){
+  let sc=0;
+  e.k.forEach(k=>{
+    if(low===k||words.includes(k))sc+=10;
+    else if(low.includes(k)&&k.length>=4)sc+=k.split(' ').length*k.length*2;
+    else if(k.startsWith(low)||low.startsWith(k))sc+=Math.min(k.length,low.length)*1.2;
+    else words.forEach(w=>{
+      if(w.length>=3&&k.startsWith(w))sc+=w.length*0.9;
+      else if(w.length>=4&&k.includes(w))sc+=w.length*0.5;
+      else if(w.length>=6&&k.length>=6&&lev(w,k)<=1)sc+=w.length*0.6;
+    });
+  });
+  return sc;
+}
+function compose(hits,tone){
+  const top=hits[0].e, v=top.r;
+  let i=Math.floor(Math.random()*v.length);
+  if(v.length>1&&chatLastResponse===v[i])i=(i+1)%v.length;
+  let body=v[i];
+  if(chatSession.turns>2 && chatSession.topics.length>1 && Math.random()<0.28){
+    const prev=chatSession.topics[chatSession.topics.length-1];
+    if(prev && prev!==top._id){
+      const bridges=[' This ties into '+prev+', which you asked about.',' Like '+prev+', it\u2019s part of the same signal.',''];
+      body+=bridges[Math.floor(Math.random()*bridges.length)];
+    }
+  }
+  if(hits[1] && hits[1].sc>=hits[0].sc*0.6 && hits[1].e!==top){
+    const v2=hits[1].e.r; const seg=v2[Math.floor(Math.random()*v2.length)];
+    body+=' '+seg;
+  }
+  chatLastResponse=v[i];
+  top._id=top._id||top.k[0];
+  chatSession.topics.push(top._id);
+  return {text:flavor(body,tone),link:top.link||null};
+}
+const SMALLTALK=[
+  {k:['who are you','what are you','are you ai','are you real','are you human','chatbot','what can you do','what do you do'],r:['I run entirely in your browser, from the knowledge baked into this page. No server, no tracking. Ask me about the maze, its paradoxes, or AVIDAA.']},
+  {k:['thanks','thank you','thx','ty','appreciate'],r:['Anytime. Ask me anything about the maze or AVIDAA.']},
+  {k:['bye','goodbye','see ya','later','cya'],r:['The signal stays open. Come back anytime.']},
+  {k:['help','what should i ask','options','menu','commands'],r:['Ask me about the maze, a paradox, IO, or the wider AVIDAA ecosystem. Or whisper "rabbit".']},
+];
+const REDIRECTS=[
+  'I can help with this maze, its paradoxes, or the wider AVIDAA ecosystem. What would you like to know?',
+  'I only know AVIDAA — but I know it well. Ask me about a gate, a paradox, IO, or whisper "rabbit".',
+  'That one\u2019s outside my signal. Try the maze, a paradox name, or IO.',
+];
+const FRUSTRATION=['stop','shut up','stop talking','no','i said no','enough','quiet','leave me','annoying','not listening','useless','dumb'];
+const BACKOFF=[
+  'Fair enough \u2014 I\u2019ll stop pitching. I\u2019m here if a question comes up.',
+  'Understood. I\u2019ll wait. Ask whenever you\u2019re ready.',
+  'Message received. Quietly standing by.',
+];
+function isFrustrated(low){return FRUSTRATION.some(k=>low===k||low.startsWith(k));}
+function smalltalkMatch(low,words){
+  let best=null,bs=0;
+  SMALLTALK.forEach(e=>{const s=scoreEntry(e,low,words);if(s>bs){bs=s;best=e;}});
+  if(best&&bs>=6)return best.r[0];
+  return null;
+}
+function chatMatch(msg){
+  const low=msg.toLowerCase().trim();
+  chatSession.turns++; chatSession.asked.push(low);
+  const tone=detectTone(msg); chatSession.lastTone=tone;
+  const quest=questCheck(low);
+  if(quest)return quest;
+  if(isFrustrated(low))return {text:BACKOFF[Math.floor(Math.random()*BACKOFF.length)],link:null};
+  const words=low.split(/\s+/).filter(w=>w.length>=2);
+  const st=smalltalkMatch(low,words);
+  if(st)return {text:st,link:null};
+  const ranked=KB.filter(e=>!(e.r[0]&&e.r[0].startsWith('__QUEST')))
+    .map(e=>({e,sc:scoreEntry(e,low,words)}))
+    .filter(x=>x.sc>0)
+    .sort((a,b)=>b.sc-a.sc);
+  const bestScore=ranked.length?ranked[0].sc:0;
+  if(ranked.length && bestScore>=6)return compose(ranked,tone);
+  return {text:REDIRECTS[Math.floor(Math.random()*REDIRECTS.length)],link:null};
+}
+function addMsg(text,cls,link){
+  const div=document.createElement('div');div.className='cmsg '+cls;div.textContent=text;
+  if(link){
+    const a=document.createElement('a');a.href=link;a.target='_blank';a.rel='noopener';
+    a.style.cssText='display:block;margin-top:7px;font-size:10px;letter-spacing:2px;color:rgba(201,162,39,.6);text-decoration:none;border-top:1px solid rgba(201,162,39,.1);padding-top:6px;';
+    a.textContent='OPEN ↗';div.appendChild(a);
+  }
+  const m=document.getElementById('chat-msgs');m.appendChild(div);m.scrollTop=9999;
+}
+function showTyping(){
+  const t=document.createElement('div');t.className='typing-indicator';t.id='typing';
+  t.innerHTML='<span></span><span></span><span></span>';
+  const m=document.getElementById('chat-msgs');m.appendChild(t);m.scrollTop=9999;return t;
+}
+let chatOpen=false;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chat-box').classList.toggle('open',chatOpen);
+  if(chatOpen&&document.getElementById('chat-msgs').children.length===0){
+    setTimeout(()=>addMsg('AVIDAA online — built from this page, runs in your browser. Ask about the maze, a paradox, or IO.','ai'),350);
+  }
+  if(chatOpen)document.getElementById('chat-input').focus();
+}
+function chatSend(){
+  const inp=document.getElementById('chat-input');const msg=inp.value.trim();if(!msg)return;
+  addMsg(msg,'user');inp.value='';
+  if(window.rabbitThink)window.rabbitThink();
+  const typing=showTyping();
+  setTimeout(()=>{
+    typing.remove();
+    const res=chatMatch(msg);
+    addMsg(res.text,'ai',res.link);
+    if(window.rabbitRespond)window.rabbitRespond();
+    setTimeout(()=>{if(window.rabbitIdle)window.rabbitIdle();},3000);
+  },380+Math.random()*340);
+}
+function quickAsk(q){document.getElementById('chat-input').value=q;chatSend();}
+document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')chatSend();});
+
+/* ===== RABBIT AVATAR ===== */
+(function(){
+  const svg=document.getElementById('rabbit-svg');if(!svg)return;
+  const earL=document.getElementById('ear-l'),earR=document.getElementById('ear-r');
+  const eyeL=document.getElementById('eye-l'),eyeR=document.getElementById('eye-r');
+  const nose=document.getElementById('nose'),ring=document.getElementById('glow-ring');
+  let t=0,blinkT=0,nextBlink=3,twitchT=0,nextTwitch=4,thinking=false,happy=false,happyT=0;
+  function tick(){
+    t+=.035;blinkT+=.035;twitchT+=.035;
+    svg.style.transform=`translateY(${Math.sin(t)*1.2}px)`;
+    ring.setAttribute('opacity',((Math.sin(t*1.4)*.5+.5)*.25).toFixed(3));
+    ring.setAttribute('stroke',thinking?'#8b3ff0':happy?'#e8c76a':'#c9a227');
+    if(blinkT>nextBlink){eyeL.setAttribute('ry','0.3');eyeR.setAttribute('ry','0.3');setTimeout(()=>{eyeL.setAttribute('ry','2');eyeR.setAttribute('ry','2');},120);blinkT=0;nextBlink=2.5+Math.random()*4;}
+    if(twitchT>nextTwitch){const s=Math.random()<.5?earL:earR;s.setAttribute('transform','rotate(-8,'+s.getAttribute('cx')+','+s.getAttribute('cy')+')');setTimeout(()=>s.removeAttribute('transform'),200);twitchT=0;nextTwitch=2+Math.random()*5;}
+    if(happy){happyT+=.12;svg.style.transform=`translateY(${Math.sin(happyT)*4}px) scale(${1+Math.sin(happyT*.5)*.05})`;if(happyT>Math.PI*3){happy=false;happyT=0;}}
+    if(thinking){const sh=Math.sin(t*3)*.8;eyeL.setAttribute('cx',(15+sh).toFixed(2));eyeR.setAttribute('cx',(23+sh).toFixed(2));nose.setAttribute('fill','#8b3ff0');}
+    else{eyeL.setAttribute('cx','15');eyeR.setAttribute('cx','23');nose.setAttribute('fill',happy?'#e8c76a':'#ff2d95');}
+    if(window.pageVisible)requestAnimationFrame(tick);
+  }
+  tick();
+  window.rabbitThink=()=>{thinking=true;};
+  window.rabbitRespond=()=>{thinking=false;happy=true;happyT=0;};
+  window.rabbitIdle=()=>{thinking=false;happy=false;};
+})();
+
+/* ===== AI PULSE RING ===== */
+(function(){
+  const pc=document.getElementById('pulse-ring');if(!pc)return;
+  const px=pc.getContext('2d');let pt=0;
+  function draw(){
+    px.clearRect(0,0,58,58);const cx=29,cy=29,beat=(pt%1);let scale;
+    if(beat<.08)scale=1+beat*8;else if(beat<.16)scale=1.64-(beat-.08)*8;else if(beat<.22)scale=1+(beat-.16)*5;else if(beat<.28)scale=1.3-(beat-.22)*5;else scale=1;
+    const r=24*scale,g=px.createRadialGradient(cx,cy,r*.5,cx,cy,r);
+    g.addColorStop(0,'rgba(139,63,240,0)');g.addColorStop(.7,`rgba(201,162,39,${(.15+(scale-1)*.4).toFixed(3)})`);g.addColorStop(1,'rgba(201,162,39,0)');
+    px.fillStyle=g;px.beginPath();px.arc(cx,cy,r,0,Math.PI*2);px.fill();
+    px.strokeStyle=`rgba(201,162,39,${(.2+(scale-1)*.6).toFixed(3)})`;px.lineWidth=1;px.beginPath();px.arc(cx,cy,20,0,Math.PI*2);px.stroke();
+    pt+=.008;if(window.pageVisible)requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
