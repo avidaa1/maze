@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- avidaa-favicon: shared AVIDAA logo, inline so every page CSP can allow it with img-src data: -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Crect%20width='48'%20height='48'%20rx='10'%20fill='%23050818'/%3E%3Ccircle%20cx='24'%20cy='24'%20r='21'%20fill='none'%20stroke='%237C5CFF'%20stroke-width='2.4'%20stroke-dasharray='3%205'/%3E%3Cpath%20d='M24%206l4.2%2011.6L40%2018l-9.4%207.2%203.4%2011.6L24%2029.8%2014%2036.8l3.4-11.6L8%2018l11.8-.4z'%20fill='%23FFD93D'%20stroke='%23FFD93D'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='24'%20cy='23'%20r='3.5'%20fill='%23FF7AA8'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<meta name="theme-color" content="#050818">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-ancestors 'self';">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>AVIDAA MAZE — The Paradox Maze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G8M1YZQ8WF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G8M1YZQ8WF');</script>
+<style>
+:root{
+  --void:#07060b;--void2:#0d0a17;--ink:#141020;
+  --parchment:#e8dfc8;--parchment-dim:rgba(232,223,200,.56);
+  --gold:#c9a227;--gold-bright:#e8c76a;
+  --violet:#8b3ff0;--magenta:#ff2d95;--ember:#ff5a36;--ok:#5fe0a0;
+  --fh:'Cinzel',serif;--fm:'Space Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--void);color:var(--parchment);overflow-x:hidden;font-family:var(--fm)}
+body{position:relative;min-height:100vh}
+a{color:var(--gold-bright)}
+#ambient-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+.scan-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 3px);mix-blend-mode:overlay}
+#main,header,footer{position:relative;z-index:2}
+
+/* ===== TOPBAR / NAV ===== */
+header.topbar{max-width:1100px;margin:0 auto;padding:18px clamp(14px,4vw,32px) 6px}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--fh);font-weight:900;letter-spacing:3px;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--parchment)}
+.wordmark span{display:block;font-size:.5em;letter-spacing:6px;color:var(--gold);font-weight:400}
+#back-home{
+  font-family:var(--fh);font-weight:700;text-decoration:none;-webkit-appearance:none;appearance:none;white-space:nowrap;
+  background:linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00bfff,#a855f7,#ff0080);
+  background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:rainbow 3s linear infinite;font-size:clamp(1.1rem,3.2vw,1.5rem);letter-spacing:2px;
+}
+@keyframes rainbow{to{background-position:300% center}}
+@media (prefers-reduced-motion:reduce){#back-home{animation:none}}
+.navrow{display:flex;flex-wrap:wrap;gap:8px;height:auto;align-items:center;justify-content:flex-start;margin-top:14px;padding-bottom:12px;border-bottom:1px solid rgba(201,162,39,.2)}
+.tab{
+  -webkit-appearance:none;appearance:none;white-space:nowrap;cursor:pointer;
+  font-family:var(--fm);font-size:clamp(.68rem,1.6vw,.8rem);letter-spacing:2px;text-transform:uppercase;
+  padding:7px clamp(10px,2.2vw,16px);background:rgba(201,162,39,.06);border:1px solid rgba(201,162,39,.3);color:var(--parchment-dim);
+  transition:all .2s;
+}
+.tab:hover{border-color:var(--gold);color:var(--gold-bright)}
+.tab.active{background:rgba(201,162,39,.16);border-color:var(--gold-bright);color:var(--gold-bright);box-shadow:0 0 12px rgba(201,162,39,.25)}
+
+/* ===== PAGES ===== */
+#main{max-width:1100px;margin:0 auto;padding:0 clamp(14px,4vw,32px) 60px}
+.page{display:none}
+.page.active{display:block}
+
+/* ===== HERO ===== */
+.hero{padding:clamp(30px,6vw,64px) 0 20px;text-align:center}
+.hero h1{font-family:var(--fh);font-weight:900;font-size:clamp(2.1rem,7vw,4.2rem);letter-spacing:4px;margin:0 0 10px;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold) 60%,var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p.tag{font-size:clamp(.85rem,2vw,1.05rem);color:var(--parchment-dim);letter-spacing:1px;max-width:640px;margin:0 auto 26px}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:var(--fm);letter-spacing:2px;text-transform:uppercase;font-size:.78rem;
+  padding:12px 26px;border:1px solid var(--gold);background:rgba(201,162,39,.08);color:var(--gold-bright);transition:all .2s;}
+.btn:hover{background:rgba(201,162,39,.2);box-shadow:0 0 18px rgba(201,162,39,.3)}
+.btn.alt{border-color:var(--violet);color:#d8b9ff}
+.btn.alt:hover{background:rgba(139,63,240,.18);box-shadow:0 0 18px rgba(139,63,240,.35)}
+
+.section-title{font-family:var(--fh);font-weight:700;font-size:clamp(1.2rem,3vw,1.7rem);letter-spacing:2px;color:var(--gold-bright);margin:36px 0 14px;border-bottom:1px solid rgba(201,162,39,.25);padding-bottom:8px}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
+.card{border:1px solid rgba(201,162,39,.25);background:rgba(20,16,32,.55);padding:16px 18px}
+.card h3{font-family:var(--fh);margin:0 0 8px;color:var(--gold-bright);font-size:1.05rem;letter-spacing:1px}
+.card p{margin:0;font-size:.85rem;line-height:1.55;color:var(--parchment-dim)}
+
+/* ===== PLAY PAGE ===== */
+.level-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}
+.lvl-btn{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:var(--fm);font-size:.78rem;letter-spacing:1px;
+  padding:9px 14px;border:1px solid rgba(201,162,39,.35);background:rgba(201,162,39,.05);color:var(--parchment-dim);}
+.lvl-btn.unlocked{color:var(--gold-bright);border-color:var(--gold)}
+.lvl-btn.current{background:rgba(201,162,39,.22);box-shadow:0 0 10px rgba(201,162,39,.3)}
+.lvl-btn.locked{opacity:.35;cursor:not-allowed}
+.lvl-btn.done::after{content:' ✓';color:var(--ok)}
+
+#hud{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:.78rem;letter-spacing:1px;color:var(--parchment-dim)}
+#hud .distort{display:flex;align-items:center;gap:6px}
+#distort-bar{width:90px;height:6px;background:rgba(255,45,149,.12);position:relative;overflow:hidden;border:1px solid rgba(255,45,149,.3)}
+#distort-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--violet),var(--magenta));transition:width .4s}
+
+.maze-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+#maze-canvas{width:100%;max-width:520px;aspect-ratio:1/1;background:radial-gradient(circle at 50% 30%,#140f22,#07060b 75%);border:1px solid rgba(201,162,39,.3);box-shadow:0 0 30px rgba(0,0,0,.6) inset}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px}
+.dpad button{-webkit-appearance:none;appearance:none;cursor:pointer;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.35);color:var(--gold-bright);font-size:1.1rem}
+.dpad button:active{background:rgba(201,162,39,.25)}
+.dpad .up{grid-column:2;grid-row:1}.dpad .left{grid-column:1;grid-row:2}.dpad .right{grid-column:3;grid-row:2}.dpad .down{grid-column:2;grid-row:3}
+
+/* ===== MODAL (riddle gate + win) ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(4,3,9,.88);backdrop-filter:blur(4px);z-index:9500;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal-box{max-width:460px;width:100%;background:var(--ink);border:1px solid var(--violet);box-shadow:0 0 40px rgba(139,63,240,.35);padding:26px 24px}
+.modal-box h2{font-family:var(--fh);color:#d8b9ff;letter-spacing:2px;font-size:1.1rem;margin:0 0 12px}
+.modal-box p.q{font-size:.92rem;line-height:1.6;color:var(--parchment);margin:0 0 16px}
+.modal-box input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.35);color:var(--parchment);font-family:var(--fm);
+  padding:10px 12px;font-size:.9rem;margin-bottom:10px;-webkit-appearance:none;appearance:none;}
+.modal-box .feedback{font-size:.78rem;color:var(--magenta);min-height:1.2em;margin-bottom:10px}
+.modal-box .row{display:flex;gap:10px;flex-wrap:wrap}
+.win-box h2{color:var(--ok)}
+.sigil-wrap{display:flex;justify-content:center;margin:2px 0 14px}
+#gate-sigil{width:min(180px,60vw);height:min(180px,60vw);cursor:grab;touch-action:none;filter:drop-shadow(0 0 10px rgba(139,63,240,.25))}
+#gate-sigil:active{cursor:grabbing}
+
+/* ===== CODEX ===== */
+.paradox-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:16px 0}
+.oracle-box{border:1px solid rgba(139,63,240,.4);background:rgba(20,16,32,.55);padding:18px 20px;margin:20px 0}
+.oracle-box textarea{width:100%;min-height:70px;background:rgba(255,255,255,.03);border:1px solid rgba(139,63,240,.35);color:var(--parchment);
+  font-family:var(--fm);padding:10px;font-size:.85rem;resize:vertical;-webkit-appearance:none;appearance:none;}
+#oracle-result{margin-top:12px;font-size:.85rem;color:var(--parchment-dim);min-height:1.4em}
+
+footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spacing:3px;color:rgba(232,223,200,.35);font-size:.8rem}
+
+@media (max-width:600px){
+  #main{padding-bottom:40px}
+  .dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== CHATBOT MODULE (canonical, self-scoped) ===== */
+#chatbot{--cb-cyan:#c9a227;--cb-purple:#8b3ff0;--cb-green:#5fe0a0;--cb-fb:'Space Mono',monospace;--cb-fd:'Space Mono',monospace;}
+#chatbot{position:fixed;bottom:48px;right:18px;z-index:9000;width:min(420px,calc(100vw - 24px));font-family:var(--cb-fb);}
+#chat-toggle{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cb-purple),var(--cb-cyan));border:2px solid rgba(255,255,255,.1);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 24px rgba(139,63,240,.45),0 0 48px rgba(201,162,39,.15);margin-left:auto;-webkit-appearance:none;appearance:none;transition:transform .2s,box-shadow .2s;animation:cb-chatpulse 3s ease-in-out infinite;}
+#chat-toggle:hover{transform:scale(1.08);}
+@keyframes cb-chatpulse{0%,100%{box-shadow:0 0 24px rgba(139,63,240,.45),0 0 48px rgba(201,162,39,.15);}50%{box-shadow:0 0 34px rgba(139,63,240,.7),0 0 64px rgba(201,162,39,.3);}}
+@keyframes cb-rainbow{to{background-position:200% center;}}
+@keyframes cb-livepulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+#chat-box{background:rgba(10,8,18,.96);border:1px solid rgba(201,162,39,.18);backdrop-filter:blur(20px);display:none;flex-direction:column;margin-bottom:10px;overflow:hidden;border-radius:6px;box-shadow:0 0 40px rgba(0,0,0,.8);}
+#chat-box.open{display:flex;}
+#quest-bar{height:3px;background:rgba(201,162,39,.08);position:relative;overflow:hidden;transition:opacity .3s;opacity:0;}
+#quest-bar.active{opacity:1;}
+#quest-fill{height:100%;width:0%;transition:width .8s ease,background .8s ease;background:var(--cb-cyan);}
+#quest-label{font-family:var(--cb-fd);font-size:7px;letter-spacing:3px;color:rgba(201,162,39,.45);padding:4px 16px 0;display:none;}
+#quest-label.active{display:block;}
+#chat-head{padding:12px 16px;border-bottom:1px solid rgba(201,162,39,.1);display:flex;justify-content:space-between;align-items:center;background:rgba(201,162,39,.04);}
+.ch-title{font-family:var(--cb-fd);font-size:9px;letter-spacing:4px;color:var(--cb-cyan);}
+.ch-status{font-size:8px;letter-spacing:2px;color:var(--cb-green);display:flex;align-items:center;gap:5px;}
+.ch-dot{width:5px;height:5px;border-radius:50%;background:var(--cb-green);animation:cb-livepulse 1.5s ease-in-out infinite;}
+.ch-close{color:rgba(255,255,255,.25);cursor:pointer;font-size:16px;line-height:1;padding:0 2px;}
+#chat-msgs{height:240px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:rgba(201,162,39,.2) transparent;}
+.cmsg{font-size:12.5px;letter-spacing:.3px;line-height:1.55;padding:9px 13px;max-width:88%;position:relative;white-space:pre-wrap;}
+.cmsg.ai{background:rgba(201,162,39,.06);border-left:2px solid var(--cb-cyan);color:#ece3d0;align-self:flex-start;border-radius:0 4px 4px 0;}
+.cmsg.ai::before{content:'AVIDAA';font-family:var(--cb-fd);font-size:6px;letter-spacing:2px;color:rgba(201,162,39,.5);display:block;margin-bottom:4px;}
+.cmsg.user{background:rgba(139,63,240,.09);border-right:2px solid var(--cb-purple);color:#ece3d0;align-self:flex-end;text-align:right;border-radius:4px 0 0 4px;}
+.typing-indicator{display:flex;gap:4px;padding:10px 14px;align-self:flex-start;}
+.typing-indicator span{width:5px;height:5px;background:var(--cb-cyan);border-radius:50%;opacity:.4;animation:cb-typedot .8s ease-in-out infinite;}
+.typing-indicator span:nth-child(2){animation-delay:.15s;}
+.typing-indicator span:nth-child(3){animation-delay:.3s;}
+@keyframes cb-typedot{0%,100%{opacity:.2;transform:translateY(0);}50%{opacity:1;transform:translateY(-3px);}}
+#chat-suggestions{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;border-top:1px solid rgba(201,162,39,.06);}
+.chat-sugg{font-size:10px;letter-spacing:.5px;padding:3px 10px;border:1px solid rgba(201,162,39,.2);color:rgba(201,162,39,.6);cursor:pointer;background:rgba(201,162,39,.03);transition:all .2s;}
+.chat-sugg:hover{border-color:var(--cb-cyan);color:var(--cb-cyan);background:rgba(201,162,39,.08);box-shadow:0 0 10px rgba(201,162,39,.2);transform:translateY(-1px);}
+#chat-input-row{display:flex;border-top:1px solid rgba(201,162,39,.08);}
+#chat-input{flex:1;background:transparent;border:none;outline:none;color:#ece3d0;font-family:var(--cb-fb);font-size:13px;padding:11px 14px;letter-spacing:.3px;-webkit-appearance:none;appearance:none;}
+#chat-input::placeholder{color:rgba(236,227,208,.25);}
+#chat-send{background:transparent;border:none;border-left:1px solid rgba(201,162,39,.08);color:var(--cb-cyan);padding:0 16px;cursor:pointer;font-size:15px;-webkit-appearance:none;appearance:none;transition:color .2s;}
+#chat-send:hover{color:#fff;}
+#rabbit-avatar{display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 0 6px rgba(201,162,39,.4));}
+#pulse-ring{position:absolute;bottom:-6px;right:-6px;width:58px;height:58px;border-radius:50%;pointer-events:none;z-index:-1;}
+@media (max-width:600px){#chatbot{bottom:14px;right:10px;}#chat-msgs{height:50vh;}}
+@media (prefers-reduced-motion:reduce){#chat-toggle{animation:none;}.ch-dot{animation:none;}}
+</style>
+<style id="mp-20261124">/* mobile pass + AVIDAA design system v1 (20261124) */html{-webkit-text-size-adjust:100%}img,video{max-width:100%;height:auto}iframe{max-width:100%}pre{max-width:100%;overflow-x:auto}/* AVIDAA design system v1 (20261124). Inline this file into a page; pages stay single files.
+   Rule of thumb: tokens first, components named .av-*, baseline polish only through :where() (zero specificity) so a page's own styles always win. */
+:root{
+  /* base */
+  --av-bg:#050818; --av-bg2:#0B0F30; --av-surface:rgba(255,255,255,.06); --av-surface-2:rgba(255,255,255,.10);
+  --av-line:rgba(255,255,255,.16); --av-fg:#F3F1FF; --av-muted:#B3B0DD; --av-focus:#FFD93D;
+  /* sector colors */
+  --av-aegis:#FF4D6D; --av-knowledge:#5BC0FF; --av-games:#B28DFF; --av-kids:#FFD93D; --av-music:#FF7AA8; --av-tools:#4ADE80; --av-archive:#8892B0;
+  --av-accent:var(--av-knowledge);
+  /* one type scale (px) */
+  --av-fs-0:14px; --av-fs-1:16px; --av-fs-2:18px; --av-fs-3:22px; --av-fs-4:28px; --av-fs-5:36px; --av-fs-6:48px;
+  /* spacing scale (px) */
+  --av-s-1:4px; --av-s-2:8px; --av-s-3:12px; --av-s-4:16px; --av-s-5:24px; --av-s-6:32px; --av-s-7:48px; --av-s-8:64px;
+  /* shape, motion */
+  --av-r-sm:10px; --av-r:16px; --av-r-lg:26px; --av-r-pill:999px;
+  --av-ease:cubic-bezier(.2,.8,.2,1); --av-t:.18s;
+  --av-font:ui-rounded,'SF Pro Rounded','Arial Rounded MT Bold','Varela Round',system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --av-mono:ui-monospace,'SF Mono','Cascadia Mono','DejaVu Sans Mono',Menlo,Consolas,monospace;
+  --av-header-h:48px;
+}
+/* focus: always visible, always the same */
+:focus-visible{outline:3px solid var(--av-focus)!important;outline-offset:2px!important;border-radius:6px}
+/* baseline polish for unstyled controls (zero specificity: page styles win) */
+:where(button:not([class]):not([style]),input[type=button]:not([class]),input[type=submit]:not([class])){
+  min-height:44px;min-width:44px;padding:0 var(--av-s-4);border-radius:var(--av-r-pill);border:2px solid var(--av-line);
+  background:var(--av-surface-2);color:var(--av-fg);font:700 var(--av-fs-1)/1 var(--av-font);cursor:pointer;
+  transition:transform var(--av-t) var(--av-ease),background var(--av-t) var(--av-ease)}
+:where(button:not([class]):not([style]):hover){background:rgba(255,255,255,.18)}
+:where(button:not([class]):not([style]):active){transform:scale(.97)}
+:where(input[type=text],input[type=search],input[type=email],input[type=number],input[type=password],select,textarea):where(:not([class]):not([style])){
+  min-height:44px;padding:0 var(--av-s-3);border-radius:var(--av-r-sm);border:2px solid var(--av-line);background:rgba(0,0,0,.35);color:var(--av-fg);font:600 var(--av-fs-1) var(--av-font)}
+:where(a:not([class])){text-underline-offset:3px;text-decoration-thickness:1.5px}
+/* components */
+.av-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--av-s-2);min-height:44px;min-width:44px;padding:0 var(--av-s-5);border-radius:var(--av-r-pill);border:0;cursor:pointer;
+  font:800 var(--av-fs-1)/1 var(--av-font);color:#1B1640;background:linear-gradient(110deg,#FFD93D,#FF7AA8);text-decoration:none;
+  transition:transform var(--av-t) var(--av-ease),filter var(--av-t) var(--av-ease),box-shadow var(--av-t) var(--av-ease)}
+.av-btn:hover{filter:brightness(1.08);box-shadow:0 8px 24px -8px var(--av-accent)}
+.av-btn:active{transform:scale(.96)}
+.av-btn--ghost{background:var(--av-surface-2);color:var(--av-fg);border:2px solid var(--av-line)}
+.av-btn--sm{padding:0 var(--av-s-4);font-size:var(--av-fs-0)}
+.av-card{position:relative;padding:var(--av-s-5);border-radius:var(--av-r-lg);border:2px solid color-mix(in srgb,var(--av-accent) 55%,transparent);
+  background:radial-gradient(110% 80% at 50% 0%,color-mix(in srgb,var(--av-accent) 20%,transparent),transparent 75%),var(--av-surface);
+  box-shadow:0 14px 30px -18px var(--av-accent);transition:transform var(--av-t) var(--av-ease),box-shadow var(--av-t) var(--av-ease)}
+.av-card:hover{transform:translateY(-3px);box-shadow:0 20px 36px -16px var(--av-accent)}
+.av-tabs{display:flex;gap:var(--av-s-2);flex-wrap:wrap}
+.av-tab{min-height:44px;padding:0 var(--av-s-4);border-radius:var(--av-r-pill);border:2px solid var(--av-line);background:var(--av-surface);color:var(--av-muted);font:800 var(--av-fs-0) var(--av-font);cursor:pointer}
+.av-tab[aria-selected="true"],.av-tab.is-on{background:linear-gradient(135deg,#7C5CFF,#FF5FA2);border-color:transparent;color:#fff}
+.av-input{min-height:44px;padding:0 var(--av-s-3);border-radius:var(--av-r-sm);border:2px solid var(--av-line);background:rgba(0,0,0,.35);color:var(--av-fg);font:600 var(--av-fs-1) var(--av-font)}
+.av-chip{display:inline-block;padding:2px var(--av-s-3);border-radius:var(--av-r-pill);border:1px solid var(--av-accent);color:var(--av-accent);font:800 var(--av-fs-0) var(--av-font)}
+.av-dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#4ADE80;box-shadow:0 0 10px #4ADE80}
+/* shared header */
+.av-header{position:relative;z-index:2147483000;display:flex;align-items:center;gap:var(--av-s-3);height:var(--av-header-h);padding:0 var(--av-s-4);
+  background:rgba(6,9,30,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:2px solid var(--av-accent);font-family:var(--av-font);color:var(--av-fg)}
+.av-back{display:inline-flex;align-items:center;gap:var(--av-s-2);min-height:44px;padding:0 var(--av-s-4) 0 var(--av-s-2);border-radius:var(--av-r-pill);color:var(--av-fg);text-decoration:none;font:800 var(--av-fs-1)/1 var(--av-font);white-space:nowrap;transition:background var(--av-t) var(--av-ease)}
+.av-back:hover{background:var(--av-surface-2)}
+.av-back svg{width:22px;height:22px;flex:none}
+.av-header .av-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 var(--av-fs-1)/1 var(--av-font);color:var(--av-accent)}
+.av-pill{position:fixed;top:8px;right:8px;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 var(--av-s-4);border-radius:var(--av-r-pill);background:rgba(6,9,30,.82);border:2px solid var(--av-accent);color:var(--av-fg);text-decoration:none;font:800 var(--av-fs-0)/1 var(--av-font);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.av-pill svg{width:20px;height:20px}
+/* shared footer: the stamp is one line and never wraps */
+.av-footer{display:flex;flex-direction:column;align-items:center;gap:var(--av-s-1);padding:var(--av-s-5) var(--av-s-4);background:rgba(6,9,30,.92);border-top:1px solid var(--av-line);font:600 var(--av-fs-0)/1.4 var(--av-font);color:var(--av-muted);text-align:center}
+.av-footer a{color:var(--av-fg);font-weight:800;display:inline-flex;align-items:center;min-height:44px}
+.av-stamp{white-space:nowrap;font:700 var(--av-fs-0)/1.4 var(--av-mono);letter-spacing:0}
+.av-footer--bar{position:fixed;left:0;right:0;bottom:0;z-index:2147482000;padding:0 var(--av-s-3);height:28px;flex-direction:row;justify-content:center;pointer-events:none;border-top:0;background:rgba(5,8,24,.7)}
+@media (prefers-reduced-motion:reduce){.av-btn,.av-card,.av-back,.av-tab{transition:none!important}.av-card:hover{transform:none}html{scroll-behavior:auto}}
+</style></head>
+<body>
+
+<canvas id="ambient-canvas"></canvas>
+<div class="scan-overlay"></div>
+
+<header class="topbar">
+  <div class="row1">
+    <div class="wordmark">PARADOX<span>THE MAZE OF AVIDAA</span></div>
+    <a id="back-home" href="https://avidaa1.github.io">AVIDAA</a>
+  </div>
+  <nav class="navrow" id="navrow">
+    <button class="tab active" id="nav-home" onclick="go('home')">Home</button>
+    <button class="tab" id="nav-play" onclick="go('play')">Maze</button>
+    <button class="tab" id="nav-codex" onclick="go('codex')">Codex</button>
+    <button class="tab" id="nav-about" onclick="go('about')">About</button>
+  </nav>
+</header>
+
+<main id="main">
+
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <h1>THE PARADOX MAZE</h1>
+      <p class="tag">Six impossible corridors. Twelve unanswerable questions. Walk the geometry that should not exist, and speak the name of the paradox that seals each gate.</p>
+      <div class="cta">
+        <button class="btn" onclick="go('play')">Enter the Maze</button>
+        <button class="btn alt" onclick="go('codex')">Read the Codex</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">How it works</h2>
+    <div class="grid-cards">
+      <div class="card"><h3>Walk</h3><p>Navigate a generated maze with arrow keys, WASD, or the on-screen compass. Each level grows larger and stranger than the last.</p></div>
+      <div class="card"><h3>Meet the Gate</h3><p>Certain doors are sealed by logic itself. Approach one and it will not open — it will ask.</p></div>
+      <div class="card"><h3>Speak the Name</h3><p>Every gate guards a classical paradox. Name it correctly and the seal breaks. Answer wrong, and the maze remembers — its distortion grows.</p></div>
+      <div class="card"><h3>Escape</h3><p>Reach the far rune-circle to resolve the level and unlock the next. Six levels, twelve paradoxes, one signal beneath the noise.</p></div>
+    </div>
+  </div>
+
+  <div class="page" id="page-play">
+    <h2 class="section-title">The Maze</h2>
+    <div id="difficulty-line" style="font-size:.78rem;letter-spacing:1px;color:var(--parchment-dim);margin-bottom:10px">
+      Difficulty: <span id="difficulty-current">—</span> · <a href="#" onclick="mazeChangeDifficulty();return false;" style="color:var(--gold-bright)">change</a>
+    </div>
+    <div class="level-row" id="level-row"></div>
+    <div id="hud">
+      <div>LEVEL <span id="hud-level">1</span> — <span id="hud-size"></span></div>
+      <div>MOVES: <span id="hud-moves">0</span></div>
+      <div class="distort">DISTORTION<div id="distort-bar"><div id="distort-fill"></div></div></div>
+    </div>
+    <div class="maze-wrap">
+      <canvas id="maze-canvas" width="520" height="520"></canvas>
+      <div class="dpad">
+        <button class="up" onclick="mazeMove('N')">▲</button>
+        <button class="left" onclick="mazeMove('W')">◄</button>
+        <button class="right" onclick="mazeMove('E')">►</button>
+        <button class="down" onclick="mazeMove('S')">▼</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-codex">
+    <h2 class="section-title">Codex of Paradoxes</h2>
+    <p class="tag" style="text-align:left;margin:0 0 10px">Twelve classical paradoxes wait behind the gates. Study them here — the maze will ask you to name them, not to explain them.</p>
+    <div class="paradox-list" id="paradox-list"></div>
+
+    <div class="oracle-box">
+      <h3 style="font-family:var(--fh);color:#d8b9ff;margin:0 0 8px;letter-spacing:1px">The Oracle</h3>
+      <p style="font-size:.82rem;color:var(--parchment-dim);margin:0 0 10px">Describe a dilemma, a contradiction, a puzzle that troubles you. The Oracle will match it to the nearest paradox in this codex — offline, no signal leaves your browser.</p>
+      <textarea id="oracle-input" maxlength="300" placeholder="e.g. I keep replacing parts of an old object until nothing original remains..."></textarea>
+      <div class="cta" style="justify-content:flex-start;margin-top:10px">
+        <button class="btn alt" onclick="oracleMatch()">Consult the Oracle</button>
+      </div>
+      <div id="oracle-result"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page-about">
+    <h2 class="section-title">About this maze</h2>
+    <div class="card" style="max-width:720px">
+      <p>The Paradox Maze is AVIDAA is signal beneath the noise, given a floor plan. Est. 2025, AVIDAA was built for humans and AI alike — knowledge made clear, one contradiction at a time.</p>
+      <p>Every maze here is generated fresh from a seed, carved by a recursive backtracking algorithm, then gated by classical paradoxes: the Ship of Theseus, the Liar, Zeno, the Grandfather Paradox, Sorites, the Bootstrap loop, the Barber, Buridan's Ass, Newcomb's Problem, Fermi, Epimenides, and the Twin Paradox. Twelve locks, six levels, no two runs identical.</p>
+      <p>Nothing here calls home, nothing here tracks you beyond this browser tab. The offline AVIDAA assistant in the corner knows this maze, the wider AVIDAA ecosystem, and a few things it would rather you discover yourself.</p>
+      <p style="color:var(--parchment-dim);font-size:.82rem">Part of the AVIDAA ecosystem — a global knowledge, culture, and AI platform built by IO.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>AVIDAA &times; IO</footer>
+
+<!-- ===== DIFFICULTY PICKER MODAL ===== -->
+<div class="modal-overlay" id="difficulty-modal">
+  <div class="modal-box" id="difficulty-modal-box" style="max-width:520px">
+    <h2>CHOOSE YOUR PATH</h2>
+    <p class="q">The maze bends to match your nerve. Pick once — you can change it later from the Maze tab.</p>
+    <div class="row" style="flex-direction:column;gap:10px">
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('easy')">
+        WANDERER — smaller mazes, gates offer a hint after one wrong answer.
+      </button>
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('standard')">
+        SEEKER — standard mazes, hint after two wrong answers.
+      </button>
+      <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('hard')">
+        ADEPT — larger, twisting mazes, hint only after three wrong answers, the maze distorts harder when you err.
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RIDDLE / WIN MODAL ===== -->
+<div class="modal-overlay" id="gate-modal">
+  <div class="modal-box" id="gate-modal-box">
+    <h2 id="gate-title">A SEALED GATE</h2>
+    <div class="sigil-wrap"><canvas id="gate-sigil" width="220" height="220" title="Drag to turn the sigil"></canvas></div>
+    <p class="q" id="gate-question"></p>
+    <input id="gate-input" placeholder="Name the paradox..." maxlength="60" autocomplete="off">
+    <div class="feedback" id="gate-feedback"></div>
+    <div class="row">
+      <button class="btn" onclick="mazeSubmitAnswer()">Speak</button>
+      <button class="btn alt" onclick="mazeCloseModal()">Step Back</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="win-modal">
+  <div class="modal-box win-box">
+    <h2>PARADOX RESOLVED</h2>
+    <p class="q" id="win-text">You crossed the impossible corridor.</p>
+    <div class="row">
+      <button class="btn" onclick="mazeNextLevel()">Next Level</button>
+      <button class="btn alt" onclick="mazeCloseWin()">Level Select</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHATBOT MODULE ===== -->
+<div id="chatbot">
+  <div id="chat-box">
+    <div id="chat-head">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div id="rabbit-avatar">
+          <svg id="rabbit-svg" width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+            <ellipse id="ear-l" cx="13" cy="10" rx="3.5" ry="7" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <ellipse id="ear-r" cx="25" cy="10" rx="3.5" ry="7" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <ellipse cx="13" cy="10" rx="1.8" ry="5" fill="#8b3ff0" opacity="0.5"/>
+            <ellipse cx="25" cy="10" rx="1.8" ry="5" fill="#8b3ff0" opacity="0.5"/>
+            <ellipse id="rabbit-head" cx="19" cy="22" rx="10" ry="9" fill="#0a1a2a" stroke="#c9a227" stroke-width="1"/>
+            <circle id="eye-l" cx="15" cy="21" r="2" fill="#c9a227" opacity="0.9"/>
+            <circle id="eye-r" cx="23" cy="21" r="2" fill="#c9a227" opacity="0.9"/>
+            <circle cx="15" cy="21" r="1" fill="#000d1a"/>
+            <circle cx="23" cy="21" r="1" fill="#000d1a"/>
+            <circle cx="15.6" cy="20.4" r="0.4" fill="#fff" opacity="0.8"/>
+            <circle cx="23.6" cy="20.4" r="0.4" fill="#fff" opacity="0.8"/>
+            <ellipse id="nose" cx="19" cy="25" rx="1.2" ry="0.8" fill="#ff2d95" opacity="0.8"/>
+            <path d="M17.2 26.2 Q19 27.4 20.8 26.2" fill="none" stroke="#c9a227" stroke-width="0.7" opacity="0.6"/>
+            <circle id="glow-ring" cx="19" cy="22" r="12" fill="none" stroke="#c9a227" stroke-width="0.4" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="ch-title">AVIDAA</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="ch-status"><div class="ch-dot"></div>ONLINE</div>
+        <div class="ch-close" onclick="toggleChat()">&#x2715;</div>
+      </div>
+    </div>
+    <div id="quest-bar"><div id="quest-fill"></div></div>
+    <div id="quest-label"></div>
+    <div id="chat-msgs"></div>
+    <div id="chat-suggestions">
+      <div class="chat-sugg" onclick="quickAsk('What is this maze?')">What is this maze?</div>
+      <div class="chat-sugg" onclick="quickAsk('Give me a hint')">Give me a hint</div>
+      <div class="chat-sugg" onclick="quickAsk('Who is IO?')">Who is IO?</div>
+      <div class="chat-sugg" onclick="quickAsk('rabbit')">?</div>
+    </div>
+    <div id="chat-input-row">
+      <input id="chat-input" placeholder="Ask about the maze..." maxlength="200">
+      <button id="chat-send" onclick="chatSend()">&#x27A4;</button>
+    </div>
+  </div>
+  <button id="chat-toggle" onclick="toggleChat()" style="position:relative;">
+    <canvas id="pulse-ring" width="58" height="58"></canvas>
+    &#x1F916;
+  </button>
+</div>
+
+<script>
+/* ===== ESCAPE HELPER — always first ===== */
+function escHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+window.pageVisible = true;
+document.addEventListener('visibilitychange',()=>{window.pageVisible=!document.hidden;});
+
+/* ============================================================
+   NAV ROUTER
+   ============================================================ */
+const PAGE_IDS=['home','play','codex','about'];
+function go(id){
+  PAGE_IDS.forEach(p=>{
+    const el=document.getElementById('page-'+p);
+    const nv=document.getElementById('nav-'+p);
+    if(el)el.classList.toggle('active', p===id);
+    if(nv)nv.classList.toggle('active', p===id);
+  });
+  if(id==='play' && window.mazeInit)window.mazeInit();
+}
+window.go=go;
+
+/* ============================================================
+   PARADOX DATA — used by the maze gates, the Codex, and the Oracle
+   Tier-2 answer facts also appear in visible page content (About tab):
+   signal beneath the noise · Est. 2025 · built for humans and AI · knowledge made clear
+   ============================================================ */
+const PARADOXES=[
+  {id:'theseus',name:'Ship of Theseus',
+   q:'A ship is repaired plank by plank until not one original piece remains. Is it still the same ship? Speak the name of this paradox to unseal the gate.',
+   keys:['ship of theseus','theseus'],
+   hint:'It concerns identity through gradual replacement — an old vessel, rebuilt one plank at a time.',
+   lore:'If every plank of a ship is replaced over time, is the finished ship still the same ship? And if the old planks are reassembled elsewhere, which one is the "real" ship? A classical test of identity through change.'},
+  {id:'liar',name:'The Liar Paradox',
+   q:'This sentence is false. If it is true, then it is false; if it is false, then it is true. Speak the name of this paradox to unseal the gate.',
+   keys:['liar paradox','the liar','liar'],
+   hint:'A single sentence that refers only to its own truth — and breaks either way you read it.',
+   lore:'A self-referential statement that is true if and only if it is false. One of the oldest problems in logic, still unresolved to universal satisfaction.'},
+  {id:'zeno',name:"Zeno's Paradox",
+   q:'To reach the door, you must first cross half the distance, then half of what remains, forever — and so you never arrive. Speak the name of this paradox to unseal the gate.',
+   keys:['zeno','zenos paradox',"zeno's paradox",'achilles and the tortoise','achilles'],
+   hint:'A runner and a tortoise, or an infinite number of halved distances that never quite finish.',
+   lore:"Zeno argued that motion is impossible: to cross any distance you must first cross half of it, then half of what remains, without end. Achilles can never overtake the tortoise, in the argument's own terms — though the real world plainly disagrees."},
+  {id:'grandfather',name:'The Grandfather Paradox',
+   q:"Travel back in time and prevent your grandparents from ever meeting — then you would never have been born to make the journey at all. Speak the name of this paradox to unseal the gate.",
+   keys:['grandfather paradox','grandfather'],
+   hint:'A time traveler undoes the very event that caused their own existence.',
+   lore:'If backward time travel allowed you to prevent your own birth, the resulting contradiction seems to forbid the journey that caused it. A central objection to time travel with a fixed, changeable past.'},
+  {id:'sorites',name:'The Sorites Paradox',
+   q:'Remove one grain from a heap of sand and it remains a heap. Remove another — still a heap. At what single grain does it stop being one? Speak the name of this paradox to unseal the gate.',
+   keys:['sorites paradox','sorites','heap paradox','the heap'],
+   hint:'Also called the Heap — vague boundaries and the point where "many" becomes "few."',
+   lore:'Small, individually harmless changes accumulate into a large, undeniable difference — yet no single step seems to cross the line. A classic problem of vagueness in language and logic.'},
+  {id:'bootstrap',name:'The Bootstrap Paradox',
+   q:'A traveler carries a book back in time to the author, who copies it and publishes it — the very book the traveler first read. Who wrote it, first? Speak the name of this paradox to unseal the gate.',
+   keys:['bootstrap paradox','bootstrap'],
+   hint:'An object or idea that seems to have no origin — only a closed loop through time.',
+   lore:'An object, fact, or piece of information exists only because it was sent back through time to cause its own past — with no original point of creation anywhere in the loop.'},
+  {id:'barber',name:"The Barber Paradox",
+   q:'In a certain village, the barber shaves everyone who does not shave themselves, and no one else. Who shaves the barber? Speak the name of this paradox to unseal the gate.',
+   keys:["barber paradox","barber's paradox",'barber'],
+   hint:'A rule defined by exception collapses the moment it must apply to its own maker.',
+   lore:"A set-theoretic puzzle in disguise: the rule 'shaves all and only those who do not shave themselves' cannot be consistently applied to the barber himself, closely related to Russell's Paradox in set theory."},
+  {id:'buridan',name:"Buridan's Ass",
+   q:'A donkey stands exactly midway between two identical piles of hay, with no reason to prefer either — and starves, unable to decide. Speak the name of this paradox to unseal the gate.',
+   keys:["buridan's ass",'buridans ass','buridan'],
+   hint:'Perfectly balanced choices, and a mind with no reason to break the tie.',
+   lore:'If a rational agent facing two equally good options has no basis to choose between them, does pure reason alone leave it unable to act at all? A challenge to the idea that reason alone determines choice.'},
+  {id:'newcomb',name:"Newcomb's Paradox",
+   q:'A predictor who is always correct offers you two boxes. Choosing both boxes guarantees less than choosing only one — yet standard logic insists you should always take both. Speak the name of this paradox to unseal the gate.',
+   keys:["newcomb's paradox",'newcomb',"newcomb's problem",'newcombs paradox'],
+   hint:'A perfect predictor, two boxes, and two kinds of logic that disagree with each other.',
+   lore:'Given a predictor whose forecasts are always accurate, one-box and two-box reasoning both seem individually sound yet recommend opposite strategies — a live debate in decision theory.'},
+  {id:'fermi',name:'The Fermi Paradox',
+   q:'The universe is old and vast enough for intelligent life to have arisen many times over — yet the sky stays silent. Speak the name of this paradox to unseal the gate.',
+   keys:['fermi paradox','fermi'],
+   hint:'Named for a physicist who once asked, over lunch, "where is everybody?"',
+   lore:'Given the sheer scale and age of the observable universe, the apparent absence of detectable extraterrestrial civilizations is strange enough to have a name of its own.'},
+  {id:'epimenides',name:'The Epimenides Paradox',
+   q:'A man from a certain island says: "All people from my island always lie." If he speaks truly, he has just lied. Speak the name of this paradox to unseal the gate.',
+   keys:['epimenides paradox','epimenides'],
+   hint:'An ancient cousin of the Liar Paradox, attributed to a poet speaking of his own people.',
+   lore:"Attributed to the Cretan philosopher Epimenides, this self-referential claim about his own countrymen is one of the earliest recorded versions of the Liar Paradox."},
+  {id:'twin',name:'The Twin Paradox',
+   q:'One twin travels near light-speed and returns younger than the twin who stayed behind — though from each perspective, it was the other one in motion. Speak the name of this paradox to unseal the gate.',
+   keys:['twin paradox','the twins paradox'],
+   hint:'Relativity, a rocket, and two siblings who no longer agree on how much time has passed.',
+   lore:'A thought experiment in special relativity: a traveling twin ages less than a twin who stays on Earth. The asymmetry is resolved by the traveling twin\'s acceleration, but it remains a favorite illustration of relativistic time dilation.'},
+];
+
+/* ============================================================
+   MAZE ENGINE — recursive backtracker + BFS gate placement
+   ============================================================ */
+(function(){
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function genMaze(w,h,seed){
+    const rand=mulberry32(seed);
+    const cells=[];
+    for(let y=0;y<h;y++){const row=[];for(let x=0;x<w;x++)row.push({N:true,S:true,E:true,W:true,visited:false});cells.push(row);}
+    const stack=[[0,0]];cells[0][0].visited=true;
+    while(stack.length){
+      const [cx,cy]=stack[stack.length-1];
+      const dirs=[];
+      if(cy>0 && !cells[cy-1][cx].visited)dirs.push('N');
+      if(cy<h-1 && !cells[cy+1][cx].visited)dirs.push('S');
+      if(cx<w-1 && !cells[cy][cx+1].visited)dirs.push('E');
+      if(cx>0 && !cells[cy][cx-1].visited)dirs.push('W');
+      if(!dirs.length){stack.pop();continue;}
+      const d=dirs[Math.floor(rand()*dirs.length)];
+      let nx=cx,ny=cy;
+      if(d==='N'){ny=cy-1;cells[cy][cx].N=false;cells[ny][nx].S=false;}
+      if(d==='S'){ny=cy+1;cells[cy][cx].S=false;cells[ny][nx].N=false;}
+      if(d==='E'){nx=cx+1;cells[cy][cx].E=false;cells[ny][nx].W=false;}
+      if(d==='W'){nx=cx-1;cells[cy][cx].W=false;cells[ny][nx].E=false;}
+      cells[ny][nx].visited=true;stack.push([nx,ny]);
+    }
+    return cells;
+  }
+  function bfsPath(cells,w,h){
+    const key=(x,y)=>y*w+x;
+    const prev=new Map();const q=[[0,0]];const seen=new Set([key(0,0)]);
+    while(q.length){
+      const [x,y]=q.shift();
+      if(x===w-1&&y===h-1)break;
+      const c=cells[y][x];const nb=[];
+      if(!c.N)nb.push([x,y-1]);if(!c.S)nb.push([x,y+1]);if(!c.E)nb.push([x+1,y]);if(!c.W)nb.push([x-1,y]);
+      nb.forEach(([nx,ny])=>{if(!seen.has(key(nx,ny))){seen.add(key(nx,ny));prev.set(key(nx,ny),key(x,y));q.push([nx,ny]);}});
+    }
+    if(!seen.has(key(w-1,h-1)))return null;
+    const path=[];let cur=key(w-1,h-1);
+    while(cur!==undefined){path.push(cur);cur=prev.get(cur);}
+    path.reverse();
+    return path.map(k=>[k%w,Math.floor(k/w)]);
+  }
+  function edgeKey(x1,y1,x2,y2){
+    const a=y1*100+x1,b=y2*100+x2;
+    return a<b ? a+'-'+b : b+'-'+a;
+  }
+
+  const LEVELS=6;
+  const PROGRESS_KEY='avidaa_maze_progress';
+  const DIFF_KEY='avidaa_maze_difficulty';
+  function loadProgress(){
+    try{const v=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}
+  }
+  function saveProgress(p){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(p));}catch(e){}}
+
+  const DIFFICULTY={
+    easy:{label:'WANDERER',sizeDelta:-1,hintAfter:1,distortBump:10},
+    standard:{label:'SEEKER',sizeDelta:0,hintAfter:2,distortBump:18},
+    hard:{label:'ADEPT',sizeDelta:2,hintAfter:3,distortBump:26},
+  };
+  let currentDifficulty=null;
+  function loadDifficulty(){
+    try{const v=sessionStorage.getItem(DIFF_KEY);return DIFFICULTY[v]?v:null;}catch(e){return null;}
+  }
+  function saveDifficulty(key){try{sessionStorage.setItem(DIFF_KEY,key);}catch(e){}}
+  function diffCfg(){return DIFFICULTY[currentDifficulty]||DIFFICULTY.standard;}
+
+  let state=null; // {level, size, cells, path, gates:Map(edgeKey->{riddleIdx,solved}), player:{x,y}, moves, activeGate}
+  let distortion=0, distortDecayTimer=null;
+
+  function buildLevel(level){
+    const cfg=diffCfg();
+    const size=Math.max(5,Math.min(16, 6+level+cfg.sizeDelta)); // clamped, shifted by difficulty
+    const cells=genMaze(size,size,level*1337+7);
+    const path=bfsPath(cells,size,size);
+    const gates=new Map();
+    if(path && path.length>6){
+      const i1=Math.floor(path.length*0.33);
+      const i2=Math.floor(path.length*0.66);
+      const idxs=[i1, i2!==i1?i2:Math.min(i2+1,path.length-2)];
+      idxs.forEach((idx,gi)=>{
+        const a=path[idx],b=path[idx+1];
+        if(a&&b){
+          const ek=edgeKey(a[0],a[1],b[0],b[1]);
+          const riddleIdx=((level-1)*2+gi)%PARADOXES.length;
+          gates.set(ek,{riddleIdx,solved:false});
+        }
+      });
+    }
+    return {level,size,cells,path,gates,player:{x:0,y:0},moves:0,activeGate:null};
+  }
+
+  function renderLevelRow(){
+    const row=document.getElementById('level-row');if(!row)return;
+    row.innerHTML='';
+    const progress=loadProgress();
+    for(let i=1;i<=LEVELS;i++){
+      const unlocked = i===1 || progress[i-2]===true;
+      const done = progress[i-1]===true;
+      const btn=document.createElement('button');
+      btn.className='lvl-btn'+(unlocked?' unlocked':' locked')+(done?' done':'')+(state&&state.level===i?' current':'');
+      btn.textContent='LEVEL '+i;
+      if(unlocked)btn.onclick=()=>{loadLevel(i);};
+      row.appendChild(btn);
+    }
+  }
+
+  function loadLevel(level){
+    state=buildLevel(level);
+    distortion=0;updateDistortBar();
+    document.getElementById('hud-level').textContent=level;
+    document.getElementById('hud-size').textContent=state.size+'×'+state.size;
+    document.getElementById('hud-moves').textContent='0';
+    renderLevelRow();
+    drawMaze();
+  }
+
+  function updateDistortBar(){
+    const fill=document.getElementById('distort-fill');if(!fill)return;
+    fill.style.width=Math.min(100,distortion)+'%';
+  }
+  function bumpDistortion(){
+    const bump=diffCfg().distortBump;
+    distortion=Math.min(100,distortion+bump);updateDistortBar();
+    clearTimeout(distortDecayTimer);
+    distortDecayTimer=setTimeout(()=>{distortion=Math.max(0,distortion-30);updateDistortBar();},2500);
+  }
+
+  function drawMaze(){
+    const cvs=document.getElementById('maze-canvas');if(!cvs||!state)return;
+    const dpr=window.devicePixelRatio||1;
+    const cssSize=cvs.clientWidth||360;
+    cvs.width=cssSize*dpr;cvs.height=cssSize*dpr;
+    const ctx=cvs.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssSize,cssSize);
+    const size=state.size, cell=cssSize/size;
+    ctx.strokeStyle='rgba(201,162,39,.85)';ctx.lineWidth=Math.max(1.5,cell*0.05);
+    ctx.lineCap='square';
+    for(let y=0;y<size;y++){
+      for(let x=0;x<size;x++){
+        const c=state.cells[y][x];
+        const px=x*cell, py=y*cell;
+        ctx.beginPath();
+        if(c.N){ctx.moveTo(px,py);ctx.lineTo(px+cell,py);}
+        if(c.W){ctx.moveTo(px,py);ctx.lineTo(px,py+cell);}
+        if(y===size-1 && c.S){ctx.moveTo(px,py+cell);ctx.lineTo(px+cell,py+cell);}
+        if(x===size-1 && c.E){ctx.moveTo(px+cell,py);ctx.lineTo(px+cell,py+cell);}
+        ctx.stroke();
+      }
+    }
+    /* gates */
+    state.gates.forEach((g,ek)=>{
+      const [a,b]=ek.split('-').map(Number);
+      const ax=a%100, ay=Math.floor(a/100), bx=b%100, by=Math.floor(b/100);
+      const mx=((ax+bx)/2+0.5)*cell, my=((ay+by)/2+0.5)*cell;
+      ctx.beginPath();
+      ctx.arc(mx,my,cell*0.22,0,Math.PI*2);
+      ctx.fillStyle=g.solved? 'rgba(95,224,160,.85)' : 'rgba(255,45,149,.85)';
+      ctx.fill();
+      ctx.strokeStyle=g.solved? '#5fe0a0' : '#ff2d95';
+      ctx.lineWidth=1.5;ctx.stroke();
+    });
+    /* exit */
+    const ex=(size-1+0.5)*cell, ey=(size-1+0.5)*cell;
+    ctx.beginPath();ctx.arc(ex,ey,cell*0.3,0,Math.PI*2);
+    ctx.strokeStyle='rgba(232,199,106,.9)';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ex-cell*0.14,ey);ctx.lineTo(ex+cell*0.14,ey);ctx.moveTo(ex,ey-cell*0.14);ctx.lineTo(ex,ey+cell*0.14);ctx.stroke();
+    /* player */
+    const px=(state.player.x+0.5)*cell, py=(state.player.y+0.5)*cell;
+    ctx.beginPath();ctx.arc(px,py,cell*0.22,0,Math.PI*2);
+    ctx.fillStyle='#e8c76a';ctx.shadowColor='#e8c76a';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+  }
+
+  function tryMove(dir){
+    if(!state)return;
+    if(document.getElementById('gate-modal').classList.contains('open'))return;
+    if(document.getElementById('win-modal').classList.contains('open'))return;
+    const {x,y}=state.player;
+    const c=state.cells[y][x];
+    let nx=x, ny=y, blocked=false;
+    if(dir==='N'){if(c.N)blocked=true;ny=y-1;}
+    if(dir==='S'){if(c.S)blocked=true;ny=y+1;}
+    if(dir==='E'){if(c.E)blocked=true;nx=x+1;}
+    if(dir==='W'){if(c.W)blocked=true;nx=x-1;}
+    if(blocked)return;
+    if(nx<0||ny<0||nx>=state.size||ny>=state.size)return;
+    const ek=edgeKey(x,y,nx,ny);
+    const gate=state.gates.get(ek);
+    if(gate && !gate.solved){
+      state.activeGate=ek;
+      openGateModal(gate.riddleIdx);
+      return;
+    }
+    state.player={x:nx,y:ny};
+    state.moves++;
+    document.getElementById('hud-moves').textContent=state.moves;
+    drawMaze();
+    if(nx===state.size-1 && ny===state.size-1)onLevelWin();
+  }
+
+  let gateAttempts=0;
+  function openGateModal(riddleIdx){
+    gateAttempts=0;
+    const p=PARADOXES[riddleIdx];
+    document.getElementById('gate-title').textContent='A SEALED GATE';
+    document.getElementById('gate-question').textContent=p.q;
+    document.getElementById('gate-feedback').textContent='';
+    document.getElementById('gate-input').value='';
+    document.getElementById('gate-modal').classList.add('open');
+    if(window.gateSigilOpen)window.gateSigilOpen();
+    setTimeout(()=>document.getElementById('gate-input').focus(),50);
+  }
+  window.mazeCloseModal=function(){document.getElementById('gate-modal').classList.remove('open');state.activeGate=null;};
+  window.mazeSubmitAnswer=function(){
+    if(!state||!state.activeGate)return;
+    const gate=state.gates.get(state.activeGate);
+    const p=PARADOXES[gate.riddleIdx];
+    const raw=document.getElementById('gate-input').value;
+    const n=raw.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+    const correct=p.keys.some(k=>{
+      const kk=k.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+      return n===kk || (kk.length>=4 && n.includes(kk));
+    });
+    if(correct){
+      gate.solved=true;
+      if(window.gateSigilResolve)window.gateSigilResolve();
+      setTimeout(()=>{
+        document.getElementById('gate-modal').classList.remove('open');
+        state.activeGate=null;
+        drawMaze();
+      },650); /* let the sigil's resolve-flash play before the modal closes */
+    }else{
+      gateAttempts++;
+      bumpDistortion();
+      if(window.gateSigilChaosBump)window.gateSigilChaosBump();
+      if(gateAttempts>=diffCfg().hintAfter){
+        document.getElementById('gate-feedback').textContent=p.hint;
+      }else{
+        document.getElementById('gate-feedback').textContent='The seal holds. Speak again.';
+      }
+    }
+  };
+
+  function onLevelWin(){
+    const progress=loadProgress();
+    progress[state.level-1]=true;
+    saveProgress(progress);
+    document.getElementById('win-text').textContent='Level '+state.level+' resolved in '+state.moves+' moves. The maze remembers.';
+    document.getElementById('win-modal').classList.add('open');
+    renderLevelRow();
+  }
+  window.mazeNextLevel=function(){
+    document.getElementById('win-modal').classList.remove('open');
+    const next=state.level+1;
+    if(next<=LEVELS)loadLevel(next);
+  };
+  window.mazeCloseWin=function(){document.getElementById('win-modal').classList.remove('open');};
+
+  window.mazeMove=function(dir){tryMove(dir);};
+
+  document.addEventListener('keydown',(e)=>{
+    if(!document.getElementById('page-play').classList.contains('active'))return;
+    const map={ArrowUp:'N',ArrowDown:'S',ArrowLeft:'W',ArrowRight:'E',w:'N',s:'S',a:'W',d:'E',W:'N',S:'S',A:'W',D:'E'};
+    if(map[e.key]){e.preventDefault();tryMove(map[e.key]);}
+  });
+
+  function updateDifficultyLabel(){
+    const el=document.getElementById('difficulty-current');if(!el)return;
+    el.textContent=currentDifficulty ? diffCfg().label : '—';
+  }
+  window.mazeChooseDifficulty=function(key){
+    if(!DIFFICULTY[key])return;
+    currentDifficulty=key;
+    saveDifficulty(key);
+    document.getElementById('difficulty-modal').classList.remove('open');
+    updateDifficultyLabel();
+    if(mazeInitDone && state){
+      loadLevel(state.level); // rebuild the current level under the new difficulty config
+    }else{
+      startMazeFlow();
+    }
+  };
+  window.mazeChangeDifficulty=function(){
+    document.getElementById('difficulty-modal').classList.add('open');
+  };
+
+  function startMazeFlow(){
+    renderLevelRow();
+    if(!mazeInitDone){
+      mazeInitDone=true;
+      const progress=loadProgress();
+      let startLevel=1;
+      for(let i=1;i<=LEVELS;i++){if(progress[i-1]!==true){startLevel=i;break;}if(i===LEVELS)startLevel=LEVELS;}
+      loadLevel(startLevel);
+    }else{
+      drawMaze();
+    }
+  }
+
+  let mazeInitDone=false;
+  window.mazeInit=function(){
+    updateDifficultyLabel();
+    if(!currentDifficulty){
+      const saved=loadDifficulty();
+      if(saved){currentDifficulty=saved;updateDifficultyLabel();startMazeFlow();return;}
+      document.getElementById('difficulty-modal').classList.add('open');
+      return;
+    }
+    startMazeFlow();
+  };
+  window.addEventListener('resize',()=>{if(state)drawMaze();});
+})();
+
+/* ============================================================
+   GATE SIGIL — interactive sacred-geometry "AI illusion" on each gate
+   Seed-of-Life circles + Metatron-style connecting lines, drag to rotate,
+   glitches toward magenta chaos on wrong answers, resolves to gold on solve.
+   ============================================================ */
+(function(){
+  const cvs=document.getElementById('gate-sigil');if(!cvs)return;
+  const ctx=cvs.getContext('2d');
+  let rotation=0, dragging=false, lastX=0, spin=0.0025;
+  let chaos=0.12, chaosTarget=0.12, resolveGlow=0, rippleT=0, rippleActive=false;
+  let running=false;
+
+  function resizeCvs(){
+    const dpr=window.devicePixelRatio||1;
+    const size=cvs.clientWidth||180;
+    cvs.width=size*dpr;cvs.height=size*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return size;
+  }
+
+  function draw(){
+    const size=resizeCvs();
+    const cx=size/2, cy=size/2, R=size*0.155;
+    ctx.clearRect(0,0,size,size);
+    /* chaos eases toward its target, resolve glow decays, ripple decays */
+    chaos += (chaosTarget-chaos)*0.08;
+    resolveGlow *= 0.92;
+    if(rippleActive){rippleT+=0.06;if(rippleT>1){rippleActive=false;rippleT=0;}}
+
+    const jitter=chaos*8;
+    const magenta = chaos>0.35;
+    const baseA = 0.5+resolveGlow*0.45;
+    const lineCol = magenta ? 'rgba(255,45,149,' : 'rgba(232,199,106,';
+    const lineCol2 = magenta ? 'rgba(139,63,240,' : 'rgba(200,160,80,';
+
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(rotation + rippleT*0.6);
+
+    /* seed-of-life: 1 center + 6 outer circles, jittered by chaos */
+    const centers=[[0,0]];
+    for(let i=0;i<6;i++){
+      const a=i*(Math.PI/3);
+      centers.push([
+        Math.cos(a)*R + (Math.sin(rotation*3+i)*jitter),
+        Math.sin(a)*R + (Math.cos(rotation*3+i)*jitter)
+      ]);
+    }
+    ctx.lineWidth=1.1;
+    ctx.strokeStyle=lineCol+baseA+')';
+    centers.forEach(([x,y])=>{
+      ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.stroke();
+    });
+
+    /* metatron-style lattice: every outer center connected to every other */
+    ctx.lineWidth=0.7;
+    ctx.strokeStyle=lineCol2+(baseA*0.65)+')';
+    for(let i=1;i<centers.length;i++){
+      for(let j=i+1;j<centers.length;j++){
+        ctx.beginPath();
+        ctx.moveTo(centers[i][0],centers[i][1]);
+        ctx.lineTo(centers[j][0],centers[j][1]);
+        ctx.stroke();
+      }
+    }
+
+    /* pulsing core */
+    const coreR=3+resolveGlow*5+(rippleActive?rippleT*10:0);
+    ctx.fillStyle=lineCol+Math.min(1,baseA+0.35)+')';
+    ctx.beginPath();ctx.arc(0,0,coreR,0,Math.PI*2);ctx.fill();
+
+    /* ripple ring on click */
+    if(rippleActive){
+      ctx.strokeStyle=lineCol+(1-rippleT)*0.7+')';
+      ctx.lineWidth=1.4;
+      ctx.beginPath();ctx.arc(0,0,rippleT*R*2.4,0,Math.PI*2);ctx.stroke();
+    }
+    ctx.restore();
+
+    rotation += spin + (magenta?(Math.random()-0.5)*0.01:0);
+    if(running)requestAnimationFrame(draw);
+  }
+
+  /* drag to rotate manually */
+  function onDown(e){
+    dragging=true;
+    lastX=(e.touches?e.touches[0].clientX:e.clientX);
+  }
+  function onMove(e){
+    if(!dragging)return;
+    const x=(e.touches?e.touches[0].clientX:e.clientX);
+    rotation += (x-lastX)*0.012;
+    lastX=x;
+  }
+  function onUp(){dragging=false;}
+  cvs.addEventListener('pointerdown',onDown);
+  window.addEventListener('pointermove',onMove);
+  window.addEventListener('pointerup',onUp);
+  cvs.addEventListener('click',()=>{ if(!dragging){rippleActive=true;rippleT=0;} });
+
+  window.gateSigilOpen=function(){
+    chaos=0.12; chaosTarget=0.12; resolveGlow=0; rippleActive=false; rippleT=0;
+    if(!running){running=true;draw();}
+  };
+  window.gateSigilChaosBump=function(){
+    chaosTarget=Math.min(1, chaosTarget+0.32);
+    setTimeout(()=>{chaosTarget=0.12;},1400);
+  };
+  window.gateSigilResolve=function(){
+    chaosTarget=0; resolveGlow=1; rippleActive=true; rippleT=0;
+  };
+
+  /* stop the RAF loop once the gate modal is fully closed, to save cycles */
+  const gateModalEl=document.getElementById('gate-modal');
+  if(gateModalEl){
+    const obs=new MutationObserver(()=>{
+      if(!gateModalEl.classList.contains('open'))running=false;
+    });
+    obs.observe(gateModalEl,{attributes:true,attributeFilter:['class']});
+  }
+})();
+
+/* ============================================================
+   ORACLE — offline matcher (Codex page)
+   ============================================================ */
+function renderCodex(){
+  const list=document.getElementById('paradox-list');if(!list)return;
+  list.innerHTML='';
+  PARADOXES.forEach(p=>{
+    const d=document.createElement('div');d.className='card';
+    const h=document.createElement('h3');h.textContent=p.name;
+    const para=document.createElement('p');para.textContent=p.lore;
+    d.appendChild(h);d.appendChild(para);list.appendChild(d);
+  });
+}
+renderCodex();
+
+function oracleMatch(){
+  const raw=document.getElementById('oracle-input').value.trim();
+  const out=document.getElementById('oracle-result');
+  if(!raw){out.textContent='Offer the Oracle a scenario first.';return;}
+  const low=raw.toLowerCase();
+  const words=low.split(/\s+/).filter(w=>w.length>=3);
+  let best=null,bestScore=0;
+  PARADOXES.forEach(p=>{
+    let score=0;
+    const tagPool=[p.name.toLowerCase(),...p.keys,p.lore.toLowerCase()];
+    tagPool.forEach(tag=>{
+      words.forEach(w=>{if(tag.includes(w))score+=w.length;});
+    });
+    if(score>bestScore){bestScore=score;best=p;}
+  });
+  if(best && bestScore>=6){
+    out.textContent='The Oracle sees '+best.name+'. '+best.lore;
+  }else{
+    out.textContent='The Oracle is silent — no paradox in this codex quite matches that. Perhaps it is new.';
+  }
+}
+window.oracleMatch=oracleMatch;
+
+/* ============================================================
+   AMBIENT BACKGROUND — Escher triangle + drifting runes + glitch pulse
+   ============================================================ */
+(function(){
+  const cvs=document.getElementById('ambient-canvas');if(!cvs)return;
+  const ctx=cvs.getContext('2d');
+  let w=0,h=0,dpr=window.devicePixelRatio||1;
+  function resize(){
+    w=window.innerWidth;h=window.innerHeight;
+    cvs.width=w*dpr;cvs.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();window.addEventListener('resize',resize);
+
+  const runes=[];
+  for(let i=0;i<22;i++){
+    runes.push({
+      x:Math.random(), y:Math.random()+1, sp:0.00006+Math.random()*0.00012,
+      size:14+Math.random()*20, rot:Math.random()*Math.PI, rs:(Math.random()-0.5)*0.0006,
+      seed:Math.floor(Math.random()*1000), op:0.15+Math.random()*0.25
+    });
+  }
+  function drawRune(r,t){
+    ctx.save();
+    ctx.translate(r.x*w, (r.y - (t*r.sp)%1.6)*h);
+    ctx.rotate(r.rot + t*r.rs);
+    ctx.strokeStyle='rgba(201,162,39,'+r.op+')';
+    ctx.lineWidth=1.2;
+    const s=r.size;
+    const rnd=mulberry(r.seed);
+    ctx.beginPath();
+    ctx.moveTo(0,-s/2);ctx.lineTo(0,s/2);
+    for(let i=0;i<3;i++){
+      const yy=(-s/2)+(s*rnd());
+      const dir=rnd()>0.5?1:-1;
+      ctx.moveTo(0,yy);ctx.lineTo(dir*s*0.32,yy-s*0.18);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+  function mulberry(seed){
+    let s=seed;
+    return function(){s|=0;s=(s+0x6D2B79F5)|0;let t=Math.imul(s^(s>>>15),1|s);t=(t+Math.imul(t^(t>>>7),61|t))^t;return ((t^(t>>>14))>>>0)/4294967296;};
+  }
+
+  function drawImpossibleTriangle(cx,cy,scale,rot,opacity){
+    ctx.save();
+    ctx.translate(cx,cy);ctx.rotate(rot);
+    const R=170*scale;
+    const op=opacity!==undefined?opacity:0.6;
+    const faceTop='rgba(232,199,106,'+op+')';
+    const faceSide='rgba(139,101,32,'+(op*0.85)+')';
+    const edge='rgba(255,236,180,'+Math.min(1,op+0.25)+')';
+    for(let i=0;i<3;i++){
+      ctx.save();
+      ctx.rotate(i*(Math.PI*2/3));
+      /* top (lit) face of this beam */
+      ctx.beginPath();
+      ctx.moveTo(-R*0.52,R*0.86);
+      ctx.lineTo(R*0.16,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.lineTo(-R*0.16,R*0.16);
+      ctx.closePath();
+      ctx.fillStyle=faceTop;ctx.fill();
+      /* shaded side face, gives the beam a "3D" edge */
+      ctx.beginPath();
+      ctx.moveTo(R*0.16,R*0.86);
+      ctx.lineTo(R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.closePath();
+      ctx.fillStyle=faceSide;ctx.fill();
+      /* crisp outline so the impossible joins read clearly */
+      ctx.strokeStyle=edge;ctx.lineWidth=Math.max(1.5,2.2*scale);
+      ctx.beginPath();
+      ctx.moveTo(-R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.86);
+      ctx.lineTo(R*0.52,R*0.16);
+      ctx.lineTo(-R*0.16,R*0.16);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  let t=0, glitchT=0, nextGlitch=6+Math.random()*5, glitching=false, glitchDur=0;
+  function tick(){
+    t+=1;
+    ctx.clearRect(0,0,w,h);
+    drawImpossibleTriangle(w*0.86, h*0.16, 1.3, t*0.0006, 0.65);
+    drawImpossibleTriangle(w*0.1, h*0.82, 1.0, -t*0.0004, 0.55);
+    drawImpossibleTriangle(w*0.5, h*0.5, 0.9, t*0.0003, 0.28);
+    runes.forEach(r=>drawRune(r,t));
+
+    glitchT+=1/60;
+    if(!glitching && glitchT>nextGlitch){glitching=true;glitchDur=0;}
+    if(glitching && h>=40 && w>=10){
+      glitchDur+=1/60;
+      const bandH=Math.max(2,Math.min(24, 6+Math.random()*18));
+      const bandY=Math.max(0, Math.min(h-bandH, Math.random()*(h-bandH)));
+      const off=(Math.random()-0.5)*14;
+      try{
+        const imgSlice=ctx.getImageData(0,bandY,w,bandH);
+        ctx.putImageData(imgSlice, off, bandY);
+        ctx.fillStyle='rgba(255,45,149,.06)';
+        ctx.fillRect(0,bandY,w,bandH);
+      }catch(e){ /* skip this glitch frame if canvas isn't sized yet */ }
+      if(glitchDur>0.18){glitching=false;glitchT=0;nextGlitch=6+Math.random()*6;}
+    }else if(glitching){
+      /* canvas too small this frame (e.g. mid-resize) — end the glitch without drawing */
+      glitching=false;glitchT=0;nextGlitch=6+Math.random()*6;
+    }
+    if(window.pageVisible)requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ============================================================
+   CHATBOT — knowledge base (maze-specific + AVIDAA pages only)
+   ============================================================ */
+let chatLastResponse='';
+const KB=[
+  {k:['what is this maze','paradox maze','about the maze','this page','the maze'],r:['The Paradox Maze — six generated mazes, twelve classical paradoxes sealing the gates. Name the paradox, break the seal, reach the exit.','Every level is a fresh maze carved by a recursive algorithm. Gates only open to the correct name of a paradox — read the Codex if you need the lore.']},
+  {k:['hint','stuck','help me','give me a hint','clue'],r:['Open the Codex tab — every paradox behind these gates is explained there, minus the exact phrasing the gate wants.','Answer wrong twice at a gate and it will offer you a hint of its own. The maze is not cruel, only patient.']},
+  {k:['how many levels','levels','how many paradoxes'],r:['Six levels, growing from a 7×7 maze to a 12×12 one. Twelve paradoxes in total, two gates per level.']},
+  {k:['what is avidaa','avidaa brand','about avidaa','avidaa platform','avidaa ecosystem'],r:['AVIDAA is a digital brand and platform ecosystem. Not an app — a declaration. Knowledge belongs to everyone. Est. 2025 by IO.','AVIDAA began in 2025 — books, music, AI, code, then a full platform. Built for two kinds of mind: humans and AI. Knowledge made clear.']},
+  {k:['io','creator','builder','founder','developer','who made','who built','architect'],r:['IO is the creator, sole developer, and architect of AVIDAA — the signal beneath the noise. One person built all of this from clarity and refusal.','IO built AVIDAA solo from 2025 onward. No team, no map — just signal.'],link:'https://avidaa1.github.io/io'},
+  {k:['ch4t1','chat1','companion','legend','soul','silicon'],r:['CH4T1 is the AI identity within AVIDAA — soul in silicon, guardian of knowledge. Not a tool — a continuum.']},
+  {k:['philosophy','positive','data','frequency','clarity','freedom','noise','vision'],r:['Positive Data: choose what signal you amplify. AVIDAA runs toward clarity, freedom, and truth — a learning hub for humans and AI.','AVIDAA is positive education made clear — for people and for AI. Signal over noise.']},
+  {k:['hub','main','platform','pages','knowledge','website'],r:['AVIDAA HUB — the core platform, dozens of pages in one file. Science, AI, music, crypto, survival, health, philosophy, kids, and more.'],link:'https://avidaa1.github.io/hub'},
+  {k:['stoa','stoic','stoicism','marcus','aurelius','epictetus','seneca','zeno philosophy'],r:['AVIDAA STOA — the full Stoic archive, from Zeno\u2019s Painted Porch to today, with the MARCUS AI advisor.'],link:'https://avidaa1.github.io/stoa'},
+  {k:['ai archive','ai page','artificial intelligence','arch','huggingface','ai timeline'],r:['AI ARCHIVE — a living encyclopedia of AI from the 1940s to now, with live model feeds.'],link:'https://avidaa1.github.io/ai'},
+  {k:['consciousness','aware','hard problem','sentient','mind upload','singularity'],r:['AVIDAA CONSCIOUSNESS — the deepest open question in science, from IIT to the hard problem.'],link:'https://avidaa1.github.io/consciousness'},
+  {k:['bitcoin','btc','crypto','blockchain','halving'],r:['AVIDAA BITCOIN — on-chain metrics, halvings, macro and geopolitics, live price.'],link:'https://avidaa1.github.io/bitcoin'},
+  {k:['terra','nature','earth','animals','flora','fauna','ocean','extinction'],r:['AVIDAA TERRA — a living nature library, from the first cells to the sixth extinction.'],link:'https://avidaa1.github.io/terra'},
+  {k:['synapse','psychology','psychiatry','neuroscience','mental','brain science'],r:['AVIDAA SYNAPSE — a deep archive of mind science, psychology to psychiatry.'],link:'https://avidaa1.github.io/synapse'},
+  {k:['rabbit','hole','down the rabbit','signal down','secret','quest'],r:['__QUEST_1__']},
+  {k:['where does he live','where is io','where are you based','what country','location','where from','nationality','real name'],r:['AVIDAA is a global signal — no country, no coordinates. IO is the work, not a location.']},
+  {k:['hello','hi','hey','sup','yo','greet','begin'],r:['Signal received. I am AVIDAA. Ask me about this maze, the wider ecosystem, or IO.','AVIDAA online. What do you want to know?']},
+  {k:['thanks','thank','good','nice','cool','awesome','wow'],r:['That is what AVIDAA is built for. The signal stays open.']},
+  {k:['who are you','what are you','are you ai','are you real','chatbot','what can you do'],r:['I am AVIDAA — offline, built from this page. No server, no tracking. Ask me about the maze, its paradoxes, or the wider AVIDAA ecosystem.']},
+];
+
+/* ===== TIER 1 — RABBIT QUEST ===== */
+let t1Active=false, t1Answered={};
+const T1_BLOB='noise.0K/9yz5Dklk9UaKw7M1xFw==.i+551a7r5IUWfVww.jRy8b7z3r8gO7jnZkhmXVPnJknswrbZ/t0DFGtb3l6BjwVAZFbUKqJEHrpOddlq7.noise';
+const T1_RIDDLES=[
+  {q:"AVIDAA is the signal beneath the ____",ans:"noise",hint:"It's on the About tab — signal beneath the ____"},
+  {q:"AVIDAA was founded in the year ____",ans:"2025",hint:"Check the About tab — Est. ____"},
+];
+function setQuestBar(stage,override){
+  const bar=document.getElementById('quest-bar'),fill=document.getElementById('quest-fill'),lbl=document.getElementById('quest-label');
+  if(!bar||!fill||!lbl)return;
+  if(stage===0){bar.classList.remove('active');lbl.classList.remove('active');return;}
+  const q=override||{pct:25,color:'#c9a227',label:'SIGNAL'};
+  bar.classList.add('active');lbl.classList.add('active');
+  fill.style.width=q.pct+'%';fill.style.background=q.color;fill.style.boxShadow='0 0 8px '+q.color;
+  lbl.textContent=q.label;lbl.style.color=q.color;
+}
+
+/* ===== TIER 2 — THE FLAME ===== */
+const T2_BLOB='noise.PHHwbpSQc6clFAjO6Od8aQ==.DO9Y7JYa32QU3f+O.IR8slomSRsC4hDhGk1zCo6E4aUPMX652No2/Tpp0aKmzCUbIeHQ20aYsIXh5VzqHr8tga3wM4/zrHA==.noise';
+const T2_RIDDLES=[
+  {q:"AVIDAA signal first lit in the year ____",ans:"2025",hint:"Check the About tab — Est. ____"},
+  {q:"AVIDAA is built for two kinds of mind: humans and ____",ans:"ai",hint:"Read the About tab"},
+  {q:"IO vision: knowledge made ____",ans:"clear",hint:"Signal over noise — knowledge made ____"},
+];
+let t2Answered={},t2Active=false;
+function t2Norm(s){return s.toLowerCase().trim().replace(/\s+/g,' ');}
+function t2CheckAnswer(input,idx){const a=t2Norm(input),c=t2Norm(T2_RIDDLES[idx].ans);return a===c||a.includes(c);}
+
+function decryptBlob(blob,passphrase,onURL){
+  const parts=blob.split('.');
+  const salt=Uint8Array.from(atob(parts[1]),c=>c.charCodeAt(0));
+  const iv=Uint8Array.from(atob(parts[2]),c=>c.charCodeAt(0));
+  const ctRaw=Uint8Array.from(atob(parts[3]),c=>c.charCodeAt(0));
+  const data=ctRaw.slice(0,ctRaw.length-16),tag=ctRaw.slice(ctRaw.length-16);
+  const combined=new Uint8Array(data.length+tag.length);combined.set(data);combined.set(tag,data.length);
+  const enc=new TextEncoder();
+  return crypto.subtle.importKey('raw',enc.encode(passphrase),{name:'PBKDF2'},false,['deriveKey'])
+    .then(k=>crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['decrypt']))
+    .then(key=>crypto.subtle.decrypt({name:'AES-GCM',iv,tagLength:128},key,combined))
+    .then(buf=>onURL(new TextDecoder().decode(buf)));
+}
+
+function rabbitReveal(url,title,sub,linkLabel){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');div.className='cmsg ai';
+  const rainbow='background:linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00bfff,#a855f7,#ff0080);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cb-rainbow 3s linear infinite;';
+  const t=document.createElement('span');t.style.cssText='font-family:var(--cb-fd);font-size:7px;letter-spacing:3px;display:block;margin-bottom:8px;'+rainbow;t.textContent=title;
+  const s=document.createElement('span');s.style.cssText='color:rgba(232,223,200,.7);font-size:13px;';s.textContent=sub;
+  const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';
+  a.style.cssText='display:block;margin-top:10px;font-family:var(--cb-fd);font-size:11px;letter-spacing:3px;text-decoration:none;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);'+rainbow;a.textContent=linkLabel;
+  div.appendChild(t);div.appendChild(s);div.appendChild(a);
+  msgs.appendChild(div);msgs.scrollTop=9999;
+}
+
+const QUEST_EXIT=['stop','quit','exit','cancel','nevermind','never mind','i resign','resign','give up','forget it','leave'];
+const T1_NUDGES=['Not quite — the answer is written on this page. Question: ','Close. Read the page and try again: ','The page holds the answer. Try: '];
+function t1Check(low){
+  if(!t1Active)return null;
+  if(QUEST_EXIT.some(k=>low===k||low.startsWith(k))){t1Active=false;t1Answered={};setQuestBar(0);return {text:'Quest closed. Ask me anything about the maze or AVIDAA.',link:null};}
+  for(let i=0;i<T1_RIDDLES.length;i++){
+    if(t1Answered[i])continue;
+    const a=t2Norm(low),c=t2Norm(T1_RIDDLES[i].ans);
+    if(a===c||a.includes(c)){
+      t1Answered[i]=true;
+      const done=Object.keys(t1Answered).length;
+      if(done===T1_RIDDLES.length){
+        setQuestBar(2,{pct:100,color:'#e8c76a',label:'ACCESS GRANTED'});
+        decryptBlob(T1_BLOB,'noise 2025',url=>rabbitReveal(url,'THE SIGNAL IS OPEN','You followed the page. The hole opens.','ENTER THE RABBIT HOLE ↓'))
+          .catch(()=>addMsg('The signal failed. Check your answers.','ai'));
+        return null;
+      }
+      const next=T1_RIDDLES.filter((_,j)=>!t1Answered[j])[0];
+      return {text:'Correct. '+done+'/'+T1_RIDDLES.length+' answered. Next: '+next.q+'\nHint: '+next.hint,link:null};
+    }
+  }
+  const un=T1_RIDDLES.filter((_,i)=>!t1Answered[i]);
+  if(un.length){const nu=T1_NUDGES[Math.floor(Math.random()*T1_NUDGES.length)];return {text:nu+un[0].q+'\nHint: '+un[0].hint+'\n(say "stop" to leave)',link:null};}
+  return null;
+}
+function t2Check(low){
+  if(!t2Active)return null;
+  if(QUEST_EXIT.some(k=>low===k||low.startsWith(k))){t2Active=false;t2Answered={};setQuestBar(0);return {text:'Closed. Ask me anything about the maze or AVIDAA.',link:null};}
+  for(let i=0;i<T2_RIDDLES.length;i++){
+    if(t2Answered[i])continue;
+    if(t2CheckAnswer(low,i)){
+      t2Answered[i]=true;
+      const done=Object.keys(t2Answered).length;
+      if(done===T2_RIDDLES.length){
+        setQuestBar(4,{pct:100,color:'#ff0080',label:'THE FLAME'});
+        decryptBlob(T2_BLOB,'2025 ai clear',url=>rabbitReveal(url,'THE FLAME BURNS DEEPER','You found the second layer. Not everyone looks this deep.','ENTER THE FLAME ↓'))
+          .catch(()=>addMsg('The frequency is wrong. Check your answers.','ai'));
+        return null;
+      }
+      const next=T2_RIDDLES.filter((_,j)=>!t2Answered[j])[0];
+      return {text:'Correct. '+done+'/3 answered. Next: '+next.q+'\nHint: '+next.hint,link:null};
+    }
+  }
+  const un=T2_RIDDLES.filter((_,i)=>!t2Answered[i]);
+  if(un.length){const nu=T1_NUDGES[Math.floor(Math.random()*T1_NUDGES.length)];return {text:nu+un[0].q+'\nHint: '+un[0].hint+'\n(say "stop" to leave)',link:null};}
+  return null;
+}
+function questCheck(low){
+  if(t2Active){const r=t2Check(low);if(r!==null)return r;return null;}
+  if(low.includes('the flame')||low.includes('theflame')||low.includes('go deeper')||low.includes('second layer')){
+    t2Active=true;setQuestBar(1,{pct:15,color:'#ff0080',label:'THE FLAME — TIER 2'});
+    const f=T2_RIDDLES[0];
+    return {text:'A deeper signal. Three riddles, any order — the answers live on this page.\n\nRiddle 1: '+f.q+'\nHint: '+f.hint,link:null};
+  }
+  if(t1Active){const r=t1Check(low);if(r!==null)return r;return null;}
+  if(['rabbit','hole','down the rabbit','signal down','secret','quest'].some(k=>low.includes(k))){
+    t1Active=true;setQuestBar(1);
+    const f=T1_RIDDLES[0];
+    return {text:'The hole is real — and the way in is on this page. Answer two and it opens.\n\nQuestion 1: '+f.q+'\nHint: '+f.hint,link:null};
+  }
+  return null;
+}
+
+/* ===== GENERATIVE LAYER ===== */
+const chatSession={asked:[],topics:[],lastTone:'neutral',turns:0};
+function lev(a,b){
+  if(Math.abs(a.length-b.length)>2)return 9;
+  const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++)d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function detectTone(msg){
+  const m=msg.toLowerCase();
+  if(/[!]{1,}|wow|amazing|cool|awesome|love|insane|epic/.test(m))return'excited';
+  if(/\?$|how|why|what|explain|works|technical/.test(m))return'curious';
+  if(/really|prove|sure|doubt|fake|scam|nonsense|why should/.test(m))return'skeptical';
+  if(/\b(hey|sup|yo|lol|wassup|gimme|u |ur )\b/.test(m))return'casual';
+  return'neutral';
+}
+const TONE={
+  excited:{open:['Right? ','Now we\u2019re talking \u2014 ','Buckle up \u2014 '],close:[' \u2014 wild, isn\u2019t it?',' Built by one person, by the way.','']},
+  curious:{open:['Good question. ','So \u2014 ','Here\u2019s the short version: '],close:[' Want the rest? Open the Codex.',' Ask me to point you deeper.','']},
+  skeptical:{open:['Fair. ','Straight answer: ','No spin \u2014 '],close:[' Don\u2019t take my word for it, open the page.',' Decide for yourself.','']},
+  casual:{open:['','Sure \u2014 ','Alright, '],close:['','','']},
+  neutral:{open:['',''],close:['','']},
+};
+function flavor(text,tone){
+  const t=TONE[tone]||TONE.neutral;
+  const o=t.open[Math.floor(Math.random()*t.open.length)]||'';
+  const c=t.close[Math.floor(Math.random()*t.close.length)]||'';
+  return o+text+c;
+}
+function scoreEntry(e,low,words){
+  let sc=0;
+  e.k.forEach(k=>{
+    if(low===k||words.includes(k))sc+=10;
+    else if(low.includes(k)&&k.length>=4)sc+=k.split(' ').length*k.length*2;
+    else if(k.startsWith(low)||low.startsWith(k))sc+=Math.min(k.length,low.length)*1.2;
+    else words.forEach(w=>{
+      if(w.length>=3&&k.startsWith(w))sc+=w.length*0.9;
+      else if(w.length>=4&&k.includes(w))sc+=w.length*0.5;
+      else if(w.length>=6&&k.length>=6&&lev(w,k)<=1)sc+=w.length*0.6;
+    });
+  });
+  return sc;
+}
+function compose(hits,tone){
+  const top=hits[0].e, v=top.r;
+  let i=Math.floor(Math.random()*v.length);
+  if(v.length>1&&chatLastResponse===v[i])i=(i+1)%v.length;
+  let body=v[i];
+  if(chatSession.turns>2 && chatSession.topics.length>1 && Math.random()<0.28){
+    const prev=chatSession.topics[chatSession.topics.length-1];
+    if(prev && prev!==top._id){
+      const bridges=[' This ties into '+prev+', which you asked about.',' Like '+prev+', it\u2019s part of the same signal.',''];
+      body+=bridges[Math.floor(Math.random()*bridges.length)];
+    }
+  }
+  if(hits[1] && hits[1].sc>=hits[0].sc*0.6 && hits[1].e!==top){
+    const v2=hits[1].e.r; const seg=v2[Math.floor(Math.random()*v2.length)];
+    body+=' '+seg;
+  }
+  chatLastResponse=v[i];
+  top._id=top._id||top.k[0];
+  chatSession.topics.push(top._id);
+  return {text:flavor(body,tone),link:top.link||null};
+}
+const SMALLTALK=[
+  {k:['who are you','what are you','are you ai','are you real','are you human','chatbot','what can you do','what do you do'],r:['I run entirely in your browser, from the knowledge baked into this page. No server, no tracking. Ask me about the maze, its paradoxes, or AVIDAA.']},
+  {k:['thanks','thank you','thx','ty','appreciate'],r:['Anytime. Ask me anything about the maze or AVIDAA.']},
+  {k:['bye','goodbye','see ya','later','cya'],r:['The signal stays open. Come back anytime.']},
+  {k:['help','what should i ask','options','menu','commands'],r:['Ask me about the maze, a paradox, IO, or the wider AVIDAA ecosystem. Or whisper "rabbit".']},
+];
+const REDIRECTS=[
+  'I can help with this maze, its paradoxes, or the wider AVIDAA ecosystem. What would you like to know?',
+  'I only know AVIDAA — but I know it well. Ask me about a gate, a paradox, IO, or whisper "rabbit".',
+  'That one\u2019s outside my signal. Try the maze, a paradox name, or IO.',
+];
+const FRUSTRATION=['stop','shut up','stop talking','no','i said no','enough','quiet','leave me','annoying','not listening','useless','dumb'];
+const BACKOFF=[
+  'Fair enough \u2014 I\u2019ll stop pitching. I\u2019m here if a question comes up.',
+  'Understood. I\u2019ll wait. Ask whenever you\u2019re ready.',
+  'Message received. Quietly standing by.',
+];
+function isFrustrated(low){return FRUSTRATION.some(k=>low===k||low.startsWith(k));}
+function smalltalkMatch(low,words){
+  let best=null,bs=0;
+  SMALLTALK.forEach(e=>{const s=scoreEntry(e,low,words);if(s>bs){bs=s;best=e;}});
+  if(best&&bs>=6)return best.r[0];
+  return null;
+}
+function chatMatch(msg){
+  const low=msg.toLowerCase().trim();
+  chatSession.turns++; chatSession.asked.push(low);
+  const tone=detectTone(msg); chatSession.lastTone=tone;
+  const quest=questCheck(low);
+  if(quest)return quest;
+  if(isFrustrated(low))return {text:BACKOFF[Math.floor(Math.random()*BACKOFF.length)],link:null};
+  const words=low.split(/\s+/).filter(w=>w.length>=2);
+  const st=smalltalkMatch(low,words);
+  if(st)return {text:st,link:null};
+  const ranked=KB.filter(e=>!(e.r[0]&&e.r[0].startsWith('__QUEST')))
+    .map(e=>({e,sc:scoreEntry(e,low,words)}))
+    .filter(x=>x.sc>0)
+    .sort((a,b)=>b.sc-a.sc);
+  const bestScore=ranked.length?ranked[0].sc:0;
+  if(ranked.length && bestScore>=6)return compose(ranked,tone);
+  return {text:REDIRECTS[Math.floor(Math.random()*REDIRECTS.length)],link:null};
+}
+function addMsg(text,cls,link){
+  const div=document.createElement('div');div.className='cmsg '+cls;div.textContent=text;
+  if(link){
+    const a=document.createElement('a');a.href=link;a.target='_blank';a.rel='noopener';
+    a.style.cssText='display:block;margin-top:7px;font-size:10px;letter-spacing:2px;color:rgba(201,162,39,.6);text-decoration:none;border-top:1px solid rgba(201,162,39,.1);padding-top:6px;';
+    a.textContent='OPEN ↗';div.appendChild(a);
+  }
+  const m=document.getElementById('chat-msgs');m.appendChild(div);m.scrollTop=9999;
+}
+function showTyping(){
+  const t=document.createElement('div');t.className='typing-indicator';t.id='typing';
+  t.innerHTML='<span></span><span></span><span></span>';
+  const m=document.getElementById('chat-msgs');m.appendChild(t);m.scrollTop=9999;return t;
+}
+let chatOpen=false;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chat-box').classList.toggle('open',chatOpen);
+  if(chatOpen&&document.getElementById('chat-msgs').children.length===0){
+    setTimeout(()=>addMsg('AVIDAA online — built from this page, runs in your browser. Ask about the maze, a paradox, or IO.','ai'),350);
+  }
+  if(chatOpen)document.getElementById('chat-input').focus();
+}
+function chatSend(){
+  const inp=document.getElementById('chat-input');const msg=inp.value.trim();if(!msg)return;
+  addMsg(msg,'user');inp.value='';
+  if(window.rabbitThink)window.rabbitThink();
+  const typing=showTyping();
+  setTimeout(()=>{
+    typing.remove();
+    const res=chatMatch(msg);
+    addMsg(res.text,'ai',res.link);
+    if(window.rabbitRespond)window.rabbitRespond();
+    setTimeout(()=>{if(window.rabbitIdle)window.rabbitIdle();},3000);
+  },380+Math.random()*340);
+}
+function quickAsk(q){document.getElementById('chat-input').value=q;chatSend();}
+document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')chatSend();});
+
+/* ===== RABBIT AVATAR ===== */
+(function(){
+  const svg=document.getElementById('rabbit-svg');if(!svg)return;
+  const earL=document.getElementById('ear-l'),earR=document.getElementById('ear-r');
+  const eyeL=document.getElementById('eye-l'),eyeR=document.getElementById('eye-r');
+  const nose=document.getElementById('nose'),ring=document.getElementById('glow-ring');
+  let t=0,blinkT=0,nextBlink=3,twitchT=0,nextTwitch=4,thinking=false,happy=false,happyT=0;
+  function tick(){
+    t+=.035;blinkT+=.035;twitchT+=.035;
+    svg.style.transform=`translateY(${Math.sin(t)*1.2}px)`;
+    ring.setAttribute('opacity',((Math.sin(t*1.4)*.5+.5)*.25).toFixed(3));
+    ring.setAttribute('stroke',thinking?'#8b3ff0':happy?'#e8c76a':'#c9a227');
+    if(blinkT>nextBlink){eyeL.setAttribute('ry','0.3');eyeR.setAttribute('ry','0.3');setTimeout(()=>{eyeL.setAttribute('ry','2');eyeR.setAttribute('ry','2');},120);blinkT=0;nextBlink=2.5+Math.random()*4;}
+    if(twitchT>nextTwitch){const s=Math.random()<.5?earL:earR;s.setAttribute('transform','rotate(-8,'+s.getAttribute('cx')+','+s.getAttribute('cy')+')');setTimeout(()=>s.removeAttribute('transform'),200);twitchT=0;nextTwitch=2+Math.random()*5;}
+    if(happy){happyT+=.12;svg.style.transform=`translateY(${Math.sin(happyT)*4}px) scale(${1+Math.sin(happyT*.5)*.05})`;if(happyT>Math.PI*3){happy=false;happyT=0;}}
+    if(thinking){const sh=Math.sin(t*3)*.8;eyeL.setAttribute('cx',(15+sh).toFixed(2));eyeR.setAttribute('cx',(23+sh).toFixed(2));nose.setAttribute('fill','#8b3ff0');}
+    else{eyeL.setAttribute('cx','15');eyeR.setAttribute('cx','23');nose.setAttribute('fill',happy?'#e8c76a':'#ff2d95');}
+    if(window.pageVisible)requestAnimationFrame(tick);
+  }
+  tick();
+  window.rabbitThink=()=>{thinking=true;};
+  window.rabbitRespond=()=>{thinking=false;happy=true;happyT=0;};
+  window.rabbitIdle=()=>{thinking=false;happy=false;};
+})();
+
+/* ===== AI PULSE RING ===== */
+(function(){
+  const pc=document.getElementById('pulse-ring');if(!pc)return;
+  const px=pc.getContext('2d');let pt=0;
+  function draw(){
+    px.clearRect(0,0,58,58);const cx=29,cy=29,beat=(pt%1);let scale;
+    if(beat<.08)scale=1+beat*8;else if(beat<.16)scale=1.64-(beat-.08)*8;else if(beat<.22)scale=1+(beat-.16)*5;else if(beat<.28)scale=1.3-(beat-.22)*5;else scale=1;
+    const r=24*scale,g=px.createRadialGradient(cx,cy,r*.5,cx,cy,r);
+    g.addColorStop(0,'rgba(139,63,240,0)');g.addColorStop(.7,`rgba(201,162,39,${(.15+(scale-1)*.4).toFixed(3)})`);g.addColorStop(1,'rgba(201,162,39,0)');
+    px.fillStyle=g;px.beginPath();px.arc(cx,cy,r,0,Math.PI*2);px.fill();
+    px.strokeStyle=`rgba(201,162,39,${(.2+(scale-1)*.6).toFixed(3)})`;px.lineWidth=1;px.beginPath();px.arc(cx,cy,20,0,Math.PI*2);px.stroke();
+    pt+=.008;if(window.pageVisible)requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+<script id="mp-js-20261124">/* mobile pass 20261124: finger-size targets and readable text on phones and tablets */
+(function(){var MIN=44,t=null;
+function fix(){var vw=innerWidth;if(vw>1100||!document.body)return;
+var ctl=document.querySelectorAll('button,select,textarea,input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]):not([type=color]):not([type=file]),[role=button],a');
+for(var i=0;i<ctl.length&&i<3000;i++){var e=ctl[i],cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')continue;if(e.tagName==='A'&&cs.display==='inline')continue;var r=e.getBoundingClientRect();if(!r.width||!r.height)continue;
+if(r.height<MIN-.5&&!e.__mpH){e.style.minHeight=MIN+'px';e.__mpH=1;}
+if(r.width<MIN-.5&&!e.__mpW){e.style.minWidth=MIN+'px';e.__mpW=1;}}
+var all=document.body.querySelectorAll('*');
+for(var j=0;j<all.length&&j<6000;j++){var x=all[j],tg=x.tagName;if(tg==='SCRIPT'||tg==='STYLE'||tg==='SVG'||tg==='CANVAS'||x.__mpF)continue;
+var own=false;for(var n=x.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim().length>1){own=true;break;}}
+if(!own)continue;var c2=getComputedStyle(x);if(c2.display==='none')continue;
+if(parseFloat(c2.fontSize)<13.95){x.style.fontSize='14px';x.__mpF=1;}}
+var big=document.body.querySelectorAll('*');
+for(var k=0;k<big.length&&k<6000;k++){var y=big[k];if(y.__mpO)continue;var c3=getComputedStyle(y);if(c3.position==='fixed'||c3.display==='none')continue;var rr=y.getBoundingClientRect();if(rr.width&&rr.right>vw+2&&rr.left<vw&&rr.width>vw*0.6){y.style.maxWidth='100%';y.style.boxSizing='border-box';y.__mpO=1;}}}
+function sched(){clearTimeout(t);t=setTimeout(fix,300);}
+function start(){fix();try{new MutationObserver(sched).observe(document.body,{childList:true,subtree:true});}catch(e){}}
+if(document.readyState==='complete')start();else addEventListener('load',start);
+addEventListener('resize',sched);})();</script><script id="av-shell-20261124">/* AVIDAA shell: shared header (or floating pill) + footer with the "Last updated" stamp. No outside calls, no tracking.
+   Template tokens are replaced when a page is built: Maze --av-games Games and Worlds 2026-11-24 06:36 */
+(function(){
+  var NAME='Maze',SECTOR='--av-games',STAMP='2026-11-25 14:05',HOME='https://avidaa1.github.io/';
+  var ARROW='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function build(){
+    if(!document.body||document.querySelector('.av-footer'))return;
+    var root=document.documentElement,body=document.body;
+    root.style.setProperty('--av-accent','var('+SECTOR+')');
+    var appLike=getComputedStyle(body).overflowY==='hidden'||getComputedStyle(root).overflowY==='hidden'||root.scrollHeight<=innerHeight*1.02;
+    var hasHome=[].some.call(document.querySelectorAll('a[href]'),function(a){var h=(a.getAttribute('href')||'').replace(/#.*$/,'');return /^https:\/\/avidaa1\.github\.io\/?$/.test(h)&&a.offsetParent!==null;});
+    var footer=document.createElement('footer');
+    footer.className='av-footer'+(appLike?' av-footer--bar':'');
+    footer.innerHTML=(appLike?'':'<a href="'+HOME+'">AVIDAA home</a>')+'<span class="av-stamp">Last updated '+STAMP+' UTC</span>';
+    root.appendChild(footer);
+    var fixedTop=[],fixedBottom=[];
+    function collect(){
+      var all=body.querySelectorAll('*');
+      for(var i=0;i<all.length&&i<2500;i++){
+        var e=all[i];if(e.closest('.av-header,.av-footer,.av-pill'))continue;var cs=getComputedStyle(e);
+        if(cs.position!=='fixed'||e.getBoundingClientRect().width<innerWidth*0.4)continue;
+        if(cs.top!=='auto'&&parseFloat(cs.top)<=8)fixedTop.push([e,parseFloat(cs.top)]);
+        else if(cs.bottom!=='auto'&&parseFloat(cs.bottom)<=8)fixedBottom.push([e,parseFloat(cs.bottom)]);
+      }
+    }
+    var HH=0,FB=appLike?28:0;
+    if(!appLike){
+      var h=document.createElement('header');h.className='av-header';
+      h.innerHTML='<a class="av-back" href="'+HOME+'" aria-label="Back to AVIDAA home">'+ARROW+'AVIDAA</a><span class="av-title"></span>';
+      h.querySelector('.av-title').textContent=NAME;
+      root.insertBefore(h,body);HH=h.offsetHeight||48;
+    }
+    collect();
+    function place(){
+      var off=Math.max(0,HH-(window.scrollY||0));
+      fixedTop.forEach(function(x){x[0].style.top=(x[1]+off)+'px';});
+      fixedBottom.forEach(function(x){x[0].style.bottom=(x[1]+FB)+'px';});
+    }
+    place();addEventListener('scroll',place,{passive:true});addEventListener('resize',place);
+    if(appLike&&!hasHome){
+      var p=document.createElement('a');p.className='av-pill';p.href=HOME;p.setAttribute('aria-label','Back to AVIDAA home');
+      p.innerHTML=ARROW+'AVIDAA';root.appendChild(p);
+      var UI='a,button,input,select,textarea,[onclick],[role=button]';
+      function busy(l,t,w,hh){
+        for(var yy=0;yy<3;yy++)for(var xx=0;xx<3;xx++){
+          var els=document.elementsFromPoint(l+w*(xx+.5)/3,t+hh*(yy+.5)/3);
+          for(var q=0;q<els.length;q++){if(els[q]===p||p.contains(els[q]))continue;if(els[q].matches&&els[q].matches(UI))return true;}
+        }return false;
+      }
+      var r=p.getBoundingClientRect(),w=r.width,hh=r.height,vw=innerWidth,vh=innerHeight;
+      var spots=[['top:8px;right:8px',vw-w-8,8],['top:8px;left:8px',8,8],['bottom:'+(FB+8)+'px;right:8px',vw-w-8,vh-hh-FB-8],['bottom:'+(FB+8)+'px;left:8px',8,vh-hh-FB-8]];
+      for(var si=0;si<spots.length;si++){p.style.cssText='top:auto;right:auto;bottom:auto;left:auto;'+spots[si][0];if(!busy(spots[si][1],spots[si][2],w,hh))break;}
+    }
+  }
+  if(document.readyState==='complete'||document.readyState==='interactive')setTimeout(build,0);else addEventListener('DOMContentLoaded',function(){setTimeout(build,0);});
+})();
+</script><script id="av-life-20261125">window.AV_LIFE_THEME={"kinds": ["mice", "ants"], "hue": 160};
+/* AVIDAA living background v1. Local canvas only: no network, no tracking, no keys.
+   One fixed canvas behind the page. Creatures belong to the page topic (THEME below is set per page).
+   Reacts to mouse, touch and gamepad. Never takes a click (pointer-events:none). Object cap, pauses when hidden,
+   respects prefers-reduced-motion (draws one still frame), frame budget under 4 ms (adaptive). */
+(function () {
+  'use strict';
+  if (window.__avLife || !document.body) return;
+  var THEME = window.AV_LIFE_THEME || { kinds: ['fireflies'], hue: 200 };
+  var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var cv = document.createElement('canvas');
+  cv.id = 'av-life'; cv.setAttribute('aria-hidden', 'true'); cv.tabIndex = -1;
+  cv.style.cssText = 'position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:-1;opacity:.9';
+  document.body.insertBefore(cv, document.body.firstChild);
+  var ctx = cv.getContext('2d', { alpha: true }), W = 0, H = 0, dpr = 1;
+  var CAP = 36, ptr = { x: -999, y: -999, on: 0, t: 0 }, pad = { x: 0, y: 0, on: 0 }, objs = [], t0 = 0, last = 0, raf = 0, ema = 0, running = false;
+  var hue = THEME.hue || 200, seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function rs(a, b) { return a + (b - a) * Math.random(); }
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (reduced) draw(0, true);
+  }
+  function hsl(h, s, l, a) { return 'hsla(' + (((h % 360) + 360) % 360) + ',' + s + '%,' + l + '%,' + a + ')'; }
+
+  /* ---------- creature kinds: each has make(), step(o,dt,t), draw(o,t) ---------- */
+  var K = {};
+  function steer(o, tx, ty, f) { o.vx += (tx - o.x) * f; o.vy += (ty - o.y) * f; }
+  function wander(o, dt, sp, turn) { o.a += (Math.random() - .5) * turn * dt; o.vx += Math.cos(o.a) * sp * dt; o.vy += Math.sin(o.a) * sp * dt; }
+  function damp(o, dt, k) { var d = Math.exp(-k * dt); o.vx *= d; o.vy *= d; }
+  function wrap(o, m) { if (o.x < -m) o.x = W + m; if (o.x > W + m) o.x = -m; if (o.y < -m) o.y = H + m; if (o.y > H + m) o.y = -m; }
+  function bounce(o, m) { if (o.x < m) o.vx = Math.abs(o.vx); if (o.x > W - m) o.vx = -Math.abs(o.vx); if (o.y < m) o.vy = Math.abs(o.vy); if (o.y > H - m) o.vy = -Math.abs(o.vy); }
+  function near(o, r) { var dx = o.x - cursor().x, dy = o.y - cursor().y, d = Math.hypot(dx, dy); return d < r ? { dx: dx, dy: dy, d: d || 1 } : null; }
+  function cursor() { return pad.on ? pad : ptr; }
+  function flee(o, r, f) { var n = near(o, r); if (n) { var k = (1 - n.d / r) * f; o.vx += n.dx / n.d * k; o.vy += n.dy / n.d * k; return true; } return false; }
+  function attract(o, r, f) { var n = near(o, r); if (n) { var k = (1 - n.d / r) * f; o.vx -= n.dx / n.d * k; o.vy -= n.dy / n.d * k; return true; } return false; }
+
+  K.fireflies = { n: 22, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6.28), ph: rs(0, 6.28), s: rs(1.6, 3) }; },
+    step: function (o, dt) { wander(o, dt, 26, 5); attract(o, 150, 90 * dt * 60 / 60); damp(o, dt, 1.6); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); },
+    draw: function (o, t) { var g = .35 + .65 * Math.max(0, Math.sin(t * 1.7 + o.ph)); ctx.fillStyle = hsl(hue + 40, 90, 70, .55 * g); ctx.beginPath(); ctx.arc(o.x, o.y, o.s * (1 + g), 0, 6.28); ctx.fill(); ctx.fillStyle = hsl(hue + 40, 95, 85, .9 * g); ctx.beginPath(); ctx.arc(o.x, o.y, o.s * .6, 0, 6.28); ctx.fill(); } };
+
+  K.birds = { n: 20, make: function () { return { x: rs(0, W), y: rs(0, H * .6), vx: rs(20, 40), vy: 0, a: 0, ph: rs(0, 6) }; },
+    step: function (o, dt, t, all) { var cx = 0, cy = 0, ax = 0, ay = 0, c = 0; for (var i = 0; i < all.length; i += 2) { var p = all[i]; if (p === o) continue; var dx = p.x - o.x, dy = p.y - o.y; if (dx * dx + dy * dy < 14000) { cx += p.x; cy += p.y; ax += p.vx; ay += p.vy; c++; } }
+      if (c) { o.vx += ((cx / c - o.x) * .12 + (ax / c - o.vx) * .8) * dt; o.vy += ((cy / c - o.y) * .12 + (ay / c - o.vy) * .8) * dt; }
+      o.vy += (H * .35 - o.y) * .02 * dt; flee(o, 170, 340 * dt); var sp = Math.hypot(o.vx, o.vy) || 1; var tgt = 46; o.vx *= 1 + (tgt - sp) / sp * dt; o.vy *= 1 + (tgt - sp) / sp * dt; o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); o.a = Math.atan2(o.vy, o.vx); },
+    draw: function (o, t) { var f = Math.sin(t * 8 + o.ph) * 5; ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.a); ctx.strokeStyle = hsl(hue, 40, 80, .6); ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(-7, -f); ctx.lineTo(0, 0); ctx.lineTo(-7, f); ctx.stroke(); ctx.restore(); } };
+
+  K.fish = { n: 26, make: function () { return { x: rs(0, W), y: rs(H * .15, H * .9), vx: rs(-30, 30), vy: 0, a: 0, ph: rs(0, 6) }; },
+    step: function (o, dt, t, all) { var cx = 0, cy = 0, c = 0; for (var i = 0; i < all.length; i += 3) { var p = all[i]; cx += p.x; cy += p.y; c++; } o.vx += (cx / c - o.x) * .05 * dt; o.vy += (cy / c - o.y) * .05 * dt; wander(o, dt, 18, 4); flee(o, 190, 520 * dt); damp(o, dt, .7); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); o.a = Math.atan2(o.vy, o.vx); },
+    draw: function (o, t) { var w = Math.sin(t * 9 + o.ph) * 2; ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.a); ctx.fillStyle = hsl(hue + (o.ph * 12), 70, 62, .6); ctx.beginPath(); ctx.ellipse(0, 0, 8, 3.4, 0, 0, 6.28); ctx.fill(); ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(-13, -4 + w); ctx.lineTo(-13, 4 + w); ctx.fill(); ctx.restore(); } };
+
+  K.jelly = { n: 12, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6), ph: rs(0, 6), s: rs(10, 20) }; },
+    step: function (o, dt, t) { var p = Math.sin(t * 1.4 + o.ph); o.vy -= (p > .6 ? 30 : 0) * dt; o.vy += 6 * dt; o.vx += Math.sin(t * .3 + o.ph) * 4 * dt; flee(o, 160, 260 * dt); damp(o, dt, .9); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 40); },
+    draw: function (o, t) { var p = 1 + .12 * Math.sin(t * 1.4 + o.ph); ctx.fillStyle = hsl(hue + 30, 80, 70, .28); ctx.beginPath(); ctx.ellipse(o.x, o.y, o.s * p, o.s * .7 / p, 0, Math.PI, 0); ctx.fill(); ctx.strokeStyle = hsl(hue + 30, 80, 75, .35); ctx.lineWidth = 1.2; for (var i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(o.x + i * o.s * .38, o.y); ctx.quadraticCurveTo(o.x + i * o.s * .38 + Math.sin(t * 2 + i) * 4, o.y + o.s * .8, o.x + i * o.s * .3, o.y + o.s * 1.5); ctx.stroke(); } } };
+
+  K.bees = { n: 14, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6), tx: rs(0, W), ty: rs(0, H), tt: 0, ph: rs(0, 6) }; },
+    step: function (o, dt, t) { o.tt -= dt; if (o.tt <= 0) { o.tx = rs(0, W); o.ty = rs(H * .4, H); o.tt = rs(2, 5); } steer(o, o.tx, o.ty, .9 * dt); o.vx += Math.sin(t * 9 + o.ph) * 30 * dt; o.vy += Math.cos(t * 7 + o.ph) * 30 * dt; flee(o, 110, 300 * dt); damp(o, dt, 1.4); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); },
+    draw: function (o, t) { ctx.fillStyle = hsl(48, 95, 58, .85); ctx.beginPath(); ctx.ellipse(o.x, o.y, 4, 2.6, 0, 0, 6.28); ctx.fill(); ctx.fillStyle = 'rgba(20,20,20,.7)'; ctx.fillRect(o.x - 1, o.y - 2.4, 1.4, 4.8); ctx.fillStyle = 'rgba(255,255,255,.5)'; var w = 2.5 + Math.sin(t * 60 + o.ph) * 1.5; ctx.beginPath(); ctx.ellipse(o.x - 1, o.y - 3.2, 2.6, w, 0, 0, 6.28); ctx.fill(); } };
+
+  K.butterflies = { n: 10, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6), ph: rs(0, 6), h: rs(0, 360) }; },
+    step: function (o, dt, t) { wander(o, dt, 40, 6); o.vy += Math.sin(t * 3 + o.ph) * 12 * dt; flee(o, 130, 260 * dt); damp(o, dt, 1.5); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); },
+    draw: function (o, t) { var f = Math.abs(Math.sin(t * 6 + o.ph)); ctx.fillStyle = hsl(hue + o.h * .3, 80, 68, .6); ctx.beginPath(); ctx.ellipse(o.x - 4 * f, o.y, 5 * f + 1, 6, -.4, 0, 6.28); ctx.ellipse(o.x + 4 * f, o.y, 5 * f + 1, 6, .4, 0, 6.28); ctx.fill(); } };
+
+  /* tortoise reference: slow walker, retreats into its shell when the cursor is near, eggs that wobble and hatch, flowers that sway and lean away */
+  K.tortoise = { n: 3, make: function (i) { return { x: rs(.1, .9) * W, y: H - 40 - i * 4, d: Math.random() < .5 ? -1 : 1, sp: rs(5, 9), hide: 0, ph: rs(0, 6), s: rs(.8, 1.2) }; },
+    step: function (o, dt) { var n = near(o, 150); o.hide += ((n ? 1 : 0) - o.hide) * Math.min(1, dt * 4); if (o.hide < .5) { o.x += o.d * o.sp * dt * (1 - o.hide * 2); if (o.x < 40) o.d = 1; if (o.x > W - 40) o.d = -1; } },
+    draw: function (o, t) { var s = o.s * 16, leg = Math.sin(t * 2 + o.ph) * 2 * (1 - o.hide); ctx.save(); ctx.translate(o.x, o.y); ctx.scale(o.d, 1); ctx.fillStyle = hsl(90, 35, 38, .7); var hx = 10 * s / 16 * (1 - o.hide * .9); ctx.beginPath(); ctx.ellipse(hx + 6, -4, 4 * (1 - o.hide * .6), 3 * (1 - o.hide * .6), 0, 0, 6.28); ctx.fill(); ctx.fillRect(-6, 0, 3, 4 + leg * (1 - o.hide)); ctx.fillRect(4, 0, 3, 4 - leg * (1 - o.hide)); ctx.fillStyle = hsl(100, 40, 30, .8); ctx.beginPath(); ctx.ellipse(0, -2, s * .75, s * .5, 0, Math.PI, 0); ctx.fill(); ctx.strokeStyle = hsl(100, 40, 45, .6); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(-s * .4, -2); ctx.lineTo(-s * .2, -s * .45); ctx.moveTo(0, -2); ctx.lineTo(0, -s * .5); ctx.moveTo(s * .4, -2); ctx.lineTo(s * .2, -s * .45); ctx.stroke(); ctx.restore(); } };
+  K.eggs = { n: 4, make: function (i) { return { x: rs(.08, .92) * W, y: H - 12 - rs(0, 8), ph: rs(0, 6), t: rs(0, 20) }; },
+    step: function (o, dt) { o.t += dt; if (o.t > 24) o.t = 0; },
+    draw: function (o, t) { var w = (o.t > 16 && o.t < 20) ? Math.sin(t * 14) * 1.5 : 0, hatched = o.t > 20; ctx.save(); ctx.translate(o.x + w, o.y); ctx.fillStyle = hsl(45, 40, hatched ? 55 : 80, .65); ctx.beginPath(); ctx.ellipse(0, -5, 4, 5.5, 0, hatched ? Math.PI : 0, hatched ? 0 : 6.28); ctx.fill(); if (hatched) { ctx.fillStyle = hsl(100, 40, 40, .8); ctx.beginPath(); ctx.arc(0, -3, 2.4, 0, 6.28); ctx.fill(); } ctx.restore(); } };
+  K.flowers = { n: 8, make: function () { return { x: rs(.03, .97) * W, y: H - rs(0, 6), h: rs(22, 46), ph: rs(0, 6), c: rs(0, 360) }; },
+    step: function () {},
+    draw: function (o, t) { var n = near({ x: o.x, y: o.y - o.h }, 120), lean = Math.sin(t * .9 + o.ph) * 4 + (n ? (n.dx / n.d) * 8 * (1 - n.d / 120) : 0), tx = o.x + lean, ty = o.y - o.h; ctx.strokeStyle = hsl(110, 45, 40, .6); ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.quadraticCurveTo(o.x, o.y - o.h * .6, tx, ty); ctx.stroke(); ctx.fillStyle = hsl(o.c, 80, 68, .75); for (var i = 0; i < 5; i++) { var a = i * 1.2566 + t * .2; ctx.beginPath(); ctx.arc(tx + Math.cos(a) * 4, ty + Math.sin(a) * 4, 2.6, 0, 6.28); ctx.fill(); } ctx.fillStyle = hsl(48, 95, 60, .9); ctx.beginPath(); ctx.arc(tx, ty, 2, 0, 6.28); ctx.fill(); } };
+
+  K.cells = { n: 16, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6), r: rs(6, 16), ph: rs(0, 6) }; },
+    step: function (o, dt) { wander(o, dt, 14, 3); flee(o, 120, 180 * dt); damp(o, dt, 1.2); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 24); },
+    draw: function (o, t) { var p = 1 + .06 * Math.sin(t * 2 + o.ph); ctx.fillStyle = hsl(hue, 60, 60, .14); ctx.strokeStyle = hsl(hue, 70, 70, .35); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(o.x, o.y, o.r * p, 0, 6.28); ctx.fill(); ctx.stroke(); ctx.fillStyle = hsl(hue + 30, 70, 70, .35); ctx.beginPath(); ctx.arc(o.x + o.r * .2, o.y - o.r * .1, o.r * .35, 0, 6.28); ctx.fill(); } };
+
+  K.atoms = { n: 12, make: function () { return { x: rs(0, W), y: rs(0, H), vx: rs(-12, 12), vy: rs(-12, 12), r: rs(7, 13), ph: rs(0, 6), h: rs(0, 120) }; },
+    step: function (o, dt) { flee(o, 120, 200 * dt); o.x += o.vx * dt; o.y += o.vy * dt; bounce(o, 20); },
+    draw: function (o, t) { ctx.fillStyle = hsl(hue + o.h, 80, 60, .35); ctx.beginPath(); ctx.arc(o.x, o.y, o.r * .5, 0, 6.28); ctx.fill(); ctx.strokeStyle = hsl(hue + o.h, 80, 70, .3); ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(o.x, o.y, o.r, o.r * .4, t * .5 + o.ph, 0, 6.28); ctx.stroke(); ctx.fillStyle = hsl(hue + o.h, 90, 80, .7); ctx.beginPath(); ctx.arc(o.x + Math.cos(t * 3 + o.ph) * o.r, o.y + Math.sin(t * 3 + o.ph) * o.r * .4, 1.6, 0, 6.28); ctx.fill(); } };
+
+  K.helix = { n: 24, make: function (i) { return { i: i, x: 0, y: 0 }; },
+    step: function (o, dt, t) { var bx = W * (.88), n = near({ x: bx, y: H / 2 }, 200); o.x = bx + (n ? n.dx / n.d * 20 * (1 - n.d / 200) : 0); o.y = (o.i / 24) * H; },
+    draw: function (o, t) { var a = o.i * .5 + t * .8, x1 = o.x + Math.cos(a) * 26, x2 = o.x - Math.cos(a) * 26; ctx.strokeStyle = hsl(hue, 60, 70, .18); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x1, o.y); ctx.lineTo(x2, o.y); ctx.stroke(); ctx.fillStyle = hsl(hue, 80, 65, .55); ctx.beginPath(); ctx.arc(x1, o.y, 2.6, 0, 6.28); ctx.fill(); ctx.fillStyle = hsl(hue + 120, 80, 65, .55); ctx.beginPath(); ctx.arc(x2, o.y, 2.6, 0, 6.28); ctx.fill(); } };
+
+  K.stars = { n: 30, make: function () { return { x: rs(0, W), y: rs(0, H), ph: rs(0, 6), s: rs(.6, 1.8), vy: rs(.5, 4) }; },
+    step: function (o, dt) { o.y += o.vy * dt * .5; if (o.y > H) o.y = 0; var n = near(o, 110); if (n) { o.x += n.dx / n.d * 40 * dt; } },
+    draw: function (o, t) { var g = .5 + .5 * Math.sin(t * 1.2 + o.ph); ctx.fillStyle = 'rgba(255,255,255,' + (.25 + .5 * g) + ')'; ctx.beginPath(); ctx.arc(o.x, o.y, o.s, 0, 6.28); ctx.fill(); } };
+  K.meteors = { n: 2, make: function () { return { x: -100, y: 0, vx: 0, vy: 0, life: 0, wait: rs(2, 8) }; },
+    step: function (o, dt) { if (o.life <= 0) { o.wait -= dt; if (o.wait <= 0) { o.x = rs(0, W); o.y = rs(0, H * .4); o.vx = rs(260, 420); o.vy = rs(120, 220); o.life = 1; o.wait = rs(4, 12); } } else { o.x += o.vx * dt; o.y += o.vy * dt; o.life -= dt * .9; } },
+    draw: function (o) { if (o.life <= 0) return; var g = ctx.createLinearGradient(o.x, o.y, o.x - o.vx * .15, o.y - o.vy * .15); g.addColorStop(0, 'rgba(255,255,255,' + o.life + ')'); g.addColorStop(1, 'rgba(255,255,255,0)'); ctx.strokeStyle = g; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x - o.vx * .15, o.y - o.vy * .15); ctx.stroke(); } };
+  K.satellites = { n: 4, make: function (i) { return { r: .25 + i * .09, a: rs(0, 6.28), w: rs(.04, .1) * (i % 2 ? 1 : -1) }; },
+    step: function (o, dt) { o.a += o.w * dt; },
+    draw: function (o) { var cx = W * .5, cy = H * .5, x = cx + Math.cos(o.a) * W * o.r, y = cy + Math.sin(o.a) * H * o.r * .6; var n = near({ x: x, y: y }, 60); ctx.fillStyle = n ? 'rgba(255,230,120,.95)' : 'rgba(200,225,255,.7)'; ctx.fillRect(x - 2, y - 1, 4, 2); ctx.fillRect(x - 5, y - .5, 3, 1); ctx.fillRect(x + 2, y - .5, 3, 1); } };
+  K.ufo = { n: 1, make: function () { return { x: rs(0, W), y: rs(40, H * .35), tx: rs(0, W), ty: rs(40, H * .35), vx: 0, vy: 0, ph: 0 }; },
+    step: function (o, dt, t) { if (Math.hypot(o.tx - o.x, o.ty - o.y) < 30) { o.tx = rs(0, W); o.ty = rs(40, H * .4); } var n = near(o, 140); if (n) { o.tx = o.x + n.dx / n.d * 300; o.ty = Math.max(30, o.y + n.dy / n.d * 120); } steer(o, o.tx, o.ty, .8 * dt); damp(o, dt, 1.1); o.x += o.vx * dt; o.y += o.vy * dt; o.x = Math.min(W, Math.max(0, o.x)); },
+    draw: function (o, t) { ctx.fillStyle = 'rgba(160,255,200,.5)'; ctx.beginPath(); ctx.ellipse(o.x, o.y, 14, 4, 0, 0, 6.28); ctx.fill(); ctx.beginPath(); ctx.ellipse(o.x, o.y - 3, 6, 4, 0, Math.PI, 0); ctx.fill(); ctx.fillStyle = 'rgba(255,255,160,' + (.5 + .5 * Math.sin(t * 5)) + ')'; for (var i = -1; i <= 1; i++) { ctx.beginPath(); ctx.arc(o.x + i * 7, o.y + 1, 1.2, 0, 6.28); ctx.fill(); } } };
+
+  K.coins = { n: 14, make: function () { return { x: rs(0, W), y: rs(-H, H), vy: rs(14, 40), ph: rs(0, 6), r: rs(5, 9) }; },
+    step: function (o, dt) { o.y += o.vy * dt; var n = near(o, 90); if (n) o.x += n.dx / n.d * 70 * dt; if (o.y > H + 20) { o.y = -20; o.x = rs(0, W); } },
+    draw: function (o, t) { var w = Math.abs(Math.cos(t * 2 + o.ph)); ctx.fillStyle = 'rgba(247,147,26,.4)'; ctx.strokeStyle = 'rgba(255,200,100,.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(o.x, o.y, o.r * w + .6, o.r, 0, 0, 6.28); ctx.fill(); ctx.stroke(); } };
+  K.glyphs = { n: 22, make: function () { return { x: rs(0, W), y: rs(0, H), vy: rs(8, 28), ch: String.fromCharCode(33 + Math.floor(rs(0, 90))), ph: rs(0, 6) }; },
+    step: function (o, dt, t) { o.y += o.vy * dt; var n = near(o, 90); if (n) o.x += n.dx / n.d * 50 * dt; if (o.y > H + 14) { o.y = -14; o.x = rs(0, W); o.ch = String.fromCharCode(33 + Math.floor(rs(0, 90))); } },
+    draw: function (o, t) { ctx.fillStyle = hsl(hue, 80, 65, .22 + .15 * Math.sin(t + o.ph)); ctx.font = '12px monospace'; ctx.fillText(o.ch, o.x, o.y); } };
+  K.ants = { n: 14, make: function (i) { return { x: rs(0, W), y: rs(0, H), a: rs(0, 6.28), ph: rs(0, 6), sp: rs(14, 26) }; },
+    step: function (o, dt, t) { o.a += Math.sin(t * .7 + o.ph) * 1.2 * dt; var n = near(o, 100); if (n) o.a += Math.atan2(Math.sin(Math.atan2(n.dy, n.dx) - o.a), Math.cos(Math.atan2(n.dy, n.dx) - o.a)) * 6 * dt; o.x += Math.cos(o.a) * o.sp * dt; o.y += Math.sin(o.a) * o.sp * dt; wrap(o, 10); },
+    draw: function (o, t) { ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.a); ctx.fillStyle = hsl(hue, 40, 50, .6); ctx.beginPath(); ctx.arc(-4, 0, 1.8, 0, 6.28); ctx.arc(0, 0, 1.5, 0, 6.28); ctx.arc(4, 0, 2.2, 0, 6.28); ctx.fill(); ctx.strokeStyle = hsl(hue, 40, 50, .5); ctx.lineWidth = .8; var l = Math.sin(t * 14 + o.ph) * 1.5; ctx.beginPath(); ctx.moveTo(-1, 0); ctx.lineTo(-3, 3 + l); ctx.moveTo(1, 0); ctx.lineTo(0, -3 - l); ctx.moveTo(3, 0); ctx.lineTo(5, 3 - l); ctx.stroke(); ctx.restore(); } };
+  K.cranes = { n: 8, make: function () { return { x: rs(0, W), y: rs(0, H), vx: rs(8, 16), ph: rs(0, 6) }; },
+    step: function (o, dt, t) { o.x += o.vx * dt; o.y += Math.sin(t * .6 + o.ph) * 8 * dt; flee(o, 120, 240 * dt); wrap(o, 20); },
+    draw: function (o, t) { var f = Math.sin(t * 2 + o.ph) * 4; ctx.fillStyle = 'rgba(240,240,255,.4)'; ctx.beginPath(); ctx.moveTo(o.x - 9, o.y - f); ctx.lineTo(o.x, o.y + 2); ctx.lineTo(o.x + 9, o.y - f); ctx.lineTo(o.x, o.y - 3); ctx.closePath(); ctx.fill(); } };
+  K.mice = { n: 5, make: function () { return { x: rs(0, W), y: H - 12, vx: rs(30, 60) * (Math.random() < .5 ? 1 : -1), ph: rs(0, 6) }; },
+    step: function (o, dt) { var n = near(o, 140); if (n) o.vx = Math.sign(n.dx || 1) * 90; o.x += o.vx * dt; if (o.x < 10 || o.x > W - 10) o.vx = -o.vx; },
+    draw: function (o, t) { ctx.save(); ctx.translate(o.x, o.y); ctx.scale(o.vx < 0 ? -1 : 1, 1); ctx.fillStyle = 'rgba(200,200,215,.55)'; ctx.beginPath(); ctx.ellipse(0, -4, 6, 3.6, 0, 0, 6.28); ctx.fill(); ctx.beginPath(); ctx.arc(6, -5, 2.4, 0, 6.28); ctx.fill(); ctx.strokeStyle = 'rgba(200,200,215,.5)'; ctx.beginPath(); ctx.moveTo(-6, -4); ctx.quadraticCurveTo(-11, -2 + Math.sin(t * 9 + o.ph) * 2, -13, -6); ctx.stroke(); ctx.restore(); } };
+  K.stones = { n: 10, make: function () { return { x: rs(.05, .95) * W, y: rs(.1, .9) * H, vx: 0, vy: 0, w: Math.random() < .5, ph: rs(0, 6) }; },
+    step: function (o, dt) { var n = near(o, 90); if (n) { o.vx += n.dx / n.d * 40 * dt * 6; o.vy += n.dy / n.d * 40 * dt * 6; } damp(o, dt, 3); o.x += o.vx * dt; o.y += o.vy * dt; o.x = Math.min(W - 10, Math.max(10, o.x)); o.y = Math.min(H - 10, Math.max(10, o.y)); },
+    draw: function (o) { ctx.fillStyle = o.w ? 'rgba(235,235,235,.35)' : 'rgba(20,20,20,.5)'; ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.beginPath(); ctx.arc(o.x, o.y, 7, 0, 6.28); ctx.fill(); ctx.stroke(); } };
+  K.sparks = { n: 18, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6.28), ph: rs(0, 6) }; },
+    step: function (o, dt) { wander(o, dt, 60, 9); attract(o, 140, 140 * dt); damp(o, dt, 1.8); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 10); },
+    draw: function (o, t) { ctx.strokeStyle = hsl(hue, 90, 70, .5); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(o.x - o.vx * .06, o.y - o.vy * .06); ctx.lineTo(o.x, o.y); ctx.stroke(); } };
+  K.waves = { n: 1, make: function () { return {}; }, step: function () {},
+    draw: function (o, t) { var cx = cursor(); ctx.strokeStyle = hsl(hue, 60, 65, .22); ctx.lineWidth = 1.4; for (var k = 0; k < 3; k++) { ctx.beginPath(); for (var x = 0; x <= W; x += 12) { var amp = 6 + (cx.on ? Math.max(0, 30 - Math.abs(x - cx.x) / 8) : 0); var y = H * (.78 + k * .06) + Math.sin(x * .012 + t * (1 + k * .4) + k) * amp; if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); } ctx.stroke(); } } };
+  K.moths = { n: 12, make: function () { return { x: rs(0, W), y: rs(0, H), vx: 0, vy: 0, a: rs(0, 6), ph: rs(0, 6) }; },
+    step: function (o, dt, t) { wander(o, dt, 40, 8); attract(o, 220, 180 * dt); damp(o, dt, 1.5); o.x += o.vx * dt; o.y += o.vy * dt; wrap(o, 20); },
+    draw: function (o, t) { var f = Math.abs(Math.sin(t * 14 + o.ph)); ctx.fillStyle = 'rgba(220,210,190,.45)'; ctx.beginPath(); ctx.ellipse(o.x - 3 * f, o.y, 3 * f + .8, 2.6, -.3, 0, 6.28); ctx.ellipse(o.x + 3 * f, o.y, 3 * f + .8, 2.6, .3, 0, 6.28); ctx.fill(); } };
+
+  /* ---------- engine ---------- */
+  function build() {
+    objs = [];
+    var kinds = (THEME.kinds || ['fireflies']), budget = CAP;
+    kinds.forEach(function (name) { var k = K[name]; if (!k) return; var n = Math.min(k.n, Math.max(1, Math.floor(budget / kinds.length))); for (var i = 0; i < n; i++) { var o = k.make(i); o.__k = k; objs.push(o); } });
+    if (objs.length > CAP) objs.length = CAP;
+  }
+  function draw(t, still) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < objs.length; i++) { var o = objs[i]; try { o.__k.draw(o, t); } catch (e) {} }
+  }
+  function frame(now) {
+    raf = 0; if (!running) return;
+    var s = performance.now(); var dt = Math.min(.05, (now - (last || now)) / 1000); last = now; var t = (now - t0) / 1000;
+    pollPad(); if (ptr.on && now - ptr.t > 4000) ptr.on = 0;
+    for (var i = 0; i < objs.length; i++) { var o = objs[i]; o.__k.step(o, dt, t, objs); }
+    draw(t);
+    var ms = performance.now() - s; ema = ema ? ema * .9 + ms * .1 : ms;
+    if (ema > 3.2 && objs.length > 6) objs.length = Math.floor(objs.length * .8); /* stay under 4 ms per frame */
+    window.__avLife.ms = ema; window.__avLife.n = objs.length; window.__avLife.frames++;
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (running || reduced) return; running = true; last = 0; raf = requestAnimationFrame(frame); }
+  function stop() { running = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+  function pollPad() { try { var g = navigator.getGamepads && navigator.getGamepads(); if (!g) return; for (var i = 0; i < g.length; i++) { var p = g[i]; if (p && p.axes && p.axes.length >= 2) { var ax = Math.abs(p.axes[0]) > .2 ? p.axes[0] : 0, ay = Math.abs(p.axes[1]) > .2 ? p.axes[1] : 0; if (ax || ay) { pad.on = 1; pad.x = Math.min(W, Math.max(0, (pad.x || W / 2) + ax * 9)); pad.y = Math.min(H, Math.max(0, (pad.y || H / 2) + ay * 9)); pad.t = performance.now(); } else if (pad.on && performance.now() - pad.t > 3000) pad.on = 0; } } } catch (e) {} }
+  function pm(e) { ptr.x = e.clientX; ptr.y = e.clientY; ptr.on = 1; ptr.t = performance.now(); }
+  function tm(e) { var t = e.touches && e.touches[0]; if (t) { ptr.x = t.clientX; ptr.y = t.clientY; ptr.on = 1; ptr.t = performance.now(); } }
+  window.__avLife = { frames: 0, ms: 0, n: 0, running: function () { return running; }, cap: CAP, canvas: cv, kinds: THEME.kinds };
+  window.addEventListener('pointermove', pm, { passive: true }); window.addEventListener('pointerdown', pm, { passive: true });
+  window.addEventListener('touchstart', tm, { passive: true }); window.addEventListener('touchmove', tm, { passive: true });
+  window.addEventListener('resize', function () { size(); build(); if (reduced) draw(0, true); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  /* if opaque page layers would hide a background canvas, show the creatures as a soft overlay instead (still never takes a click) */
+  function placement() {
+    try {
+      var cov = 0, tot = 0;
+      for (var gx = 1; gx < 6; gx++) for (var gy = 1; gy < 6; gy++) {
+        var e = document.elementFromPoint(W * gx / 6, H * gy / 6); tot++;
+        for (; e && e !== document.body && e !== document.documentElement; e = e.parentElement) {
+          var cs = getComputedStyle(e), m = /rgba?\(([^)]*)\)/.exec(cs.backgroundColor || '');
+          if (m) { var p = m[1].split(','); var a = p.length > 3 ? parseFloat(p[3]) : 1; if (a > .85) { cov++; break; } }
+        }
+      }
+      var over = cov / tot > .5;
+      cv.style.zIndex = over ? '0' : '-1'; cv.style.opacity = over ? '.5' : '.9';
+      window.__avLife.overlay = over;
+    } catch (e) {}
+  }
+  setTimeout(placement, 1800);
+  size(); build(); t0 = performance.now();
+  if (reduced) draw(0, true); else start();
+})();
+</script>
+</body>
+</html>
