@@ -225,7 +225,7 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
 
   <div class="page active" id="page-home">
     <div class="hero">
-      <h1>THE PARADOX MAZE</h1>
+      <h1 id="s-the-paradox-maze">THE PARADOX MAZE</h1>
       <p class="tag">Six impossible corridors. Twelve unanswerable questions. Walk the geometry that should not exist, and speak the name of the paradox that seals each gate.</p>
       <div class="cta">
         <button class="btn" onclick="go('play')">Enter the Maze</button>
@@ -233,17 +233,17 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
       </div>
     </div>
 
-    <h2 class="section-title">How it works</h2>
+    <h2 class="section-title" id="s-how-it-works">How it works</h2>
     <div class="grid-cards">
-      <div class="card"><h3>Walk</h3><p>Navigate a generated maze with arrow keys, WASD, or the on-screen compass. Each level grows larger and stranger than the last.</p></div>
-      <div class="card"><h3>Meet the Gate</h3><p>Certain doors are sealed by logic itself. Approach one and it will not open — it will ask.</p></div>
-      <div class="card"><h3>Speak the Name</h3><p>Every gate guards a classical paradox. Name it correctly and the seal breaks. Answer wrong, and the maze remembers — its distortion grows.</p></div>
-      <div class="card"><h3>Escape</h3><p>Reach the far rune-circle to resolve the level and unlock the next. Six levels, twelve paradoxes, one signal beneath the noise.</p></div>
+      <div class="card"><h3 id="s-walk">Walk</h3><p>Navigate a generated maze with arrow keys, WASD, or the on-screen compass. Each level grows larger and stranger than the last.</p></div>
+      <div class="card"><h3 id="s-meet-the-gate">Meet the Gate</h3><p>Certain doors are sealed by logic itself. Approach one and it will not open — it will ask.</p></div>
+      <div class="card"><h3 id="s-speak-the-name">Speak the Name</h3><p>Every gate guards a classical paradox. Name it correctly and the seal breaks. Answer wrong, and the maze remembers — its distortion grows.</p></div>
+      <div class="card"><h3 id="s-escape">Escape</h3><p>Reach the far rune-circle to resolve the level and unlock the next. Six levels, twelve paradoxes, one signal beneath the noise.</p></div>
     </div>
   </div>
 
   <div class="page" id="page-play">
-    <h2 class="section-title">The Maze</h2>
+    <h2 class="section-title" id="s-the-maze">The Maze</h2>
     <div id="difficulty-line" style="font-size:.78rem;letter-spacing:1px;color:var(--parchment-dim);margin-bottom:10px">
       Difficulty: <span id="difficulty-current">—</span> · <a href="#" onclick="mazeChangeDifficulty();return false;" style="color:var(--gold-bright)">change</a>
     </div>
@@ -265,12 +265,12 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
   </div>
 
   <div class="page" id="page-codex">
-    <h2 class="section-title">Codex of Paradoxes</h2>
+    <h2 class="section-title" id="s-codex-of-paradoxes">Codex of Paradoxes</h2>
     <p class="tag" style="text-align:left;margin:0 0 10px">Twelve classical paradoxes wait behind the gates. Study them here — the maze will ask you to name them, not to explain them.</p>
     <div class="paradox-list" id="paradox-list"></div>
 
     <div class="oracle-box">
-      <h3 style="font-family:var(--fh);color:#d8b9ff;margin:0 0 8px;letter-spacing:1px">The Oracle</h3>
+      <h3 style="font-family:var(--fh);color:#d8b9ff;margin:0 0 8px;letter-spacing:1px" id="s-the-oracle">The Oracle</h3>
       <p style="font-size:.82rem;color:var(--parchment-dim);margin:0 0 10px">Describe a dilemma, a contradiction, a puzzle that troubles you. The Oracle will match it to the nearest paradox in this codex — offline, no signal leaves your browser.</p>
       <textarea id="oracle-input" maxlength="300" placeholder="e.g. I keep replacing parts of an old object until nothing original remains..."></textarea>
       <div class="cta" style="justify-content:flex-start;margin-top:10px">
@@ -281,7 +281,7 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
   </div>
 
   <div class="page" id="page-about">
-    <h2 class="section-title">About this maze</h2>
+    <h2 class="section-title" id="s-about-this-maze">About this maze</h2>
     <div class="card" style="max-width:720px">
       <p>The Paradox Maze is AVIDAA is signal beneath the noise, given a floor plan. Est. 2025, AVIDAA was built for humans and AI alike — knowledge made clear, one contradiction at a time.</p>
       <p>Every maze here is generated fresh from a seed, carved by a recursive backtracking algorithm, then gated by classical paradoxes: the Ship of Theseus, the Liar, Zeno, the Grandfather Paradox, Sorites, the Bootstrap loop, the Barber, Buridan's Ass, Newcomb's Problem, Fermi, Epimenides, and the Twin Paradox. Twelve locks, six levels, no two runs identical.</p>
@@ -297,7 +297,7 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
 <!-- ===== DIFFICULTY PICKER MODAL ===== -->
 <div class="modal-overlay" id="difficulty-modal">
   <div class="modal-box" id="difficulty-modal-box" style="max-width:520px">
-    <h2>CHOOSE YOUR PATH</h2>
+    <h2 id="s-choose-your-path">CHOOSE YOUR PATH</h2>
     <p class="q">The maze bends to match your nerve. Pick once — you can change it later from the Maze tab.</p>
     <div class="row" style="flex-direction:column;gap:10px">
       <button class="btn" style="text-align:left;width:100%" onclick="mazeChooseDifficulty('easy')">
@@ -329,7 +329,7 @@ footer{text-align:center;padding:30px 14px 90px;font-family:var(--fh);letter-spa
 </div>
 <div class="modal-overlay" id="win-modal">
   <div class="modal-box win-box">
-    <h2>PARADOX RESOLVED</h2>
+    <h2 id="s-paradox-resolved">PARADOX RESOLVED</h2>
     <p class="q" id="win-text">You crossed the impossible corridor.</p>
     <div class="row">
       <button class="btn" onclick="mazeNextLevel()">Next Level</button>
@@ -1095,7 +1095,7 @@ if(document.readyState==='complete')start();else addEventListener('load',start);
 addEventListener('resize',sched);})();</script><script id="av-shell-20261124">/* AVIDAA shell: shared header (or floating pill) + footer with the "Last updated" stamp. No outside calls, no tracking.
    Template tokens are replaced when a page is built: Maze --av-games Games and Worlds 2026-11-24 06:36 */
 (function(){
-  var NAME='Maze',SECTOR='--av-games',STAMP='2026-11-25 18:36',HOME='https://avidaa1.github.io/';
+  var NAME='Maze',SECTOR='--av-games',STAMP='2026-11-25 19:24',HOME='https://avidaa1.github.io/';
   var ARROW='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function build(){
     if(!document.body||document.querySelector('.av-footer'))return;
